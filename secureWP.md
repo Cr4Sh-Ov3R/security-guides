@@ -29,8 +29,8 @@
 - [ ] Avant de commencer l'installation //TODO : Tyc-Tac
 - [ ] [Installation Best Practice](#best-practice) //TODO : Tyc-Tac
 - [ ] [Installation de plugins](#install-plugins)
-- [ ] [Secure Login](#secure-login) 
-- [ ] Limit Login
+- [ ] [Hide Login Page](#hide-login-page) 
+- [ ] [Limit Brute Force Login](#bf-login)
 - [ ] Firewall & scanning 
 - [ ] Remove WP version
 - [ ] Remove Yoast SEO Version
@@ -51,11 +51,9 @@ Base APACHE NGINX ....
 
 
 
-----
+<hr id="hide-login-page" />
 
-<hr id="secure-login" />
-
-# Secure Login
+# Hide Login Page
 
 Les premières tentatives de brute force login via wordpress se font généralement aux adresses  ``votresite.fr/wp-admin.php`` ou ``votresite.fr/login`` ou ``votresite.fr/wp-login.php`` qui sont les 3 moyens d'accéder nativement à votre interface de connexion.
 
@@ -82,5 +80,18 @@ Il est donc primordial de "cacher" l'accès à cette interface du grand public e
 
 2. Une fois activé, cliquez sur ``Réglages``sur votre plugin ou rendez-vous dans la partie ``Réglages > WPS Hide Login`` depuis votre menu administrateur.
 
-Tout en bas de cette page, vous trouverez la partie liée à votre plugin, avec les parties ``URL de connexion`` qui sera le lien avec lequel vous vous connecterez et la partie U
+3. Tout en bas de cette page, vous trouverez la partie liée à votre plugin :
+  
+  - ``URL de connexion`` qui sera le lien avec lequel vous vous connecterez : modifiez "login" par le mot que vous souhaitez (ici en exemple à ne pas réutiliser : ``super-connexion``)
+  
+  - ``URL de redirection``qui sera la page vers laquelle seront redirigés les personnes tentant d'accéder aux pages ``votresite.fr/wp-admin.php``, ``votresite.fr/wp-login.php``, ``votresite.fr/login`` (nous garderons dans l'exemple la page 404 qui sert aux pages introuvables)
+
+  - Pensez ensuite à bien ``Enregistrer les modifications``
+
+> NB : À partir de maintenant, rappelez-vous que pour vous connecter, vous devrez utiliser le lien que vous avez indiqué en ``URL de connexion``, dans notre exemple : ``votresite.fr/super-connexion``
+
+
+<hr id="bf-login" />
+
+# Limit Brute Force Login
 
