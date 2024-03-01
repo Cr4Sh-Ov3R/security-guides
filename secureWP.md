@@ -224,17 +224,25 @@ Il est donc primordial de "cacher" l'accès à cette interface du grand public e
 ## L'activation & les réglages
 
 1. Votre module est maintenant installé, il faut maintenant cliquer sur le bouton ``Activer``. 
+
 > NB : Si vous ne voyez pas le bouton Activer ou que vous avez cliqué sur un autre onglet sans faire exprès, il vous suffit de vous rendre dans la partie ``Extensions``, vous retrouverez alors la liste des plugins installés, il vous suffit maintenant de l'activer. 
 
 2. Une fois activé, cliquez sur ``Réglages``sur votre plugin ou rendez-vous dans la partie ``Réglages > WPS Hide Login`` depuis votre menu administrateur.
 
+<p align="center"><img src="./assets/secure-wp/wps-hide-login-plugin-list.png" alt="Plugin WPS Hide Login plugin list" width="450" height="auto" /></p>
+
 3. Tout en bas de cette page, vous trouverez la partie liée à votre plugin :
   
+  <p align="center"><img src="./assets/secure-wp/wps-hide-login-config.png" alt="Plugin WPS Hide Login config" width="450" height="auto" /></p>
+
   - ``URL de connexion`` qui sera le lien avec lequel vous vous connecterez : modifiez "login" par le mot que vous souhaitez (ici en exemple à ne pas réutiliser : ``super-connexion``)
   
+  <p align="center"><img src="./assets/secure-wp/wps-hide-login-url-connexion.png" alt="Plugin WPS Hide Login url connexion" width="450" height="auto" /></p>
+
   - ``URL de redirection``qui sera la page vers laquelle seront redirigés les personnes tentant d'accéder aux pages ``votresite.fr/wp-admin.php``, ``votresite.fr/wp-login.php``, ``votresite.fr/login`` (nous garderons dans l'exemple la page 404 qui sert aux pages introuvables)
 
   - Pensez ensuite à bien ``Enregistrer les modifications``
+
 
 > NB : À partir de maintenant, rappelez-vous que pour vous connecter, vous devrez utiliser le lien que vous avez indiqué en ``URL de connexion``, dans notre exemple : ``votresite.fr/super-connexion``
 
@@ -254,11 +262,15 @@ De la même manière que lors de l'installation du plugin ``WPS Limit Login``, i
 
 > NB : si vous avez besoin d'un rappel, je ne vais pas rentrer dans le détail, mais vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
 
+<p align="center"><img src="./assets/secure-wp/wps-limit-login-details.png" alt="Plugin WPS Limit Login details" width="350" height="auto" /></p>
+
 ## Les réglages
 
 Lorsque vous accédez aux réglages de ``WPS Limit Login``, vous tombez sur le premier onglet ``Configuration``, dans lequel vous trouverez tous les paramétrages liés aux tentatives de connexion et aux limites que vous souhaitez fixer. (Nous verrons les autres onglets plus tard).
 
 ### Onglet Configuration
+
+<p align="center"><img src="./assets/secure-wp/wps-limit-login-config.png" alt="Plugin WPS Limit Login config" width="450" height="auto" /></p>
 
 1. Définissez le nombre de tentatives que vous souhaitez autoriser avant blocage ainsi que le temps de blocage souhaité pour l'adresse IP ayant fait les tentatives de brute force. 
 
@@ -299,9 +311,13 @@ Cet onglet vous permet de définir les adresses IP que vous connaissez comme mal
 
 Par exemple, avec Be Cyber Community, nous avons référencé un grand nombre d'adresses IP malveillantes que vous trouverez ici [Malicious Ip Adresses - Be Cyber Community](https://github.com/duggytuxy/malicious_ip_addresses) et que vous pouvez utiliser pour enrichir votre liste noire.
 
+<p align="center"><img src="./assets/secure-wp/wps-limit-login-black-list.png" alt="Plugin WPS Limit Login black list" width="450" height="auto" /></p>
+
 ### Onglet Journal de blocage
 
 Enfin, vous retrouverez ici les statistiques de tentatives de brute force sur votre page de connexion ainsi que le journal de blocage.
+
+<p align="center"><img src="./assets/secure-wp/wps-limit-login-block.png" alt="Plugin WPS Limit Login block" width="450" height="auto" /></p>
 
 <hr id="waf-scan" />
 
