@@ -127,16 +127,21 @@ http://url/phinfo.php
 > Comme vous pouvez le voir un certain nombre de choses ne sont pas bonnes d'un point de vu sécurité
 
 ### Sécurisation de php
-```
+```bash
 #Tout se passe ici
 nano /etc/php/8.3/apache2/php.ini
-
+```
+```
 #Désactivation d'un certain nombre de functions inutiles dans notre cas
+
 disable_functions = exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source,eval,assert,stream_socket_server,stream_socket_accept,stream_socket_client,stream_set_blocking,fsockopen,fputs,fwrite,create_function,pcntl_exec,pcntl_fork,pcntl_signal,pcntl_waitpid,pcntl_wexitstatus,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wstopsig,pcntl_wtermsig,pcntl_strerror,pcntl_get_last_error,pcntl_signal_dispatch,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_async_signals,pcntl_unshare,pcntl_setpriority,pcntl_getpriority
+
 #Désactivation de la version de php
 expose_php = Off
+
 #Révocation l'inclusion de fichier
 allow_url_include = Off
+
 #Seuls les fichiers dans votre site Web peuvent être inclus
 allow_url_fopen = Off
 ```
@@ -162,11 +167,10 @@ mariadb-secure-installation
 
 #Connexion à Mariadb
 mysql -u root -p
-
-#Création de nos tables pour Wordpress
 ```
 
 ```sql
+--Création de nos tables pour Wordpress
 CREATE USER 'anyone'@'localhost' IDENTIFIED BY 'YourStrongPasswordHere';
  CREATE DATABASE  tstSecure;
  GRANT ALL PRIVILEGES ON tstSecur.* TO 'anyone'@'localhost';
@@ -201,14 +205,19 @@ Il est donc primordial de "cacher" l'accès à cette interface du grand public e
 ## Les étapes d'installation d'un plugin
 
 1. Sur votre interface d'administration Wordpress, rendez-vous sur ``Extensions > Ajouter une extension``
+
 2. Dans le champs de recherche tapez ``WPS Hide Login``
+
 3. Sélectionnez le plugin ``WPS Hide Login`` et cliquez sur "plus de détails"
+
 
 > NB : Pensez à vérifier les informations d'un plugin ou d'un thème avant installation, notamment : 
 > - ``Auteur/autrice`` ici WPServeur, NicolasKulka,wpformation
 > - ``Dernière mise à jour`` (une mise à jour trop éloignée n'est généralement pas signe de fiabilité)
 > - ``Nécessite Wordpress en version`` ET ``Compatible jusqu'à la version``, vous trouverez la version de votre Wordpress sur le coin inférieur droit de votre espace d'administration
 - ``Installations actives``, un nombre élevé, avec de bonnes notes est généralement signe d'un plugin de qualité, surtout si la dernière mise à jour est assez récente.
+
+<p align="center"><img src="./assets/secure-wp/wps-hide-login-details.png" alt="Plugin WPS Hide Login details" width="350" height="auto" /></p>
 
 4. Si le plugin vous convient, cliquez sur le bouton ``Installer maintenant``
 
