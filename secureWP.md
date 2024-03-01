@@ -372,13 +372,15 @@ Une fois avoir créé un compte et avoir choisi votre licence, vous recevrez vot
 - Ainsi que le numéro de votre licence reçue par e-mail (attention, votre licence doit rester confidentielle, ne la partagez pas, il s'agit ici, dans l'exemple, d'un nombre pris au hasard)
 - Cliquez ensuite sur ``YES`` pour accepter de recevoir des e-mails sur les alertes de sécurité et de vulnérabilités.
 
-<p align="center"><img src="./assets/secure-wp/wordfence-free-license-valid.png" alt="Plugin Wordfence free license valid" width="600" height="auto" /></p>
+<p align="center"><img src="./assets/secure-wp/wordfence-free-valid-license.png" alt="Plugin Wordfence free valid license" width="600" height="auto" /></p>
 
 > Félicitations, votre licence est valide, vous n'avez plus qu'à rejoindre le Dashboard.
 
 ### Dashboard
 
 Sur votre Dashboard, vous trouverez les parties liées au ``Firewall``, au ``Scan``, ``Notifications`, vous pouvez suivre le didacticiel lors du premier affichage.
+
+<p align="center"><img src="./assets/secure-wp/wordfence-dashboard.png" alt="Plugin Wordfence" width="600" height="auto" /></p>
 
 > NB : Lors de votre arrivée sur le Dashboard, vous trouverez en haut un alerte en rouge, vous demandant d'activer les mises à jour automatiques du plugin. 
 
