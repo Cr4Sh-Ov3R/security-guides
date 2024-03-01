@@ -1,6 +1,7 @@
 <p align="center"> <h1>SECURE YOUR WORDPRESS</h1>                   
-<srong>by Be Cyber Community</strong>
-<i>-- Tyc-Tac & Cr4Sh --</i> 
+<srong>by Be Cyber Community</strong><br/>
+<i>-- Tyc-Tac & Cr4Sh --</i>
+</p>
 
 
 ***Pour qui ?***
@@ -186,7 +187,6 @@ unzip latest.zip
 rm latest.zip
 ```
 ## To be continued lol
-
 
 
 
