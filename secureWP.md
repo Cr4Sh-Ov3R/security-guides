@@ -350,14 +350,109 @@ De la même manière que précédemment, il faut rechercher le plugin ``Wordfenc
 
 > NB : si vous avez besoin d'un rappel, vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
 
+<p align="center"><img src="./assets/secure-wp/wordfence-details.png" alt="Plugin Wordfence details" width="350" height="auto" /></p>
+
 ## Les réglages
 
 Une fois le plugin installé, vous devriez arriver sur une page vous demandant de rentrer votre licence ``Wordfence``ou de vous inscrire. 
 
-Nous partons du principe que vous n'avez pas de licence, vous devrez donc en créer une.
+<p align="center"><img src="./assets/secure-wp/wordfence-subscribe.png" alt="Plugin Wordfence subscribe" width="600" height="auto" /></p>
+
+1. Nous partons du principe que vous n'avez pas de licence, vous devrez donc en créer une.
 
 > NB : Vous avez 4 licences disponibles, vous pouvez choisir celle qui vous convient le mieux. Notez que la licence "Free" fonctionne plutôt bien mais vous ne bénéficierez pas de la mise à jour des nouvelles menaces en temps réel, mais avec un différé de 30 jours après leurs découvertes.
 
+Une fois avoir créé un compte et avoir choisi votre licence, vous recevrez votre numéro de licence par e-mail. 
+
+2. Sur votre module Wordfence, cliquez sur ``Install an existing license``, 
+
+<p align="center"><img src="./assets/secure-wp/wordfence-license.png" alt="Plugin Wordfence license" width="600" height="auto" /></p>
+
+- Renseignez votre e-mail de connexion 
+- Ainsi que le numéro de votre licence reçue par e-mail (attention, votre licence doit rester confidentielle, ne la partagez pas, il s'agit ici, dans l'exemple, d'un nombre pris au hasard)
+- Cliquez ensuite sur ``YES`` pour accepter de recevoir des e-mails sur les alertes de sécurité et de vulnérabilités.
+
+<p align="center"><img src="./assets/secure-wp/wordfence-free-license-valid.png" alt="Plugin Wordfence free license valid" width="600" height="auto" /></p>
+
+> Félicitations, votre licence est valide, vous n'avez plus qu'à rejoindre le Dashboard.
+
+### Dashboard
+
+Sur votre Dashboard, vous trouverez les parties liées au ``Firewall``, au ``Scan``, ``Notifications`, vous pouvez suivre le didacticiel lors du premier affichage.
+
+> NB : Lors de votre arrivée sur le Dashboard, vous trouverez en haut un alerte en rouge, vous demandant d'activer les mises à jour automatiques du plugin. 
+
+1. Nous vous conseillons de les mettre en application ou de faire vos mises à jour très régulièrement. 
+
+> NB : Il est une bonne pratique de mettre très régulièrement à jour vos plugins et thèmes ou versions de Wordpress. Pensez cependant à faire des sauvegardes régulières de votre Wordpress AINSI QUE de votre base de données.
+
+2. Cliquez sur ``Manage Firewall`` pour commencer à configurer ``Wordfence``.
+
+### Firewall 
+
+***Basic Firewall Options***
+
+1. Web Application Firewall Status (WAF)
+
+Par défaut, lors de l'installation de Wordfence, le mode d'apprentissage est enclenché pendant 1 semaine. Il permettra au plugin d'apprendre comment le protéger par la suite sans bloquer les utilisateurs légitimes. 
+
+Au bout d'une semaine il enclenchera automatiquement le pare-feu.
+
+2. Protection level
+
+Lors de l'installation, le "Basic Wordpress Protection" est d'office activé. Cependant, il pourra bloquer de nombreuses requête malveillante une fois le plugin chargé, mais certains plugins vulnérables ou Wordpress pourront parfois réussir à exécuter du code malveillant sans passer par le pare-feu.
+
+Il est donc primordial d'optimiser le processus en modifiant la configuration PHP afin de lancer le pare-feu avant Wordpress ou un autre fichier PHP. 
+
+Pour se faire, il est nécessaire de modifier certains fichiers (en fonction de votre serveur) comme le ``.htaccess``, le ``php.ini``...
+
+> NB : Dans tous les cas, ***AVANT TOUTE MODIFICATION***, il est primordiale de faire un sauvegarde intégrale de votre site et de votre base de données, afin de pouvoir remettre votre site en ligne en cas d'anomalie lors d'une mise à jour ou d'une erreur de configuration.
+
+- En cliquant ``OPTIMIZE THE WORDFENCE FIREWALL``, vous aurez la possibilité de choisir la configuration serveur dont vous avez besoin. Le plugin vous proposera un fichier de configuration basé sur ses propres test.
+
+- Téléchargez le fichier de configuratin en cliquant sur le bouton ``DOWNLOAD .HTACCESS``(dans le cadre de notre exemple avec Apache + mod_php, sinon veuillez suivre les informations adaptées pour votre serveur)
+
+- Une fois téléchargé et installé à la racine de votre wordpress et cliquez sur continuer.
+
+> NB : Dans certains cas, il se peut que la mise en cache de votre serveur ou si vous utilisez un plugin pour le cache, retarde de quelques instants les nouveaux paramétrages. N'hésitez pas à recharger la page du Firewall pour vérifier que les modifications aient bien été prise en compte.
+
+***Advanced Firewall Options***
+
+Vous pourrez effectuer des réglages avancés en retardant les blockage IP, en autorisant certaines adresses IP à retarder les règles de pare feu ...
+
+Par défaut, vous n'avez pas besoin d'y toucher sauf dans le cas où vous souhaiteriez affiner le pare-feu. 
+
+***Brute Force Protection***
+
+- Assurez-vous que la protection contre les attaques par brute force soient activée, si ce n'est pas le cas, cliquez sur ``ON``
+
+Vous pourrez affiner le nombre de tentatives autorisées, le temps de blocage (comme dans le module ``WPS Limit Login`` installé précédemment).
+
+- Vous pouvez choisir de bloquer immédiatement toute personne qui utiliserait un nom d'utilisateur invalide pour la connexion.
+
+> NB : Attention, le fait d'immédiatement bloquer une personne après avoir utiliser un identifiant invalide peut faciliter l'énumération des utilisateurs existants. 
+
+- Vous pouvez immédiatement bloquer toute personne utilisant certains nom d'utilisateurs, comme par exemple ``admin``, ``user``, ``root`` ... Pour cela, il vous suffit de rentrer le nom d'utilisateur qui déclenchera le bloquage et d'appuyer sur la touche ``Enter`` 
+
+- Empêchez l'utilisation de mot de passe ayant fait l'objet d'une fuite de donnée pour tous les utilisateurs qui ont le droit de publier.
+
+Dans la partie ``Additional Options``
+
+- Forcer l'utilisation d'un mot de passe fort pour tous les utilisateurs.
+
+- Ne laissez pas Wordpress révéler les utilisateurs valides dans les erreurs de connexion.
+
+- Empêchez les utilisateurs d'enregistrer un nom d'utilisateur ``admin`` même s'il n'existe pas déjà.
+
+- Empêchez la découverte des noms d'utilisateurs par les scans, oEmbed, API Rest Wordpress ou encore les sitemap XML de Wordpress.
+
+- Désactivez les mots de passe d'applications de Wordpress.
+
+- Bloquer toutes les adresses IP qui envoient des requêtes POST avec un ``user-agent`` et ``referer`` vides.
+
+- Vérifier la force du mot de passe lors de la modification d'un profil utilisateur.
+
+- Enfin, si vous souhaitez enrichir la base de connaissance sécuritaire de la communauté vous pouvez envoyer de manière anonyme des informations sur les tentatives de piratage. 
 
 
 ## WORK IN PROGRESS
