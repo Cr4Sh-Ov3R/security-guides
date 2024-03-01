@@ -229,15 +229,15 @@ Il est donc primordial de "cacher" l'accès à cette interface du grand public e
 
 2. Une fois activé, cliquez sur ``Réglages``sur votre plugin ou rendez-vous dans la partie ``Réglages > WPS Hide Login`` depuis votre menu administrateur.
 
-<p align="center"><img src="./assets/secure-wp/wps-hide-login-plugin-list.png" alt="Plugin WPS Hide Login plugin list" width="450" height="auto" /></p>
+<p align="center"><img src="./assets/secure-wp/wps-hide-login-plugin-list.png" alt="Plugin WPS Hide Login plugin list" width="650" height="auto" /></p>
 
 3. Tout en bas de cette page, vous trouverez la partie liée à votre plugin :
   
-  <p align="center"><img src="./assets/secure-wp/wps-hide-login-config.png" alt="Plugin WPS Hide Login config" width="450" height="auto" /></p>
+  <p align="center"><img src="./assets/secure-wp/wps-hide-login-config.png" alt="Plugin WPS Hide Login config" width="650" height="auto" /></p>
 
   - ``URL de connexion`` qui sera le lien avec lequel vous vous connecterez : modifiez "login" par le mot que vous souhaitez (ici en exemple à ne pas réutiliser : ``super-connexion``)
   
-  <p align="center"><img src="./assets/secure-wp/wps-hide-login-url-connexion.png" alt="Plugin WPS Hide Login url connexion" width="450" height="auto" /></p>
+  <p align="center"><img src="./assets/secure-wp/wps-hide-login-url-connexion.png" alt="Plugin WPS Hide Login url connexion" width="650" height="auto" /></p>
 
   - ``URL de redirection``qui sera la page vers laquelle seront redirigés les personnes tentant d'accéder aux pages ``votresite.fr/wp-admin.php``, ``votresite.fr/wp-login.php``, ``votresite.fr/login`` (nous garderons dans l'exemple la page 404 qui sert aux pages introuvables)
 
@@ -270,7 +270,7 @@ Lorsque vous accédez aux réglages de ``WPS Limit Login``, vous tombez sur le p
 
 ### Onglet Configuration
 
-<p align="center"><img src="./assets/secure-wp/wps-limit-login-config.png" alt="Plugin WPS Limit Login config" width="450" height="auto" /></p>
+<p align="center"><img src="./assets/secure-wp/wps-limit-login-config.png" alt="Plugin WPS Limit Login config" width="650" height="auto" /></p>
 
 1. Définissez le nombre de tentatives que vous souhaitez autoriser avant blocage ainsi que le temps de blocage souhaité pour l'adresse IP ayant fait les tentatives de brute force. 
 
@@ -311,13 +311,13 @@ Cet onglet vous permet de définir les adresses IP que vous connaissez comme mal
 
 Par exemple, avec Be Cyber Community, nous avons référencé un grand nombre d'adresses IP malveillantes que vous trouverez ici [Malicious Ip Adresses - Be Cyber Community](https://github.com/duggytuxy/malicious_ip_addresses) et que vous pouvez utiliser pour enrichir votre liste noire.
 
-<p align="center"><img src="./assets/secure-wp/wps-limit-login-black-list.png" alt="Plugin WPS Limit Login black list" width="450" height="auto" /></p>
+<p align="center"><img src="./assets/secure-wp/wps-limit-login-black-list.png" alt="Plugin WPS Limit Login black list" width="650" height="auto" /></p>
 
 ### Onglet Journal de blocage
 
 Enfin, vous retrouverez ici les statistiques de tentatives de brute force sur votre page de connexion ainsi que le journal de blocage.
 
-<p align="center"><img src="./assets/secure-wp/wps-limit-login-block.png" alt="Plugin WPS Limit Login block" width="450" height="auto" /></p>
+<p align="center"><img src="./assets/secure-wp/wps-limit-login-block.png" alt="Plugin WPS Limit Login block" width="650" height="auto" /></p>
 
 <hr id="waf-scan" />
 
@@ -332,7 +332,7 @@ Enfin, vous retrouverez ici les statistiques de tentatives de brute force sur vo
 ***2FA***
 > Two Factor Authentication (2FA) vous permet de rajouter une couche de sécurité sur votre site Wordpress lors de la connexion
 
-Pour ce faire nous pouvons vous conseiller 2 outils, CrowdSec et Wordfence
+Pour ce faire nous pouvons vous conseiller 2 outils, ``CrowdSec`` et ``Wordfence``
 
 
 ## CrowdSec 
@@ -352,4 +352,12 @@ De la même manière que précédemment, il faut rechercher le plugin ``Wordfenc
 
 ## Les réglages
 
-Une fois le plugin installé, vous devriez arriver sur 
+Une fois le plugin installé, vous devriez arriver sur une page vous demandant de rentrer votre licence ``Wordfence``ou de vous inscrire. 
+
+Nous partons du principe que vous n'avez pas de licence, vous devrez donc en créer une.
+
+> NB : Vous avez 4 licences disponibles, vous pouvez choisir celle qui vous convient le mieux. Notez que la licence "Free" fonctionne plutôt bien mais vous ne bénéficierez pas de la mise à jour des nouvelles menaces en temps réel, mais avec un différé de 30 jours après leurs découvertes.
+
+
+
+## WORK IN PROGRESS
