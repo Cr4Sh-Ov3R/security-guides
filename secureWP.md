@@ -372,7 +372,7 @@ Une fois avoir créé un compte et avoir choisi votre licence, vous recevrez vot
 - Ainsi que le numéro de votre licence reçue par e-mail (attention, votre licence doit rester confidentielle, ne la partagez pas, il s'agit ici, dans l'exemple, d'un nombre pris au hasard)
 - Cliquez ensuite sur ``YES`` pour accepter de recevoir des e-mails sur les alertes de sécurité et de vulnérabilités.
 
-<p align="center"><img src="./assets/secure-wp/wordfence-free-valid-license.png" alt="Plugin Wordfence free valid license" width="600" height="auto" /></p>
+<p align="center"><img src="./assets/secure-wp/wordfence-free-valid-license.png" alt="Plugin Wordfence free valid license" width="350" height="auto" /></p>
 
 > Félicitations, votre licence est valide, vous n'avez plus qu'à rejoindre le Dashboard.
 
@@ -380,7 +380,7 @@ Une fois avoir créé un compte et avoir choisi votre licence, vous recevrez vot
 
 Sur votre Dashboard, vous trouverez les parties liées au ``Firewall``, au ``Scan``, ``Notifications`, vous pouvez suivre le didacticiel lors du premier affichage.
 
-<p align="center"><img src="./assets/secure-wp/wordfence-dashboard.png" alt="Plugin Wordfence" width="600" height="auto" /></p>
+<p align="center"><img src="./assets/secure-wp/wordfence-dashboard.png" alt="Plugin Wordfence dashboard" width="600" height="auto" /></p>
 
 > NB : Lors de votre arrivée sur le Dashboard, vous trouverez en haut un alerte en rouge, vous demandant d'activer les mises à jour automatiques du plugin. 
 
@@ -393,6 +393,8 @@ Sur votre Dashboard, vous trouverez les parties liées au ``Firewall``, au ``Sca
 ### Firewall 
 
 ***Basic Firewall Options***
+
+<p align="center"><img src="./assets/secure-wp/wordfence-firewall-basics.png" alt="Plugin Wordfence firewall basics" width="600" height="auto" /></p>
 
 1. Web Application Firewall Status (WAF)
 
@@ -410,25 +412,36 @@ Pour se faire, il est nécessaire de modifier certains fichiers (en fonction de 
 
 > NB : Dans tous les cas, ***AVANT TOUTE MODIFICATION***, il est primordiale de faire un sauvegarde intégrale de votre site et de votre base de données, afin de pouvoir remettre votre site en ligne en cas d'anomalie lors d'une mise à jour ou d'une erreur de configuration.
 
+<p align="center"><img src="./assets/secure-wp/wordfence-optimize-firewall.png" alt="Plugin Wordfence optimize firewall " width="600" height="auto" /></p> 
+
 - En cliquant ``OPTIMIZE THE WORDFENCE FIREWALL``, vous aurez la possibilité de choisir la configuration serveur dont vous avez besoin. Le plugin vous proposera un fichier de configuration basé sur ses propres test.
 
 - Téléchargez le fichier de configuratin en cliquant sur le bouton ``DOWNLOAD .HTACCESS``(dans le cadre de notre exemple avec Apache + mod_php, sinon veuillez suivre les informations adaptées pour votre serveur)
+
+<p align="center"><img src="./assets/secure-wp/wordfence-optimize-firewal-success.png" alt="Plugin Wordfence optimize firewall success" width="600" height="auto" /></p> 
 
 - Une fois téléchargé et installé à la racine de votre wordpress et cliquez sur continuer.
 
 > NB : Dans certains cas, il se peut que la mise en cache de votre serveur ou si vous utilisez un plugin pour le cache, retarde de quelques instants les nouveaux paramétrages. N'hésitez pas à recharger la page du Firewall pour vérifier que les modifications aient bien été prise en compte.
 
+<p align="center"><img src="./assets/secure-wp/wordfence-extented-protection.png" alt="Plugin Wordfence extented protection" width="600" height="auto" /></p> 
+
 ***Advanced Firewall Options***
 
 Vous pourrez effectuer des réglages avancés en retardant les blockage IP, en autorisant certaines adresses IP à retarder les règles de pare feu ...
 
+<p align="center"><img src="./assets/secure-wp/wordfence-advanced-firewall.png" alt="Plugin Wordfence advanced firewall" width="600" height="auto" /></p> 
+
 Par défaut, vous n'avez pas besoin d'y toucher sauf dans le cas où vous souhaiteriez affiner le pare-feu. 
+
 
 ***Brute Force Protection***
 
+<p align="center"><img src="./assets/secure-wp/wordfence-brute-force-options.png" alt="Plugin Wordfence brute force options" width="600" height="auto" /></p> 
+
 - Assurez-vous que la protection contre les attaques par brute force soient activée, si ce n'est pas le cas, cliquez sur ``ON``
 
-Vous pourrez affiner le nombre de tentatives autorisées, le temps de blocage (comme dans le module ``WPS Limit Login`` installé précédemment).
+> NB : Vous pourrez affiner le nombre de tentatives autorisées, le temps de blocage (comme dans le module ``WPS Limit Login`` installé précédemment).
 
 - Vous pouvez choisir de bloquer immédiatement toute personne qui utiliserait un nom d'utilisateur invalide pour la connexion.
 
