@@ -424,7 +424,7 @@ Pour se faire, il est nécessaire de modifier certains fichiers (en fonction de 
 
 > NB : Dans certains cas, il se peut que la mise en cache de votre serveur ou si vous utilisez un plugin pour le cache, retarde de quelques instants les nouveaux paramétrages. N'hésitez pas à recharger la page du Firewall pour vérifier que les modifications aient bien été prise en compte.
 
-<p align="center"><img src="./assets/secure-wp/wordfence-extented-protection.png" alt="Plugin Wordfence extented protection" width="600" height="auto" /></p> 
+<p align="center"><img src="./assets/secure-wp/wordfence-extented-protection.png" alt="Plugin Wordfence extented protection" width="350" height="auto" /></p> 
 
 ***Advanced Firewall Options***
 
@@ -452,6 +452,8 @@ Par défaut, vous n'avez pas besoin d'y toucher sauf dans le cas où vous souhai
 - Empêchez l'utilisation de mot de passe ayant fait l'objet d'une fuite de donnée pour tous les utilisateurs qui ont le droit de publier.
 
 Dans la partie ``Additional Options``
+
+<p align="center"><img src="./assets/secure-wp/wordfence-brute-force-additionnal.png" alt="Plugin Wordfence brute force additionnal options" width="600" height="auto" /></p> 
 
 - Forcer l'utilisation d'un mot de passe fort pour tous les utilisateurs.
 
