@@ -1,6 +1,6 @@
-SECURE YOUR WORDPRESS                    
-by Be Cyber Community
--- Tyc-Tac & Cr4Sh -- 
+<p align="center"> <h1>SECURE YOUR WORDPRESS</h1>                   
+<srong>by Be Cyber Community</strong>
+<i>-- Tyc-Tac & Cr4Sh --</i> 
 
 
 ***Pour qui ?***
@@ -27,7 +27,7 @@ by Be Cyber Community
 - [ ] [Installation de plugins](#install-plugins)
 - [ ] [Hide Login Page](#hide-login-page) 
 - [ ] [Limit Brute Force Login](#bf-login)
-- [ ] Firewall & scanning 
+- [ ] [Firewall & scanning](#waf-scan) 
 - [ ] Remove WP version
 - [ ] Remove Yoast SEO Version
 - [ ] Remove Remove Divi Version
@@ -187,6 +187,9 @@ rm latest.zip
 ```
 ## To be continued lol
 
+
+
+
 <hr id="hide-login-page" />
 
 # Hide Login Page
@@ -230,6 +233,7 @@ Il est donc primordial de "cacher" l'accès à cette interface du grand public e
 
 
 <hr id="bf-login" />
+
 
 # Limit Brute Force Login
 
@@ -286,9 +290,43 @@ Sauf cas particulier (et auquel cas, vous avez suffisamment de compétence pour 
 
 Cet onglet vous permet de définir les adresses IP que vous connaissez comme malveillantes via les outils de Cyber Threat Intelligence ou car elles apparaîssent souvent dans vos logs ou dans les tentatives de connexion par brute force. 
 
-Par exemple, avec Be Cyber Community, nous avons référencé un grand nombre d'adresses IP malveillantes que vous trouverez ici [Malicious Ip Adresse Be Cyber](https://github.com/duggytuxy/malicious_ip_addresses) et que vous pouvez utiliser pour enrichir votre liste noire.
+Par exemple, avec Be Cyber Community, nous avons référencé un grand nombre d'adresses IP malveillantes que vous trouverez ici [Malicious Ip Adresses - Be Cyber Community](https://github.com/duggytuxy/malicious_ip_addresses) et que vous pouvez utiliser pour enrichir votre liste noire.
 
 ### Onglet Journal de blocage
 
 Enfin, vous retrouverez ici les statistiques de tentatives de brute force sur votre page de connexion ainsi que le journal de blocage.
 
+<hr id="waf-scan" />
+
+# Firewall & scanning & 2FA
+
+***Firewall***
+> Un pare-feu (firewall) sur votre wordpress vous aidera à protéger votre site wordpress des attaques en identifiant et bloquant le trafic malveillant.
+
+***Scanning***
+> Un scanner vous permet de bloquer du code ou contenu malveillant, de vérifier si vos fichiers ont été modifiés ...
+
+***2FA***
+> Two Factor Authentication (2FA) vous permet de rajouter une couche de sécurité sur votre site Wordpress lors de la connexion
+
+Pour ce faire nous pouvons vous conseiller 2 outils, CrowdSec et Wordfence
+
+
+## CrowdSec 
+
+De la même manière que précédemment, il faut rechercher le plugin ``CrowdSec``, l'installer et l'activer.
+
+> NB : si vous avez besoin d'un rappel, vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
+
+// TODO
+
+
+## Wordfence
+
+De la même manière que précédemment, il faut rechercher le plugin ``Wordfence Security – Pare-feu, scanner de logiciels malveillants, et sécurité de connexion ``, l'installer et l'activer.
+
+> NB : si vous avez besoin d'un rappel, vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
+
+## Les réglages
+
+Une fois le plugin installé, vous devriez arriver sur 
