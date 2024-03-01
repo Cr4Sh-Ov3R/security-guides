@@ -1,7 +1,5 @@
-<p align="center"> <h1>SECURE YOUR WORDPRESS</h1>                   
-<srong>by Be Cyber Community</strong><br/>
-<i>-- Tyc-Tac & Cr4Sh --</i>
-</p>
+<h1 align="center">SECURE YOUR WORDPRESS</h1>                   
+<p align="center"><srong>by Be Cyber Community</strong><br/><i>-- Tyc-Tac & Cr4Sh --</i></p>
 
 
 ***Pour qui ?***
