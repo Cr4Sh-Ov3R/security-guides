@@ -21,7 +21,7 @@
 
 ***Date de mise à jour 2024-03-05***
 
-- [ ] Avant de commencer l'installation //TODO : Tyc-Tac
+- [ ] Avant de commencer l'installation 
 - [ ] [Installation Best Practice](#best-practice)
 - [ ] [Installation de plugins](#install-plugins)
 - [ ] [Hide Login Page](#hide-login-page) 
@@ -45,7 +45,7 @@
 # Installation - Best practice 
 
 <details>
-<summary>APACHE</summary>
+<summary>Installer et sécuriser Apache</summary>
 
 ## Installation Apache
 ```bash
@@ -140,6 +140,9 @@ curl -v http://localhost:80/ | head
 
 </details>
 
+<details>
+<summary>Installer et sécuriser Nginx</summary>
+
 ## Installation Nginx
 ```bash
 apt-get install nginx && apt-get install nginx-extras
@@ -206,6 +209,10 @@ systemctl reload nginx
 curl -I http://127.0.0.1/
 #pour la sécurité, c'est tout, mais vous pouvez envisager bien plus au niveau de vos optimisations
 ```
+</details>
+
+<details>
+<summary>Installer et sécuriser PHP</summary>
 
 ## PHP
 > Nous allons installer php8.3 qui est la dernière version de php
@@ -257,6 +264,8 @@ allow_url_fopen = Off
 
 > php est sécurisé 
 
+</details>
+
 ## Installation de Mariadb
 ```bash
 #Installation de Mariadb
@@ -297,9 +306,6 @@ unzip latest.zip
 
 rm latest.zip
 ```
-## To be continued lol
-
-
 
 <hr id="hide-login-page" />
 
