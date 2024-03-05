@@ -19,10 +19,10 @@
 
 -----
 
-***Date de mise à jour 2024-02-28***
+***Date de mise à jour 2024-03-05***
 
 - [ ] Avant de commencer l'installation //TODO : Tyc-Tac
-- [ ] [Installation Best Practice](#best-practice) //TODO : Tyc-Tac
+- [ ] [Installation Best Practice](#best-practice)
 - [ ] [Installation de plugins](#install-plugins)
 - [ ] [Hide Login Page](#hide-login-page) 
 - [ ] [Limit Brute Force Login](#bf-login)
@@ -37,12 +37,15 @@
 
 # Avant de commencer l'installation
 
-Base APACHE NGINX ....
+
 
 
 <hr id="best-practice" />
 
 # Installation - Best practice 
+
+<details>
+<summary>APACHE</summary>
 
 ## Installation Apache
 ```bash
@@ -53,6 +56,31 @@ apt install ca-certificates apt-transport-https software-properties-common lsb-r
 apt install apache2-utils libapache2-mod-security2 apache2 -y
 apt info apache2
 ```
+
+## Créer un groupe pour Apache :
+```bash
+addgroup --system "votre-groupe" 
+
+#Créer un utilisateur pour Apache :
+adduser --system --no-create-home --disabled-login --ingroup "votre-groupe" --disabled-password "votre-utilisateur"
+#Cette commande crée un utilisateur système nommé "votre-utilisateur" sans un répertoire personnel (--no-create-home), sans possibilité de se connecter (--disabled-login), et le place dans le groupe "votre-groupe".
+
+
+#Supprimer l'utilisateur www-data :
+deluser www-data
+Assurez-vous qu'il n'y a pas de services ou de processus critiques qui dépendent de cet utilisateur avant de le supprimer.
+
+#Supprimer le groupe www-data :
+delgroup www-data
+
+#une fois cela, fait-on modifier le fichier envars
+nano /etc/apache2/envvars
+export APACHE_RUN_USER="votre-utilisateur"
+export APACHE_RUN_GROUP="votre-groupe"
+#On redémarre le serveur apache
+systemctl restart apache2
+```
+
 ## Configuration apache
 ### Tout se passe dans le fichier */etc/apache2/conf-available/security.conf* :
 
@@ -60,18 +88,25 @@ apt info apache2
 #Cachez la version du serveur apache
 ServerTokens Prod
 ServerSignature Off
+
 #Désactivez la méthode TRACE
 TraceEnable Off
+
 #Configurez X-Frame-Options
 Header always append X-Frame-Options SAMEORIGIN
+
 #Activez X-XSS-Protection
 Header always set X-XSS-Protection: "1; mode=block"
+
 #Réduire les risques de sécurité de type MIME
 Header always set X-Content-Type-Options: "nosniff"
+
 #HSTS
 Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
 #Sécurisation des cookies
 Header always edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
+
 #Désactivez les protocoles SSL/TLS obsolètes
 nano /etc/apache2/mods-enabled/ssl.conf 
 SSLProtocol -all +TLSv1.2
@@ -81,12 +116,16 @@ SSLCipherSuite HIGH:!aNULL:!MD5
 ```
 # Modifcation des entêtes
 a2enmod headers 
+
 #Réécriture des urls
 a2enmod rewrite
+
 #Activation de ssl pour https
 a2enmod ssl
+
 #Activation de php
 a2enmod php8.*
+
 #Autres options disponible
 #a2enmod cache Pour activer le mode cache 
 #a2enmod cache_disk Pour activer le mode cache
@@ -98,6 +137,75 @@ curl -v http://localhost:80/ | head
 ```
 
 > Nous avons correctement configuré notre serveur apache enjoy !!
+
+</details>
+
+## Installation Nginx
+```bash
+apt-get install nginx && apt-get install nginx-extras
+systemctl enable nginx
+systemctl start nginx
+systemctl status nginx
+
+curl -I http://127.0.0.1/
+#On voit la version de notre serveur nginx
+```
+
+```bash
+#Désactiver la signature
+nano /etc/nginx/nginx.conf
+```
+```
+#Dans le fichier /etc/nginx/nginx.conf
+server_tokens off;
+
+#Modifier la ligne ssl comme suit TLS 1 et TLS 1.1 obsolète
+ssl_protocols TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
+```
+
+```bash
+systemctl reload nginx
+
+curl -I http://127.0.0.1/
+#La signature est bien désactivée, mais cela affiche nginx corrigeons cela
+
+nano /etc/nginx/nginx.conf
+```
+
+```
+#Dans le fichier /etc/nginx/nginx.conf
+
+#Ajoutez cela en dessous du commentaire basic
+more_set_headers 'Server: ';
+```
+
+```bash
+systemctl reload nginx
+
+curl -I http://127.0.0.1/
+#Voilà parfait cela n'affiche plus nginx
+
+nano /etc/nginx/nginx.conf
+```
+
+```
+#Dans le fichier /etc/nginx/nginx.conf
+
+#Ajout des protections pour les headers
+more_set_headers "X-Content-Type-Options : nosniff";
+more_set_headers "X-XSS-Protection : 1; mode=block";
+more_set_headers "X-Download-Options : noopen";
+more_set_headers "X-Permitted-Cross-Domain-Policies : none";
+more_set_headers "X-Frame-Options : SAMEORIGIN";
+#Vous pouvez ajouter CSP
+```
+
+```bash
+systemctl reload nginx
+
+curl -I http://127.0.0.1/
+#pour la sécurité, c'est tout, mais vous pouvez envisager bien plus au niveau de vos optimisations
+```
 
 ## PHP
 > Nous allons installer php8.3 qui est la dernière version de php
@@ -120,7 +228,8 @@ php -v
 
 #Ajout du fichier phpinfo pour voir notre configuration
 echo "<?php phpinfo(); ?>" | tee /var/www/html/phpinfo.php
-
+```
+```
 #Ouvrir la page
 http://url/phinfo.php
 ```
