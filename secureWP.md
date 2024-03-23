@@ -586,5 +586,36 @@ Dans la partie ``Additional Options``
 
 - Enfin, si vous souhaitez enrichir la base de connaissance sécuritaire de la communauté vous pouvez envoyer de manière anonyme des informations sur les tentatives de piratage. 
 
+***Rate Limiting***
+
+<p align="center"><img src="./assets/secure-wp/wordfence-rate-limiting.png" alt="Plugin Wordfence Rate Limiting" width="600" height="auto" /></p> 
+
+- Choisissez comment vous souhaitez traiter les robots d'indexation de Google : ``Ici, nous prenons le parti de ne pas limiter les robots de Google qui sont vérifiés``
+
+Nous allons décider du comportement (limité ou bloqué) à prendre lorsque le nombre d'évènements par minutes va être dépassé pour les points suivants :
+
+- Le nombre de requêtes de n'importe qui
+
+- Le nombre de pages vues par un crawler (robot)
+
+- Le nombre de pages non trouvées (404 not found) par un crawler (robot)
+
+- Le nombre de pages vues par un humain
+
+- Le nombre de pages non trouvées (404 not found) par un humain
+
+> NB : Pour les points ci-dessus, attention à vos choix et à ne pas être trop incisif dans vos décisions. Une alerte apparaîtra si vous êtres un peu trop sévère, mais dans tous les cas, évitez le ``Unlimited``
+
+- Pendant combien de temps une adresse IP est bloquée lorsqu'elle enfreint une règle ? Nous règlerons ici à 30 minutes pour l'exemple.
+
+***Rate Limiting***
+
+<p align="center"><img src="./assets/secure-wp/wordfence-allowlisted-url.png" alt="Plugin Wordfence Allowlisted URLs" width="600" height="auto" /></p> 
+
+Cette partie vous permettra définir des URL qui ne seront pas prise en compte par le pare-feu. Elles peuvent également être ajouter automatiquement lorsque le pare-feu est en mode d'apprentissage.
+
+Si vous ne savez pas précisément ce que vous faites, laissez cette partie telle quelle.
+
+
 
 ## WORK IN PROGRESS
