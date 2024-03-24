@@ -21,23 +21,13 @@
 
 ***Date de mise à jour 2024-03-24***
 
-- [ ] Avant de commencer l'installation 
 - [ ] [Installation Best Practice](#best-practice)
 - [ ] [Installation de plugins](#install-plugins)
 - [ ] [Hide Login Page](#hide-login-page) 
 - [ ] [Limit Brute Force Login](#bf-login)
 - [ ] [Firewall, scanning & 2FA](#waf-scan) 
-- [ ] Remove WP version
-- [ ] Remove Yoast SEO Version
-- [ ] Remove Remove Divi Version
-- [ ] Remove Cookie Notice Version
-- [ ] Remove Lite Speed Version
-- Bonnes pratiques sauvegardes + mise à jour.
-- Zip + hash (Comment vérifier l'intégrité ex => fichier base lors de mise en ligne + à chaque sauvegarde + garder antériotité)
-
-# Avant de commencer l'installation
-
-
+- [ ] [Remove WP version](#remove-wp-version)
+- [ ] [Remove Yoast SEO Version](#remove-yoast-version)
 
 
 <hr id="best-practice" />
@@ -436,7 +426,7 @@ Enfin, vous retrouverez ici les statistiques de tentatives de brute force sur vo
 
 <hr id="waf-scan" />
 
-# Firewall & scanning & 2FA
+# Firewall, scanning & 2FA
 
 ***Firewall***
 > Un pare-feu (firewall) sur votre wordpress vous aidera à protéger votre site wordpress des attaques en identifiant et bloquant le trafic malveillant.
@@ -630,6 +620,7 @@ Dans cette partie, Wordfence va vous permettre de scanner votre site :
 
 > NB : Une fois le scan fini, vous aurez le détail du scan disponible en cliquant sur ``Show Log``, ainsi que les parties validées ou présentant une erreur. 
 
+- Pensez à paramétrer le niveau de scan souhaité en cliquant sur ``Manage Scan`` (Choix possible entre Limited, Standard et High sensitivity). Nous choisissons ``High sensitivity`` avant de lancer le scan.
 
 ### Live Trafic
 
@@ -707,10 +698,91 @@ Dans la première partie, ``User Summary``, vous trouverez la liste des utilisat
 
 > NB : La encore si vous utilisez des plugins comme Jetpack ou tout autre ayant besoin d'XML-RPC pour fonctionner, attention à ne pas le désactiver. 
 
+La partie suivante est intéressante dans le cas où vous utiliseriez le plugin de e-commerce pour Wordpress - Woocommerce, sinon vous pouvez le laissé tel quel.
+
 <p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings-woocommerce.png" alt="Plugin Wordfence Login Security settings woocommerce" width="600" height="auto" /></p>
+
+1. Woocommerce integration : Si vous activez cette partie, recaptcha ET 2FA seront ajoutés aux formulaires de connexion et d'enregistrement de Woocommerce, en plus des formulaires Wordpress par défaut.
+
+> NB : Pensez à tester vos formulaire après avoir activé cette options pour vous assurer qu'il n'y ait pas de problème avec certains plugins.
+
+2. 2FA Management shortcode : les shortcodes permettent aux utilisateurs de gérer des paramètres 2FA sur des pages personnalisées. Nous ne vous conseillons pas d'y toucher sauf si vous connaissez PHP et savez modifier les fichiers.
+
+3. La mise en page en une seule colonne vous permettrea d'intégrer l'interface de gestion 2FA via Woocommerce de manière vertical (plutôt qu'en horizontal). Il faudra donc l'ajuster en fonction de votre thème.
+
+Le reCAPTCHA permet de limiter les bots en proposant de résoudre des "challenges". 
 
 <p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings-recaptcha.png" alt="Plugin Wordfence Login Security settings recaptcha" width="600" height="auto" /></p>
 
+1. Nous vous recommandons d'activer reCAPTCHA sur les pages de connexion et d'enregistrement utilisateur. Ici c'est la version 3 de reCAPTCHA qui est utilisé. Cette version à pour avantage de ne pas forcer les utilisateurs à résoudre des énigmes ou a cliquer sur une case pour valider le visiteurs comme étant humain.
+
+> NB : Ce service nécessite de créer un compte gratuit sur Google reCAPTCHA v3 afin de générer la paire de clef Privée (secret) et publique (site key)
+
+2. Une fois la paire de clef renseignée, vous pouvez définir les curseurs (le score). Tout les scores reCAPTCHA égal ou supérieur au score que vous aurez choisi seront considérés comme un humain, tous les scores inférieurs seront considérés comme des bots.
+
+3. Vous pouvez lancer le reCATCHA en test mode afin d'évaluer les demandes de connexion et d'enregistrement. Les scores seront alors enregistrés afin de pouvoir définir la valeur à sélectionner.
+
+La partie General vous permettra d'affiner vos réglages liées à l'authentification 2FA ou le reCAPTCHA
+
 <p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings-general.png" alt="Plugin Wordfence Login Security settings general" width="600" height="auto" /></p>
 
-## WORK IN PROGRESS
+1. Vous pouvez autoriser certaines listes IP à outrepasser l'authentification à 2 facteurs et le reCAPTCHA en les renseignants dans ce champs et en prenant soin de ne mettre qu'une adresse ou plage IP par ligne.
+
+2. NTP : Il s'agit d'un protocole permettant la synchronisation du temps à distance. Il est utilisé par Wordfence Security Login afin de s'assurer qu'il dispose de l'heure la plus précise permettant l'authentification à 2 facteurs de fonctionner correctement. En effet, TOTP étant basé sur le temps, cette synchronisation est importante.
+
+3. Nous vous recommandons d'afficher la colonne des dernières connexion sur la page utilisateur. Elle permettra d'avoir un meilleur monitoring et permettre à l'utilisateur concerné de pouvoir s'assurer que la connexion était légitime.
+
+4. ATTENTION : Vous pouvez effacer l'ensemble des tables et des données en cas de désactivation. Nous vous conseillons de le faire dans le cas où vous souhaiteriez désinstaller Wordfence uniquement.
+
+Une fois toutes ces étapes réalisées, pensez à sauvegarder avant de passer à la suite ou de changer de page.
+
+Félicitations, la grosse partie Firewall, Scanning & 2FA est terminée.
+
+<hr id="remove-wp-version" />
+
+# Remove WP Version
+
+Encore une fois, il est primordial de limiter les informations qu'on diffuse afin de complexifier le processus d'énumération. Plus nous cachons les outils et services que nous utilisons, plus nous nous mettons à l'abri des menaces, nous allons donc faire en sorte de cacher la version de Wordpress que nous utilisons.
+
+> ATTENTION : faites une sauvegarde avant toute modification dans le code source, surtout dans le cas où vous n'êtes pas à l'aise avec le code.
+
+<p align="center"><img src="./assets/secure-wp/wp-version.png" alt="Plugin WP version" width="600" height="auto" /></p>
+
+Pour éditer un fichier vous avez 2 possibilités:
+
+1. La première et la plus recommandée, est de modifier le fichier function.php de votre thème en local depuis votre éditeur de code préféré
+
+2. La seconde, depuis le menu ``Outils > Editeur de fichiers des thèmes`` 
+
+Puis à la fin du fichier function.php de votre thème, ajoutez le code suivant : 
+
+```php
+// Nous ajoutons cette partie pour retirer la version wordpress de notre site
+add_filter('the_generator', 'my_delete_version'); 
+
+function my_delete_version() { 
+return ''; }
+```
+
+<hr id="remove-yoast-version" />
+
+Bravo, votre version de Wordpress n'apparait maintenant plus dans votre code.
+
+# Remove YOAST Version
+
+YOAST est un plugin performant pour le référencement SEO de votre site Wordpress, mais bien qu'il soit performant, il diffuse lui aussi son numéro de version dans le code de votre site, ce qui est une aubaine pour les personnes qui souhaiteraient trouver une vulnérabilitée liée à votre version de plugin.
+
+<p align="center"><img src="./assets/secure-wp/yoast-version.png" alt="Plugin YOAST version" width="600" height="auto" /></p>
+
+
+De la même manière que pour la version Wordpress, ouvrez le fichier ``function.php``de votre thème et insérez-y le code suivant à la fin (tout en ayant pris soin de faire une sauvegarde avant).
+
+```php
+// Delete yoast version
+add_action('wp_head',function() { ob_start(function($o) {
+return preg_replace('/\n?<.*?yoast seo plugin.*?>/mi','',$o);
+}); },~PHP_INT_MAX);
+```
+<p align="center"><img src="./assets/secure-wp/yoast-sans-version.png" alt="Plugin YOAST sans version" width="600" height="auto" /></p>
+
+Bravo, votre version de YOAST n'apparaît maintenant plus sur votre site.
