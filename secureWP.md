@@ -687,4 +687,30 @@ Il s'agit d'une méthode pour rajouter une couche de sécurité lors de la conne
 
 Dans cette partie, nous allons régler tout ce qui est lié à l'authentification à 2 facteurs que nous venons de mettre en place. 
 
+<p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings.png" alt="Plugin Wordfence Login Security settings" width="600" height="auto" /></p>
+
+Dans la première partie, ``User Summary``, vous trouverez la liste des utilisateurs existant sur votre site Wordpress, avec le détail de leurs rôles, ceux pour qui l'authentification à deux facteurs est active ou ne l'est pas.
+
+1. ``2FA Rôles`` : Nous vous conseillons de régler les différents rôles ***Administrator***, ***Editor***, ***Author***, ***Contributor*** et ***Subscriber*** sur ``Required`` afin de forcer le 2FA pour tous les utilisateurs. 
+
+2. ``Période de grâce`` : Les utilisateurs qui ont un rôle avec un 2FA obligatoire, auront un nombre de jours (défini intialement à 10) pour se mettre en conformité et activer l'authentification à 2 facteurs. Au delà de cette période, il perdra accès à son compte. ***Nous vous conseillons de mettre un délai le moins long possible, et si possible ``0`` si c'est faisable dans le cadre de votre organisation.***
+
+> NB : Ce délai est également applicable lors de la création de nouveaux utilisateurs, la période grâce débutera dès la création du compte.
+
+3. Vous pouvez autoriser la mémorisation d'un appareil pendant 30 jours. Attention, c'est plus simple au quotidien, cependant ce ce choix augmente le risque, surtout dans le cas où l'appareil mémorisé est compromis ou si vous perdez votre appareil. ***Nous vous conseillons donc de le laisser désactivé.***
+
+4. Définissez le 2FA pour l'authentification des appels XML-RPC (même si nous désactiverons ce service plus tard). Ça aura au moins le mérite, dans le cas ou XML-RPC soit mal désactivé, de bloquer les appels extérieurs sans 2FA.
+
+> NB : Attention, si vous utilisez des plugins comme Jetpack ou tout autre ayant besoin d'XML-RPC pour fonctionner, vous devez sélectionner ``Skipped``, mais pour ces cas seulements. 
+
+5. Désactivez XML-RPC, ça interdira toute tentative d'authentification par ce service que l'utilisateur ait activé l'authentification à 2 facteurs ou non. 
+
+> NB : La encore si vous utilisez des plugins comme Jetpack ou tout autre ayant besoin d'XML-RPC pour fonctionner, attention à ne pas le désactiver. 
+
+<p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings-woocommerce.png" alt="Plugin Wordfence Login Security settings woocommerce" width="600" height="auto" /></p>
+
+<p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings-recaptcha.png" alt="Plugin Wordfence Login Security settings recaptcha" width="600" height="auto" /></p>
+
+<p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings-general.png" alt="Plugin Wordfence Login Security settings general" width="600" height="auto" /></p>
+
 ## WORK IN PROGRESS
