@@ -19,14 +19,14 @@
 
 -----
 
-***Date de mise à jour 2024-03-05***
+***Date de mise à jour 2024-03-24***
 
 - [ ] Avant de commencer l'installation 
 - [ ] [Installation Best Practice](#best-practice)
 - [ ] [Installation de plugins](#install-plugins)
 - [ ] [Hide Login Page](#hide-login-page) 
 - [ ] [Limit Brute Force Login](#bf-login)
-- [ ] [Firewall & scanning](#waf-scan) 
+- [ ] [Firewall, scanning & 2FA](#waf-scan) 
 - [ ] Remove WP version
 - [ ] Remove Yoast SEO Version
 - [ ] Remove Remove Divi Version
@@ -616,6 +616,75 @@ Cette partie vous permettra définir des URL qui ne seront pas prise en compte p
 
 Si vous ne savez pas précisément ce que vous faites, laissez cette partie telle quelle.
 
+Enfin pensez à sauvegarder les changements en cliquant sur le bouton ``Save Changes``en haut à droite.
 
+### Scan
+
+<p align="center"><img src="./assets/secure-wp/wordfence-scan.png" alt="Plugin Wordfence Scan" width="600" height="auto" /></p>
+
+Dans cette partie, Wordfence va vous permettre de scanner votre site :
+
+- De manière régulière pour étudier les vulnérabilités liées à des fichiers qui auraient été modifiés ou des plugins/thèmes qui auraient besoin de mises à jour.
+
+- De manière manuelle, de manière à lancer un scan total de votre site Wordpress en cliquant sur ``Start New Scan``
+
+> NB : Une fois le scan fini, vous aurez le détail du scan disponible en cliquant sur ``Show Log``, ainsi que les parties validées ou présentant une erreur. 
+
+
+### Live Trafic
+
+Le Live Trafic (trafic en direct), affiche par défaut un résumé de tout le trafic lié à la sécurité et à quoi le trafic est-il rattaché? (Human, Bot, Warning, Blocked).
+
+<p align="center"><img src="./assets/secure-wp/wordfence-live-trafic.png" alt="Plugin Wordfence Live Trafic" width="600" height="auto" /></p>
+
+***Live Trafic Options***
+
+Vous pouvez également affiner votre Live Trafic en choisissant :
+
+- Le mode d'enregistrement du trafic : ``Security Only`` ou ``All Trafic``. (Nous garderons le mode Security car le All Trafic peut facilement se révéler conséquent et être contre productif et peut coûter cher en terme de ressources)
+
+- Si vous ne souhaitez pas suivre les utilisateurs avec un accès de publication (administrateur, éditeur ...) afin qu'il ne se retrouvent pas dans le live trafic, il faudra cocher cette case.
+
+- Vous pouvez choisir les utilisateurs que vous souhaitez ignorer, en les séparant par une virgule ``,`` 
+
+- Vous pouvez également ignorer des adresses IP en les ajoutant et en les séparant par une virgule ``,``
+
+- Renseignez ensuite la liste des ``user-agent`` que vous souhaitez ignorer 
+
+> NB : Nous vous conseillons de ne toucher aux 3 précédents points, que si vous savez ce que vous faites
+
+- Choisissez le nombre de lignes maximum qui seront sauvegardées ( 2000 par défaut )
+
+- Ensuite, choisissez le nombre de jour durant lesquels vous conserverez les données de trafic, entre 1 et 30 jours ( 30 par défaut )
+
+<p align="center"><img src="./assets/secure-wp/wordfence-live-trafic-options.png" alt="Plugin Wordfence Live Trafic Options" width="600" height="auto" /></p>
+
+### Login Security 
+
+C'est ici que vous pourrez activer l'authentification à deux facteurs (2FA ou Two-Factor Authentication). 
+
+Il s'agit d'une méthode pour rajouter une couche de sécurité lors de la connexion à votre site Wordpress, car une fois avoir rentré vos identifiants et mots de passe, Wordfence vous demande un code pour valider la connexion.
+
+> NB : Nous vous conseillons fortement de mettre en place l'authentification multi-facteur (MFA / 2FA) partout où vous le pouvez, que ce soit sur logiciels de messagerie e-mails, vos réseaux sociaux, vos banques, sites administratifs (partout où cela est possible).
+
+<p align="center"><img src="./assets/secure-wp/wordfence-login-security-2FA.png" alt="Plugin Wordfence Login Security 2FA" width="600" height="auto" /></p>
+
+***Activation de l'authentification à 2 facteurs***
+
+1. Choisissez l'application que vous souhaitez utiliser pour mettre en place votre authentification à 2 facteurs
+
+> NB : Il est écrit dans la liste que Wordfence accepte les Apps TOTP (comprendre ``Time-Based One-time Password``) suivantes : Google authenticator, FreeOTP, LastPass authenticator, Microsoft authenticator ... (nous vous invitons à suivre le liens présent sur votre page pour avoir la liste exhaustive et en temps réel)
+
+2. Scannez le QRCode présent à l'écran dans votre application TOTP (Si vous n'avez pas d'appareil photo fonctionnel, vous pouvez aussi renseigner le code qui est sous le QRCode).
+
+3. OPTIONNEL : Téléchargez les code de récupération et sauvegardez les de manière sécurisé dans un trousseau prévu à cet effet, ``Ne les laissez jamais en accès libre dans votre dossier de téléchargement, sur votre bureau ou autre``.
+
+4. Renseignez le code généré par votre application TOTP afin de valider l'authentification à deux facteurs. 
+
+> **ATTENTION** : nous vous présentons ici le QRCode, le code ainsi que les code de récupération en clair pour l'exemple car l'installation est faite sur un LAB en local, destiné à cet effet et sera effacé dès la fin de la rédaction de ce guide. ***``NE DÉVOILEZ JAMAIS VOTRE QRCODE, LE CODE EN DESSOUS, NI LES CODE DE RÉCUPÉRATION, ILS SONT PRIVÉS ET DOIVENT ÊTRE GARDÉS EN LIEU SÛR AFIN D'ÉVITER TOUTE UTILISATION MALVEILLANTE``***
+
+***Settings***
+
+Dans cette partie, nous allons régler tout ce qui est lié à l'authentification à 2 facteurs que nous venons de mettre en place. 
 
 ## WORK IN PROGRESS
