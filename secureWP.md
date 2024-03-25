@@ -842,7 +842,7 @@ Bravo, votre version de YOAST n'apparaît maintenant plus sur votre site.
 
 ***Remerciements :***
 
-Ce référentiel à été réalisé afin de permettre à toute personne, même peu à l'aise avec le code, de pouvoir améliorer la sécurisation de vos serveurs et de vos sites Wordpress de manière la plus simple possible, en ce contexte cyber assez particulier.
+Ce référentiel à été réalisé afin de permettre à toute personne, même peu à l'aise avec le code, de pouvoir améliorer la sécurisation de ses serveurs et de ses sites Wordpress de manière la plus simple possible, en ce contexte cyber assez particulier.
 
 Nous espérons que ce référentiel vous a plu, qu'il aidera le plus de monde possible à sécuriser son site et son infrastructure.
 
