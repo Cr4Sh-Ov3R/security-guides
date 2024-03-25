@@ -508,7 +508,7 @@ Une fois le plugin installé, vous devriez arriver sur une page vous demandant d
 
 1. Nous partons du principe que vous n'avez pas de licence, vous devrez donc en créer une.
 
-> NB : Vous avez 4 licences disponibles, vous pouvez choisir celle qui vous convient le mieux. Notez que la licence "Free" fonctionne plutôt bien mais vous ne bénéficierez pas de la mise à jour des nouvelles menaces en temps réel, mais avec un différé de 30 jours après leurs découvertes.
+> NB : Vous avez 4 licences disponibles, vous pouvez choisir celle qui vous convient le mieux. Notez que la licence "Free" fonctionne plutôt bien. Par contre vous ne bénéficierez pas de la mise à jour des nouvelles menaces en temps réel, mais avec un différé de 30 jours après leurs découvertes.
 
 Une fois avoir créé un compte et avoir choisi votre licence, vous recevrez votre numéro de licence par e-mail. 
 
@@ -517,7 +517,7 @@ Une fois avoir créé un compte et avoir choisi votre licence, vous recevrez vot
 <p align="center"><img src="./assets/secure-wp/wordfence-license.png" alt="Plugin Wordfence license" width="600" height="auto" /></p>
 
 - Renseignez votre e-mail de connexion 
-- Ainsi que le numéro de votre licence reçue par e-mail (attention, votre licence doit rester confidentielle, ne la partagez pas, il s'agit ici, dans l'exemple, d'un nombre pris au hasard)
+- Ainsi que le numéro de votre licence reçue par e-mail (attention, votre licence doit rester confidentielle, ne la partagez pas, il s'agit ici, dans l'exemple, d'un nombre pris au hasard et non pas d'un numéro de licence valide)
 - Cliquez ensuite sur ``YES`` pour accepter de recevoir des e-mails sur les alertes de sécurité et de vulnérabilités.
 
 <p align="center"><img src="./assets/secure-wp/wordfence-free-valid-license.png" alt="Plugin Wordfence free valid license" width="350" height="auto" /></p>
@@ -546,15 +546,17 @@ Sur votre Dashboard, vous trouverez les parties liées au ``Firewall``, au ``Sca
 
 1. Web Application Firewall Status (WAF)
 
-Par défaut, lors de l'installation de Wordfence, le mode d'apprentissage est enclenché pendant 1 semaine. Il permettra au plugin d'apprendre comment le protéger par la suite sans bloquer les utilisateurs légitimes. 
+Par défaut, lors de l'installation de Wordfence, le mode d'apprentissage est enclenché pendant 1 semaine. Il permettra au plugin d'apprendre comment le protéger par la suite, sans bloquer les utilisateurs légitimes. 
 
-Au bout d'une semaine il enclenchera automatiquement le pare-feu.
+Au bout d'une semaine, il enclenchera automatiquement le pare-feu.
 
 2. Protection level
 
-Lors de l'installation, le "Basic Wordpress Protection" est d'office activé. Cependant, il pourra bloquer de nombreuses requête malveillante une fois le plugin chargé, mais certains plugins vulnérables ou Wordpress pourront parfois réussir à exécuter du code malveillant sans passer par le pare-feu.
+Lors de l'installation, le "Basic Wordpress Protection" est d'office activé. 
 
-Il est donc primordial d'optimiser le processus en modifiant la configuration PHP afin de lancer le pare-feu avant Wordpress ou un autre fichier PHP. 
+Cependant, il pourra certes bloquer de nombreuses requête malveillante une fois le plugin chargé, mais certains plugins vulnérables ou Wordpress lui-même pourront parfois réussir à exécuter du code malveillant sans passer par le pare-feu.
+
+Il est donc primordial d'optimiser le processus en modifiant la configuration PHP afin de lancer le pare-feu avant Wordpress ou tout autre fichier PHP. 
 
 Pour se faire, il est nécessaire de modifier certains fichiers (en fonction de votre serveur) comme le ``.htaccess``, le ``php.ini``...
 
@@ -568,15 +570,15 @@ Pour se faire, il est nécessaire de modifier certains fichiers (en fonction de 
 
 <p align="center"><img src="./assets/secure-wp/wordfence-optimize-firewal-success.png" alt="Plugin Wordfence optimize firewall success" width="600" height="auto" /></p> 
 
-- Une fois téléchargé et installé à la racine de votre wordpress et cliquez sur continuer.
+- Une fois téléchargé et sauvegardé quelque part en lieu sûr (pour pouvoir le remettre en cas de dysfonctionnement), cliquez sur continuer.
 
-> NB : Dans certains cas, il se peut que la mise en cache de votre serveur ou si vous utilisez un plugin pour le cache, retarde de quelques instants les nouveaux paramétrages. N'hésitez pas à recharger la page du Firewall pour vérifier que les modifications aient bien été prise en compte.
+> NB : Dans certains cas, il se peut que la mise en cache de votre serveur ou qu'un plugin qui gère le cache sur votre Wordpress, retarde de quelques instants les nouveaux paramétrages. N'hésitez pas à recharger la page du Firewall pour vérifier que les modifications soient bien prise en compte.
 
 <p align="center"><img src="./assets/secure-wp/wordfence-extented-protection.png" alt="Plugin Wordfence extented protection" width="350" height="auto" /></p> 
 
 ***Advanced Firewall Options***
 
-Vous pourrez effectuer des réglages avancés en retardant les blockage IP, en autorisant certaines adresses IP à retarder les règles de pare feu ...
+Vous pourrez effectuer des réglages avancés en retardant les blockages IP, en autorisant certaines adresses IP à retarder les règles de pare feu ...
 
 <p align="center"><img src="./assets/secure-wp/wordfence-advanced-firewall.png" alt="Plugin Wordfence advanced firewall" width="600" height="auto" /></p> 
 
@@ -625,7 +627,7 @@ Dans la partie ``Additional Options``
 
 - Choisissez comment vous souhaitez traiter les robots d'indexation de Google : ``Ici, nous prenons le parti de ne pas limiter les robots de Google qui sont vérifiés``
 
-Nous allons décider du comportement (limité ou bloqué) à prendre lorsque le nombre d'évènements par minutes va être dépassé pour les points suivants :
+Nous allons décider du comportement (limiter ou bloquer) à prendre lorsque le nombre d'évènements par minutes va être dépassé pour les points suivants :
 
 - Le nombre de requêtes de n'importe qui
 
@@ -637,15 +639,17 @@ Nous allons décider du comportement (limité ou bloqué) à prendre lorsque le 
 
 - Le nombre de pages non trouvées (404 not found) par un humain
 
-> NB : Pour les points ci-dessus, attention à vos choix et à ne pas être trop incisif dans vos décisions. Une alerte apparaîtra si vous êtres un peu trop sévère, mais dans tous les cas, évitez le ``Unlimited``
+> NB : Pour les points ci-dessus, attention à vos choix et à ne pas être trop incisif dans vos décisions. Une alerte apparaîtra si vous êtes un peu trop sévère, mais dans tous les cas, évitez le ``Unlimited``
 
-- Pendant combien de temps une adresse IP est bloquée lorsqu'elle enfreint une règle ? Nous règlerons ici à 30 minutes pour l'exemple.
+- Pendant combien de temps une adresse IP est bloquée lorsqu'elle enfreint une règle ? Nous règlerons ici à ``30 minutes`` pour l'exemple.
 
-***Rate Limiting***
+***AllowListed URLs***
 
 <p align="center"><img src="./assets/secure-wp/wordfence-allowlisted-url.png" alt="Plugin Wordfence Allowlisted URLs" width="600" height="auto" /></p> 
 
-Cette partie vous permettra définir des URL qui ne seront pas prise en compte par le pare-feu. Elles peuvent également être ajouter automatiquement lorsque le pare-feu est en mode d'apprentissage.
+Cette partie vous permettra définir des URL qui ne seront pas prise en compte par le pare-feu. 
+
+Elles peuvent également être ajouter automatiquement lorsque le pare-feu est en mode d'apprentissage.
 
 Si vous ne savez pas précisément ce que vous faites, laissez cette partie telle quelle.
 
@@ -659,7 +663,7 @@ Dans cette partie, Wordfence va vous permettre de scanner votre site :
 
 - De manière régulière pour étudier les vulnérabilités liées à des fichiers qui auraient été modifiés ou des plugins/thèmes qui auraient besoin de mises à jour.
 
-- De manière manuelle, de manière à lancer un scan total de votre site Wordpress en cliquant sur ``Start New Scan``
+- De manière manuelle, pour lancer un scan total de votre site Wordpress en cliquant sur ``Start New Scan``
 
 > NB : Une fois le scan fini, vous aurez le détail du scan disponible en cliquant sur ``Show Log``, ainsi que les parties validées ou présentant une erreur. 
 
@@ -667,7 +671,7 @@ Dans cette partie, Wordfence va vous permettre de scanner votre site :
 
 ### Live Trafic
 
-Le Live Trafic (trafic en direct), affiche par défaut un résumé de tout le trafic lié à la sécurité et à quoi le trafic est-il rattaché? (Human, Bot, Warning, Blocked).
+Le Live Trafic (trafic en direct), affiche par défaut un résumé de tout le trafic lié à la sécurité et nous indique à quoi le trafic est rattaché? (Human, Bot, Warning, Blocked).
 
 <p align="center"><img src="./assets/secure-wp/wordfence-live-trafic.png" alt="Plugin Wordfence Live Trafic" width="600" height="auto" /></p>
 
@@ -675,9 +679,11 @@ Le Live Trafic (trafic en direct), affiche par défaut un résumé de tout le tr
 
 Vous pouvez également affiner votre Live Trafic en choisissant :
 
-- Le mode d'enregistrement du trafic : ``Security Only`` ou ``All Trafic``. (Nous garderons le mode Security car le All Trafic peut facilement se révéler conséquent et être contre productif et peut coûter cher en terme de ressources)
+- Le mode d'enregistrement du trafic : ``Security Only`` ou ``All Trafic``. 
 
-- Si vous ne souhaitez pas suivre les utilisateurs avec un accès de publication (administrateur, éditeur ...) afin qu'il ne se retrouvent pas dans le live trafic, il faudra cocher cette case.
+> NB : Nous garderons le mode ``Security`` car le All Trafic peut facilement se révéler conséquent, être contre productif et peut coûter cher en terme de ressources
+
+- Si vous ne souhaitez pas suivre les utilisateurs avec un accès de publication (administrateur, éditeur ...) et cacher leur activité dans le live trafic, il faudra cocher cette case.
 
 - Vous pouvez choisir les utilisateurs que vous souhaitez ignorer, en les séparant par une virgule ``,`` 
 
@@ -685,7 +691,7 @@ Vous pouvez également affiner votre Live Trafic en choisissant :
 
 - Renseignez ensuite la liste des ``user-agent`` que vous souhaitez ignorer 
 
-> NB : Nous vous conseillons de ne toucher aux 3 précédents points, que si vous savez ce que vous faites
+> NB : Nous vous conseillons de ne toucher aux 3 précédents points, que si vous savez exactement ce que vous faites
 
 - Choisissez le nombre de lignes maximum qui seront sauvegardées ( 2000 par défaut )
 
@@ -715,7 +721,7 @@ Il s'agit d'une méthode pour rajouter une couche de sécurité lors de la conne
 
 4. Renseignez le code généré par votre application TOTP afin de valider l'authentification à deux facteurs. 
 
-> **ATTENTION** : nous vous présentons ici le QRCode, le code ainsi que les code de récupération en clair pour l'exemple car l'installation est faite sur un LAB en local, destiné à cet effet et sera effacé dès la fin de la rédaction de ce guide. ***``NE DÉVOILEZ JAMAIS VOTRE QRCODE, LE CODE EN DESSOUS, NI LES CODE DE RÉCUPÉRATION, ILS SONT PRIVÉS ET DOIVENT ÊTRE GARDÉS EN LIEU SÛR AFIN D'ÉVITER TOUTE UTILISATION MALVEILLANTE``***
+> **ATTENTION** : Nous vous présentons ici le QRCode, le code ainsi que les code de récupération en clair pour l'exemple car l'installation est faite sur un LAB en local, destiné à cet effet et sera effacé dès la fin de la rédaction de ce guide. ***``NE DÉVOILEZ JAMAIS VOTRE QRCODE, LE CODE EN DESSOUS, NI LES CODES DE RÉCUPÉRATION, ILS SONT PRIVÉS ET DOIVENT ÊTRE GARDÉS EN LIEU SÛR AFIN D'ÉVITER TOUTE UTILISATION MALVEILLANTE``***
 
 ***Settings***
 
@@ -731,17 +737,17 @@ Dans la première partie, ``User Summary``, vous trouverez la liste des utilisat
 
 > NB : Ce délai est également applicable lors de la création de nouveaux utilisateurs, la période grâce débutera dès la création du compte.
 
-3. Vous pouvez autoriser la mémorisation d'un appareil pendant 30 jours. Attention, c'est plus simple au quotidien, cependant ce ce choix augmente le risque, surtout dans le cas où l'appareil mémorisé est compromis ou si vous perdez votre appareil. ***Nous vous conseillons donc de le laisser désactivé.***
+3. Vous pouvez autoriser la mémorisation d'un appareil pendant 30 jours. Attention, c'est plus simple au quotidien, cependant ce choix augmente le risque, surtout dans le cas où l'appareil mémorisé est compromis ou si vous perdez votre appareil. ***Nous vous conseillons donc de le laisser désactivé.***
 
 4. Définissez le 2FA pour l'authentification des appels XML-RPC (même si nous désactiverons ce service plus tard). Ça aura au moins le mérite, dans le cas ou XML-RPC soit mal désactivé, de bloquer les appels extérieurs sans 2FA.
 
-> NB : Attention, si vous utilisez des plugins comme Jetpack ou tout autre ayant besoin d'XML-RPC pour fonctionner, vous devez sélectionner ``Skipped``, mais pour ces cas seulements. 
+> NB : Attention, si vous utilisez des plugins comme Jetpack ou tout autre plugin ayant besoin d'XML-RPC pour fonctionner, vous devez sélectionner ``Skipped``, mais pour ces cas seulements. 
 
-5. Désactivez XML-RPC, ça interdira toute tentative d'authentification par ce service que l'utilisateur ait activé l'authentification à 2 facteurs ou non. 
+5. Désactivez XML-RPC, cette option interdira toute tentative d'authentification par le biais de ce service, que l'utilisateur ait activé l'authentification à 2 facteurs ou non. 
 
-> NB : La encore si vous utilisez des plugins comme Jetpack ou tout autre ayant besoin d'XML-RPC pour fonctionner, attention à ne pas le désactiver. 
+> NB : La encore si vous utilisez des plugins comme Jetpack ou tout autre plugin ayant besoin d'XML-RPC pour fonctionner, attention à ne pas le désactiver. 
 
-La partie suivante est intéressante dans le cas où vous utiliseriez le plugin de e-commerce pour Wordpress - Woocommerce, sinon vous pouvez le laissé tel quel.
+La partie suivante est intéressante dans le cas où vous utiliseriez le plugin de e-commerce pour Wordpress - Woocommerce, sinon vous pouvez le laisser tel quel.
 
 <p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings-woocommerce.png" alt="Plugin Wordfence Login Security settings woocommerce" width="600" height="auto" /></p>
 
@@ -757,15 +763,15 @@ Le reCAPTCHA permet de limiter les bots en proposant de résoudre des "challenge
 
 <p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings-recaptcha.png" alt="Plugin Wordfence Login Security settings recaptcha" width="600" height="auto" /></p>
 
-1. Nous vous recommandons d'activer reCAPTCHA sur les pages de connexion et d'enregistrement utilisateur. Ici c'est la version 3 de reCAPTCHA qui est utilisé. Cette version à pour avantage de ne pas forcer les utilisateurs à résoudre des énigmes ou a cliquer sur une case pour valider le visiteurs comme étant humain.
+1. Nous vous recommandons d'activer reCAPTCHA sur les pages de connexion et d'enregistrement utilisateur. Ici c'est la version 3 de reCAPTCHA qui est utilisé. Cette version à pour avantage de ne pas forcer les utilisateurs à résoudre des énigmes ou à cliquer sur une case pour valider le visiteurs comme étant humain.
 
-> NB : Ce service nécessite de créer un compte gratuit sur Google reCAPTCHA v3 afin de générer la paire de clef Privée (secret) et publique (site key)
+> NB : Ce service nécessite de créer un compte gratuit sur Google reCAPTCHA v3 afin de générer la paire de clef Privée (secret) et Publique (site key)
 
-2. Une fois la paire de clef renseignée, vous pouvez définir les curseurs (le score). Tout les scores reCAPTCHA égal ou supérieur au score que vous aurez choisi seront considérés comme un humain, tous les scores inférieurs seront considérés comme des bots.
+2. Une fois la paire de clef renseignée, vous pouvez définir les curseurs (le score). Tout les scores reCAPTCHA égal ou supérieur au score que vous aurez choisi seront considérés comme ***humain***, tous les scores inférieurs seront considérés comme des ***bots***.
 
 3. Vous pouvez lancer le reCATCHA en test mode afin d'évaluer les demandes de connexion et d'enregistrement. Les scores seront alors enregistrés afin de pouvoir définir la valeur à sélectionner.
 
-La partie General vous permettra d'affiner vos réglages liées à l'authentification 2FA ou le reCAPTCHA
+La partie General vous permettra quant à elle d'affiner vos réglages liées à l'authentification 2FA ou le reCAPTCHA
 
 <p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings-general.png" alt="Plugin Wordfence Login Security settings general" width="600" height="auto" /></p>
 
@@ -773,7 +779,7 @@ La partie General vous permettra d'affiner vos réglages liées à l'authentific
 
 2. NTP : Il s'agit d'un protocole permettant la synchronisation du temps à distance. Il est utilisé par Wordfence Security Login afin de s'assurer qu'il dispose de l'heure la plus précise permettant l'authentification à 2 facteurs de fonctionner correctement. En effet, TOTP étant basé sur le temps, cette synchronisation est importante.
 
-3. Nous vous recommandons d'afficher la colonne des dernières connexion sur la page utilisateur. Elle permettra d'avoir un meilleur monitoring et permettre à l'utilisateur concerné de pouvoir s'assurer que la connexion était légitime.
+3. Nous vous recommandons d'afficher la colonne des dernières connexion sur la page utilisateur. Elle permettra d'avoir un meilleur monitoring et permettra à l'utilisateur concerné de pouvoir s'assurer que la connexion était légitime.
 
 4. ATTENTION : Vous pouvez effacer l'ensemble des tables et des données en cas de désactivation. Nous vous conseillons de le faire dans le cas où vous souhaiteriez désinstaller Wordfence uniquement.
 
@@ -785,7 +791,9 @@ Félicitations, la grosse partie Firewall, Scanning & 2FA est terminée.
 
 # Remove WP Version
 
-Encore une fois, il est primordial de limiter les informations qu'on diffuse afin de complexifier le processus d'énumération. Plus nous cachons les outils et services que nous utilisons, plus nous nous mettons à l'abri des menaces, nous allons donc faire en sorte de cacher la version de Wordpress que nous utilisons.
+Encore une fois, il est primordial de limiter les informations que l'on diffuse afin de complexifier le processus d'énumération. 
+
+Plus nous cachons les outils et services que nous utilisons, plus nous nous mettons "à l'abri" des menaces. Nous allons donc faire en sorte de cacher la version de Wordpress que nous utilisons.
 
 > ATTENTION : faites une sauvegarde avant toute modification dans le code source, surtout dans le cas où vous n'êtes pas à l'aise avec le code.
 
@@ -793,11 +801,11 @@ Encore une fois, il est primordial de limiter les informations qu'on diffuse afi
 
 Pour éditer un fichier vous avez 2 possibilités:
 
-1. La première et la plus recommandée, est de modifier le fichier function.php de votre thème en local depuis votre éditeur de code préféré
+1. La première et la plus recommandée, est de modifier le fichier function.php de votre thème en local depuis votre éditeur de code préféré puis de l'envoyer sur votre serveur.
 
 2. La seconde, depuis le menu ``Outils > Editeur de fichiers des thèmes`` 
 
-Puis à la fin du fichier function.php de votre thème, ajoutez le code suivant : 
+Trouvez le fichier ``function.php`` de votre thème, puis à la fin du fichier, ajoutez le code suivant : 
 
 ```php
 // Nous ajoutons cette partie pour retirer la version wordpress de notre site
@@ -807,13 +815,13 @@ function my_delete_version() {
 return ''; }
 ```
 
-<hr id="remove-yoast-version" />
-
 Bravo, votre version de Wordpress n'apparait maintenant plus dans votre code.
+
+<hr id="remove-yoast-version" />
 
 # Remove YOAST Version
 
-YOAST est un plugin performant pour le référencement SEO de votre site Wordpress, mais bien qu'il soit performant, il diffuse lui aussi son numéro de version dans le code de votre site, ce qui est une aubaine pour les personnes qui souhaiteraient trouver une vulnérabilitée liée à votre version de plugin.
+YOAST est un plugin performant pour le référencement SEO de votre site Wordpress, mais bien qu'il soit performant, il diffuse, lui aussi, son numéro de version dans le code de votre site, ce qui est une aubaine pour les personnes qui souhaiteraient trouver une vulnérabilité liée à votre version de plugin.
 
 <p align="center"><img src="./assets/secure-wp/yoast-version.png" alt="Plugin YOAST version" width="600" height="auto" /></p>
 
@@ -829,3 +837,24 @@ return preg_replace('/\n?<.*?yoast seo plugin.*?>/mi','',$o);
 <p align="center"><img src="./assets/secure-wp/yoast-sans-version.png" alt="Plugin YOAST sans version" width="600" height="auto" /></p>
 
 Bravo, votre version de YOAST n'apparaît maintenant plus sur votre site.
+
+<hr />
+
+***Remerciements :***
+
+Ce référentiel à été réalisé afin de permettre à toute personne, même peu à l'aise avec le code, de pouvoir améliorer la sécurisation de vos serveurs et de vos sites Wordpress de manière la plus simple possible, en ce contexte cyber assez particulier.
+
+Nous espérons que ce référentiel vous a plu, qu'il aidera le plus de monde possible à sécuriser son site et son infrastructure.
+
+Nous le tiendrons à jour le plus régulièrement possible et nous le ferons évoluer sur différents sujet Cyber, alors garder ce référentiel en favori pour en profiter 👩‍💻👨‍💻
+
+N'hésitez pas à le partager à toute personne qui aurait besoin de sécuriser son site Wordpress ou son serveur.
+
+Merci pour votre intérêt et nous vous disons à très bientôt pour plus de contenu.
+
+<hr>
+
+***Crédits :***
+
+Tyc-Tac & Cr4Sh
+ Be.Cyber Community
