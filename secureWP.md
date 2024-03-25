@@ -1,10 +1,10 @@
-<h1 align="center">SECURE YOUR WORDPRESS</h1>                   
+<h1 align="center">Comment sécuriser son site Wordpress</h1>                   
 <p align="center"><srong>by Be Cyber Community</strong><br/><i>-- Tyc-Tac & Cr4Sh --</i></p>
 
 
 ***Pour qui ?***
 >
->  Ce support est destiné à toute personnes souhaitant sécuriser son site / blog basé sur un **CMS Wordpress**, même sans connaissances poussées en développement ni en réseau.
+>  Ce support est destiné à toute personne souhaitant sécuriser son site / blog basé sur un **CMS Wordpress**, même sans connaissances poussées en développement ni en réseau.
 >
 > Les propos seront donc ***le plus vulgarisés possibles*** afin de vous accompagner, étape par étape, pour la mise en place des bonnes pratiques et l'installation de plugins reconnus en la matière.
 >
@@ -21,10 +21,10 @@
 
 ***Date de mise à jour 2024-03-24***
 
-- [ ] [Installation Best Practice](#best-practice)
+- [ ] [Installation et bonnes pratiques](#best-practice)
 - [ ] [Installation de plugins](#install-plugins)
-- [ ] [Hide Login Page](#hide-login-page) 
-- [ ] [Limit Brute Force Login](#bf-login)
+- [ ] [Cachez votre page de connexion](#hide-login-page) 
+- [ ] [Limiter les attaque par Brute Force pour la connexion](#bf-login)
 - [ ] [Firewall, scanning & 2FA](#waf-scan) 
 - [ ] [Remove WP version](#remove-wp-version)
 - [ ] [Remove Yoast SEO Version](#remove-yoast-version)
@@ -32,108 +32,140 @@
 
 <hr id="best-practice" />
 
-# Installation - Best practice 
+# Installation et bonnes pratiques 
+
+Nous serons un peu plus techniques sur cette partie afin de permettre aux personnes souhaitant installer Wordpress sur leur propre serveur de le préparer afin d'accueillir votre site dans les meilleures conditions possibles.
 
 <details>
 <summary>Installer et sécuriser Apache</summary>
 
 ## Installation Apache
 ```bash
-#installation des dépendences
+# Installation des dépendences
 apt install ca-certificates apt-transport-https software-properties-common lsb-release curl -y
 
-#installation d'apache
+# Installation d'Apache
 apt install apache2-utils libapache2-mod-security2 apache2 -y
 apt info apache2
 ```
 
-## Créer un groupe pour Apache :
+## Créez un groupe pour Apache :
 ```bash
 addgroup --system "votre-groupe" 
 
-#Créer un utilisateur pour Apache :
+# Créez un utilisateur pour Apache :
 adduser --system --no-create-home --disabled-login --ingroup "votre-groupe" --disabled-password "votre-utilisateur"
-#Cette commande crée un utilisateur système nommé "votre-utilisateur" sans un répertoire personnel (--no-create-home), sans possibilité de se connecter (--disabled-login), et le place dans le groupe "votre-groupe".
+# Cette commande créée un utilisateur système nommé "votre-utilisateur" sans répertoire personnel (--no-create-home), sans possibilité de se connecter (--disabled-login), et le place dans le groupe "votre-groupe".
 
 
-#Supprimer l'utilisateur www-data :
+# Supprimez l'utilisateur www-data :
 deluser www-data
-Assurez-vous qu'il n'y a pas de services ou de processus critiques qui dépendent de cet utilisateur avant de le supprimer.
+# Assurez-vous qu'il n'y a pas de services ou de processus critiques qui dépendent de cet utilisateur avant de le supprimer.
 
-#Supprimer le groupe www-data :
+# Supprimez le groupe www-data :
 delgroup www-data
+```
 
-#une fois cela, fait-on modifier le fichier envars
+```bash
+# Une fois cela fait, on modifie le fichier envvars
 nano /etc/apache2/envvars
+```
+
+```
+# Dans le fichier /etc/apache2/envvars
+
 export APACHE_RUN_USER="votre-utilisateur"
 export APACHE_RUN_GROUP="votre-groupe"
-#On redémarre le serveur apache
+```
+
+```bash
+# On redémarre le serveur Apache
 systemctl restart apache2
 ```
 
 ## Configuration apache
+
 ### Tout se passe dans le fichier */etc/apache2/conf-available/security.conf* :
 
+```bash
+# Nous allons modifier le fichier avec les règles pour le renforcer
+nano /etc/apache2/conf-available/security.conf
 ```
-#Cachez la version du serveur apache
+
+```
+# Dans le fichier etc/apache2/conf-available/security.conf
+
+# Cachez la version du serveur apache
 ServerTokens Prod
 ServerSignature Off
 
-#Désactivez la méthode TRACE
+# Désactivez la méthode TRACE
 TraceEnable Off
 
-#Configurez X-Frame-Options
+# Configurez X-Frame-Options
 Header always append X-Frame-Options SAMEORIGIN
 
-#Activez X-XSS-Protection
+# Activez X-XSS-Protection
 Header always set X-XSS-Protection: "1; mode=block"
 
-#Réduire les risques de sécurité de type MIME
+# Réduisez les risques de sécurité de type MIME
 Header always set X-Content-Type-Options: "nosniff"
 
-#HSTS
+# HSTS - HTTP Strict Transport Sercurity
 Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
-#Sécurisation des cookies
+# Sécurisation des cookies
 Header always edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
+```
 
-#Désactivez les protocoles SSL/TLS obsolètes
+```bash
+# Désactivez les protocoles SSL/TLS obsolètes
 nano /etc/apache2/mods-enabled/ssl.conf 
+```
+
+```
+# Dans le fichier /etc/apache2/mods-enabled/ssl.conf
 SSLProtocol -all +TLSv1.2
 SSLCipherSuite HIGH:!aNULL:!MD5
 ```
+
 ### Nous devons ensuite activer certains modules:
-```
+
+```bash
 # Modifcation des entêtes
 a2enmod headers 
 
-#Réécriture des urls
+# Réécriture des urls
 a2enmod rewrite
 
-#Activation de ssl pour https
+# Activation de ssl pour https
 a2enmod ssl
 
-#Activation de php
+# Activation de php
 a2enmod php8.*
 
-#Autres options disponible
-#a2enmod cache Pour activer le mode cache 
-#a2enmod cache_disk Pour activer le mode cache
+# Autres options disponible
+# a2enmod cache Pour activer le mode cache 
+# a2enmod cache_disk Pour activer le mode cache
+
 systemctl reload apache2
 ```
+
 ### Pour tester en local nous utilisons curl
+
 ```bash
 curl -v http://localhost:80/ | head
 ```
 
-> Nous avons correctement configuré notre serveur apache enjoy !!
+> Nous avons correctement configuré notre serveur Apache enjoy !!
 
 </details>
 
 <details>
 <summary>Installer et sécuriser Nginx</summary>
 
-## Installation Nginx
+## Installation de Nginx
+
 ```bash
 apt-get install nginx && apt-get install nginx-extras
 systemctl enable nginx
@@ -141,18 +173,20 @@ systemctl start nginx
 systemctl status nginx
 
 curl -I http://127.0.0.1/
-#On voit la version de notre serveur nginx
+# On voit la version de notre serveur nginx
 ```
 
 ```bash
-#Désactiver la signature
+# Désactivez la signature
 nano /etc/nginx/nginx.conf
 ```
+
 ```
 #Dans le fichier /etc/nginx/nginx.conf
+
 server_tokens off;
 
-#Modifier la ligne ssl comme suit TLS 1 et TLS 1.1 obsolète
+# Modifiez la ligne ssl comme suit TLS 1 et TLS 1.1 obsolète
 ssl_protocols TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
 ```
 
@@ -160,7 +194,7 @@ ssl_protocols TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
 systemctl reload nginx
 
 curl -I http://127.0.0.1/
-#La signature est bien désactivée, mais cela affiche nginx corrigeons cela
+# La signature est bien désactivée, mais cela affiche Nginx corrigeons cela
 
 nano /etc/nginx/nginx.conf
 ```
@@ -168,7 +202,7 @@ nano /etc/nginx/nginx.conf
 ```
 #Dans le fichier /etc/nginx/nginx.conf
 
-#Ajoutez cela en dessous du commentaire basic
+# Ajoutez cela en dessous du commentaire basic
 more_set_headers 'Server: ';
 ```
 
@@ -176,28 +210,29 @@ more_set_headers 'Server: ';
 systemctl reload nginx
 
 curl -I http://127.0.0.1/
-#Voilà parfait cela n'affiche plus nginx
+# Voilà, parfait cela n'affiche plus Nginx
 
 nano /etc/nginx/nginx.conf
 ```
 
 ```
-#Dans le fichier /etc/nginx/nginx.conf
+# Dans le fichier /etc/nginx/nginx.conf
 
-#Ajout des protections pour les headers
+# Ajout des protections pour les headers
 more_set_headers "X-Content-Type-Options : nosniff";
 more_set_headers "X-XSS-Protection : 1; mode=block";
 more_set_headers "X-Download-Options : noopen";
 more_set_headers "X-Permitted-Cross-Domain-Policies : none";
 more_set_headers "X-Frame-Options : SAMEORIGIN";
-#Vous pouvez ajouter CSP
+
+# Vous pouvez ajouter CSP
 ```
 
 ```bash
 systemctl reload nginx
 
 curl -I http://127.0.0.1/
-#pour la sécurité, c'est tout, mais vous pouvez envisager bien plus au niveau de vos optimisations
+# Pour la sécurité, c'est tout, mais vous pouvez envisager bien plus au niveau de vos optimisations
 ```
 </details>
 
@@ -205,75 +240,81 @@ curl -I http://127.0.0.1/
 <summary>Installer et sécuriser PHP</summary>
 
 ## PHP
-> Nous allons installer php8.3 qui est la dernière version de php
+
+> Nous allons installer PHP8.3 qui est la dernière version de php
 
 ```bash
-#Récuperation de la clé
+# Récuperation de la clé
 curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
 
-#Ajout aux sources
+# Ajout aux sources
 sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 
-#Mise à jour
+# Mise à jour
 apt update
 
-#Installation des paquets php utilisés par Wordpress
+# Installation des paquets PHP utilisés par Wordpress
 apt-get install php8.3 php8.3-cli php8.3-common php8.3-imap php8.3-redis php8.3-snmp php8.3-xml php8.3-mysqli php8.3-zip php8.3-mbstring php8.3-curl libapache2-mod-php8.3 -y
 
-#Voir la version
+# Voir la version de PHP
 php -v
 
-#Ajout du fichier phpinfo pour voir notre configuration
+# Ajout du fichier phpinfo pour voir notre configuration
 echo "<?php phpinfo(); ?>" | tee /var/www/html/phpinfo.php
 ```
+
 ```
 #Ouvrir la page
 http://url/phinfo.php
 ```
+
 > Comme vous pouvez le voir un certain nombre de choses ne sont pas bonnes d'un point de vu sécurité
 
 ### Sécurisation de php
+
 ```bash
-#Tout se passe ici
+# Tout se passe ici
 nano /etc/php/8.3/apache2/php.ini
 ```
+
 ```
-#Désactivation d'un certain nombre de functions inutiles dans notre cas
+# Désactivation d'un certain nombre de fonctions inutiles dans notre cas
 
 disable_functions = exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source,eval,assert,stream_socket_server,stream_socket_accept,stream_socket_client,stream_set_blocking,fsockopen,fputs,fwrite,create_function,pcntl_exec,pcntl_fork,pcntl_signal,pcntl_waitpid,pcntl_wexitstatus,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wstopsig,pcntl_wtermsig,pcntl_strerror,pcntl_get_last_error,pcntl_signal_dispatch,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_async_signals,pcntl_unshare,pcntl_setpriority,pcntl_getpriority
 
-#Désactivation de la version de php
+# Désactivation de la version de php
 expose_php = Off
 
-#Révocation l'inclusion de fichier
+# Révocation l'inclusion de fichier
 allow_url_include = Off
 
-#Seuls les fichiers dans votre site Web peuvent être inclus
+# Seuls les fichiers dans votre site Web peuvent être inclus
 allow_url_fopen = Off
 ```
 
-> php est sécurisé 
+> PHP est maintenant sécurisé 
 
 </details>
 
 ## Installation de Mariadb
+
 ```bash
-#Installation de Mariadb
+# Installation de Mariadb
 apt install mariadb-server -y
 
-#Activation 
+# Activation 
 systemctl enable mariadb
 
-#Démmarrage
+# Démarrage
 systemctl start mariadb
 
-#Vérification
+# Vérification
 systemctl status mariadb
 
-#Sécurisation de votre installation avec des mots de passe fort 
+# Sécurisation de votre installation avec des mots de passe fort 
 mariadb-secure-installation
 
-#Connexion à Mariadb
+# Connexion à Mariadb
 mysql -u root -p
 ```
 
@@ -285,6 +326,7 @@ CREATE USER 'anyone'@'localhost' IDENTIFIED BY 'YourStrongPasswordHere';
  FLUSH PRIVILEGES;
  EXIT;
 ```
+
 ## Nous devons ensuite Télécharger Wordpress
 
 ```bash
@@ -299,9 +341,9 @@ rm latest.zip
 
 <hr id="hide-login-page" />
 
-# Hide Login Page
+# Cachez votre page de connexion
 
-Les premières tentatives de brute force login via wordpress se font généralement aux adresses  ``votresite.fr/wp-admin.php`` ou ``votresite.fr/login`` ou ``votresite.fr/wp-login.php`` qui sont les 3 moyens d'accéder nativement à votre interface de connexion.
+Les premières tentatives de brute force login via Wordpress se font généralement aux adresses ``votresite.fr/wp-admin.php`` ou ``votresite.fr/login`` ou ``votresite.fr/wp-login.php`` qui sont les 3 moyens d'accéder nativement à votre interface de connexion.
 
 Il est donc primordial de "cacher" l'accès à cette interface du grand public en la personnalisant grâce à un plugin de type ``WPS Hide Login`` qui vous permettra de personnaliser le lien d'accès.
 
@@ -311,7 +353,7 @@ Il est donc primordial de "cacher" l'accès à cette interface du grand public e
 
 1. Sur votre interface d'administration Wordpress, rendez-vous sur ``Extensions > Ajouter une extension``
 
-2. Dans le champs de recherche tapez ``WPS Hide Login``
+2. Dans le champs de recherche tapez le nom du plugin que vous souhaitez, par exemple ``WPS Hide Login``
 
 3. Sélectionnez le plugin ``WPS Hide Login`` et cliquez sur "plus de détails"
 
@@ -332,7 +374,7 @@ Il est donc primordial de "cacher" l'accès à cette interface du grand public e
 
 > NB : Si vous ne voyez pas le bouton Activer ou que vous avez cliqué sur un autre onglet sans faire exprès, il vous suffit de vous rendre dans la partie ``Extensions``, vous retrouverez alors la liste des plugins installés, il vous suffit maintenant de l'activer. 
 
-2. Une fois activé, cliquez sur ``Réglages``sur votre plugin ou rendez-vous dans la partie ``Réglages > WPS Hide Login`` depuis votre menu administrateur.
+2. Une fois activé, cliquez sur ``Réglages`` sur votre plugin ou rendez-vous dans la partie ``Réglages > WPS Hide Login`` depuis votre menu administrateur.
 
 <p align="center"><img src="./assets/secure-wp/wps-hide-login-plugin-list.png" alt="Plugin WPS Hide Login plugin list" width="600" height="auto" /></p>
 
@@ -344,7 +386,7 @@ Il est donc primordial de "cacher" l'accès à cette interface du grand public e
   
   <p align="center"><img src="./assets/secure-wp/wps-hide-login-url-connexion.png" alt="Plugin WPS Hide Login url connexion" width="600" height="auto" /></p>
 
-  - ``URL de redirection``qui sera la page vers laquelle seront redirigés les personnes tentant d'accéder aux pages ``votresite.fr/wp-admin.php``, ``votresite.fr/wp-login.php``, ``votresite.fr/login`` (nous garderons dans l'exemple la page 404 qui sert aux pages introuvables)
+  - ``URL de redirection`` qui sera la page vers laquelle seront redirigées les personnes tentant d'accéder aux pages ``votresite.fr/wp-admin.php``, ``votresite.fr/wp-login.php`` et ``votresite.fr/login`` (nous garderons dans l'exemple la page 404 qui sert aux pages introuvables)
 
   - Pensez ensuite à bien ``Enregistrer les modifications``
 
@@ -355,17 +397,17 @@ Il est donc primordial de "cacher" l'accès à cette interface du grand public e
 <hr id="bf-login" />
 
 
-# Limit Brute Force Login
+# Limiter les attaque par Brute Force pour la connexion
 
 *Une attaque par force brute (bruteforce attack) consiste à tester, l’une après l’autre, chaque combinaison possible d’un mot de passe ou d’une clé pour un identifiant donné afin se connecter au service ciblé.* source:[CNIL](https://www.cnil.fr/fr/definition/force-brute-attaque-informatique)
 
-La première chose à faire pour en limiter les effets est de limiter le nombre de tentatives et de bloquer les attaquants sur une période définie afin de les ralentir et de leur compliquer la vie.
+La première chose à faire pour en limiter les effets, est de limiter le nombre de tentatives et de bloquer les attaquants sur une période définie afin de les ralentir et de leur compliquer la vie.
 
 Il existe plusieurs manières de faire et plusieurs outils, nous allons donc ici vous en présenter un qui se nomme ``WPS Limit Login``.
 
 De la même manière que lors de l'installation du plugin ``WPS Limit Login``, il faut le rechercher, l'installer et l'activer.
 
-> NB : si vous avez besoin d'un rappel, je ne vais pas rentrer dans le détail, mais vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
+> NB : Si vous avez besoin d'un rappel, je ne vais pas rentrer dans le détail, mais vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
 
 <p align="center"><img src="./assets/secure-wp/wps-limit-login-details.png" alt="Plugin WPS Limit Login details" width="350" height="auto" /></p>
 
@@ -377,7 +419,7 @@ Lorsque vous accédez aux réglages de ``WPS Limit Login``, vous tombez sur le p
 
 <p align="center"><img src="./assets/secure-wp/wps-limit-login-config.png" alt="Plugin WPS Limit Login config" width="600" height="auto" /></p>
 
-1. Définissez le nombre de tentatives que vous souhaitez autoriser avant blocage ainsi que le temps de blocage souhaité pour l'adresse IP ayant fait les tentatives de brute force. 
+1. Définissez le nombre de tentatives que vous souhaitez autoriser avant blocage ainsi que le temps de blocage souhaité pour l'adresse IP ayant fait les tentatives de connexion par brute force. 
 
 > NB : Par défaut, 3 tentatives sont autorisées avant blocage et la durée pour le premier blocage est de 20 minutes. (Le temps durant lequel cette adresse IP ne pourra pas recommencer la procédure de connexion.)
 
@@ -398,7 +440,7 @@ Lorsque vous accédez aux réglages de ``WPS Limit Login``, vous tombez sur le p
 
 > NB : Concernant le lien de crédit, nous partons du principe que plus il y a d'informations visible sur un système d'informations (ici pour votre site internet), plus on facilite la reconnaissance / énumération et la découverte de failles potentielles. 
 > 
-> Attention, il est primordial de soutenir les plugins et tout l'environnement gratuit / open source que vous utilisez et c'est pourquoi nous vous conseillons d'émettre un avis sur un plugin ou outils que vous utiliseriez ou d'en parler autour de vous, mais ici, le fait d'afficher publiquement que le *formulaire de connexion est protégé par WPS Limit Login* pourrait aider lors d'une phase de reconnaissance ce qui serait de notre avis contre productif.
+> Attention, il est primordial de soutenir les plugins et tout l'environnement gratuit / open source que vous utilisez et c'est pourquoi nous vous conseillons d'émettre un avis sur un plugin ou un outils que vous utiliseriez ou d'en parler autour de vous, mais ici, le fait d'afficher publiquement que le *formulaire de connexion est protégé par WPS Limit Login* pourrait aider lors d'une phase de reconnaissance ce qui serait de notre avis contre productif.
 
 6. Pensez à enregistrer vos modifications avant de changer d'onglet.
 
@@ -414,13 +456,13 @@ Sauf cas particulier (et auquel cas, vous avez suffisamment de compétence pour 
 
 Cet onglet vous permet de définir les adresses IP que vous connaissez comme malveillantes via les outils de Cyber Threat Intelligence ou car elles apparaîssent souvent dans vos logs ou dans les tentatives de connexion par brute force. 
 
-Par exemple, avec Be Cyber Community, nous avons référencé un grand nombre d'adresses IP malveillantes que vous trouverez ici [Malicious Ip Adresses - Be Cyber Community](https://github.com/duggytuxy/malicious_ip_addresses) et que vous pouvez utiliser pour enrichir votre liste noire.
+Par exemple, avec Be.Cyber Community, nous avons référencé un grand nombre d'adresses IP malveillantes que vous trouverez ici [Malicious Ip Adresses - Be Cyber Community](https://github.com/duggytuxy/malicious_ip_addresses) et que vous pouvez utiliser pour enrichir votre liste noire.
 
 <p align="center"><img src="./assets/secure-wp/wps-limit-login-black-list.png" alt="Plugin WPS Limit Login black list" width="600" height="auto" /></p>
 
 ### Onglet Journal de blocage
 
-Enfin, vous retrouverez ici les statistiques de tentatives de brute force sur votre page de connexion ainsi que le journal de blocage.
+Enfin, vous retrouverez ici les statistiques de tentatives de connexion par brute force sur votre page de connexion ainsi que le journal de blocage.
 
 <p align="center"><img src="./assets/secure-wp/wps-limit-login-block.png" alt="Plugin WPS Limit Login block" width="600" height="auto" /></p>
 
@@ -429,7 +471,8 @@ Enfin, vous retrouverez ici les statistiques de tentatives de brute force sur vo
 # Firewall, scanning & 2FA
 
 ***Firewall***
-> Un pare-feu (firewall) sur votre wordpress vous aidera à protéger votre site wordpress des attaques en identifiant et bloquant le trafic malveillant.
+
+> Un pare-feu (firewall) sur votre Wordpress vous aidera à protéger votre site Wordpress des attaques en identifiant et bloquant le trafic malveillant.
 
 ***Scanning***
 > Un scanner vous permet de bloquer du code ou contenu malveillant, de vérifier si vos fichiers ont été modifiés ...
@@ -444,16 +487,16 @@ Pour ce faire nous pouvons vous conseiller 2 outils, ``CrowdSec`` et ``Wordfence
 
 De la même manière que précédemment, il faut rechercher le plugin ``CrowdSec``, l'installer et l'activer.
 
-> NB : si vous avez besoin d'un rappel, vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
+> NB : Si vous avez besoin d'un rappel, vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
 
-// TODO
+> NOTE : A venir pour les hébergements mutualisés et serveurs VPS/dédiés
 
 
 ## Wordfence
 
-De la même manière que précédemment, il faut rechercher le plugin ``Wordfence Security – Pare-feu, scanner de logiciels malveillants, et sécurité de connexion ``, l'installer et l'activer.
+De la même manière que précédemment, il faut rechercher le plugin ``Wordfence Security – Pare-feu, scanner de logiciels malveillants, et sécurité de connexion``, l'installer et l'activer.
 
-> NB : si vous avez besoin d'un rappel, vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
+> NB : Si vous avez besoin d'un rappel, vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
 
 <p align="center"><img src="./assets/secure-wp/wordfence-details.png" alt="Plugin Wordfence details" width="350" height="auto" /></p>
 
