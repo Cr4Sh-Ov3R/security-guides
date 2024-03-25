@@ -838,6 +838,20 @@ return preg_replace('/\n?<.*?yoast seo plugin.*?>/mi','',$o);
 
 Bravo, votre version de YOAST n'apparaît maintenant plus sur votre site.
 
+# Remove CSS et JavaScript version
+
+Nous allons également cacher les versions des CSS et Js dans le code de notre site, là encore pour diminuer la surface d'attaque et ne pas afficher les versions inutilement.
+
+```php
+function remove_css_js_version( $src ) {
+    if( strpos( $src, '?ver=' ) )
+        $src = remove_query_arg( 'ver', $src );
+    return $src;
+}
+add_filter( 'style_loader_src', 'remove_css_js_version', 9999 );
+add_filter( 'script_loader_src', 'remove_css_js_version', 9999 ); 
+```
+
 <hr />
 
 ***Remerciements :***
