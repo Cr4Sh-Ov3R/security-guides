@@ -844,11 +844,9 @@ Bravo, votre version de YOAST n'apparaît maintenant plus sur votre site.
 
 Ce référentiel à été réalisé afin de permettre à toute personne, même peu à l'aise avec le code, de pouvoir améliorer la sécurisation de ses serveurs et de ses sites Wordpress de manière la plus simple possible, en ce contexte cyber assez particulier.
 
-Nous espérons que ce référentiel vous a plu, qu'il aidera le plus de monde possible à sécuriser son site et son infrastructure.
+Nous espérons que ce référentiel vous a plu, qu'il aidera le plus de monde possible, alors n'hésitez pas à le partager à toute personne qui en aurait besoin.
 
-Nous le tiendrons à jour le plus régulièrement possible et nous le ferons évoluer sur différents sujet Cyber, alors garder ce référentiel en favori pour en profiter 👩‍💻👨‍💻
-
-N'hésitez pas à le partager à toute personne qui aurait besoin de sécuriser son site Wordpress ou son serveur.
+Nous le tiendrons à jour le plus régulièrement possible et nous le ferons évoluer sur différents sujet Cyber, alors gardez ce référentiel en favori pour en profiter 👩‍💻👨‍💻
 
 Merci pour votre intérêt et nous vous disons à très bientôt pour plus de contenu.
 
@@ -856,5 +854,6 @@ Merci pour votre intérêt et nous vous disons à très bientôt pour plus de co
 
 ***Crédits :***
 
-Tyc-Tac & Cr4Sh
- Be.Cyber Community
+- **Tyc-Tac** : Be.Cyber Community
+
+- **Cr4Sh** : Be.Cyber Community - Edu.Cyber
