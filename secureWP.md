@@ -19,16 +19,18 @@
 
 -----
 
-***Date de mise à jour 2024-03-24***
+***Date de mise à jour 2024-03-29***
 
 - [ ] [Installation et bonnes pratiques](#best-practice)
 - [ ] [Installation de plugins](#install-plugins)
 - [ ] [Cachez votre page de connexion](#hide-login-page) 
 - [ ] [Limiter les attaque par Brute Force pour la connexion](#bf-login)
 - [ ] [Firewall, scanning & 2FA](#waf-scan) 
-- [ ] [Remove WP version](#remove-wp-version)
-- [ ] [Remove Yoast SEO Version](#remove-yoast-version)
+- [ ] [Effacer la version Wordpress](#remove-wp-version)
+- [ ] [Effacer la version Yoast SEO](#remove-yoast-version)
+- [ ] [Effacer les versions CSS et JavaScript](#remove-css-js-version)
 
+# 
 
 <hr id="best-practice" />
 
@@ -789,7 +791,7 @@ Félicitations, la grosse partie Firewall, Scanning & 2FA est terminée.
 
 <hr id="remove-wp-version" />
 
-# Remove WP Version
+# Effacer la version Wordpress
 
 Encore une fois, il est primordial de limiter les informations que l'on diffuse afin de complexifier le processus d'énumération. 
 
@@ -819,7 +821,7 @@ Bravo, votre version de Wordpress n'apparait maintenant plus dans votre code.
 
 <hr id="remove-yoast-version" />
 
-# Remove YOAST Version
+# Effacer la version YOAST SEO
 
 YOAST est un plugin performant pour le référencement SEO de votre site Wordpress, mais bien qu'il soit performant, il diffuse, lui aussi, son numéro de version dans le code de votre site, ce qui est une aubaine pour les personnes qui souhaiteraient trouver une vulnérabilité liée à votre version de plugin.
 
@@ -838,7 +840,9 @@ return preg_replace('/\n?<.*?yoast seo plugin.*?>/mi','',$o);
 
 Bravo, votre version de YOAST n'apparaît maintenant plus sur votre site.
 
-# Remove CSS et JavaScript version
+<hr id="remove-css-js-version" />
+
+# Effacer les versions CSS et JavaScript
 
 Nous allons également cacher les versions des CSS et Js dans le code de notre site, là encore pour diminuer la surface d'attaque et ne pas afficher les versions inutilement.
 
