@@ -954,7 +954,7 @@ Nous reviendrons sur la partie ``sauvegarder/restaurer`` à la fin, nous allons 
 
 ***Migrer / Cloner***
 
-<p align="center"><img src="./assets/secure-wp/updraftplus-migate.png" alt="plugin de sauvegarde UpdraftPlus Migrer/Clôner" width="600" height="auto" /></p>
+<p align="center"><img src="./assets/secure-wp/updraftplus-migrate.png" alt="plugin de sauvegarde UpdraftPlus Migrer/Clôner" width="600" height="auto" /></p>
 
 Cette partie vous permet de créer un clône temporaire sur les serveurs d'UpdraftPlus, afin de tester les mises à jour, nouveaux thèmes ... sans risque de planter votre site. Une fois terminé, il vous suffit de supprimer le clône.
 
