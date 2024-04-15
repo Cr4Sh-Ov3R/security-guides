@@ -1076,7 +1076,7 @@ Avant de télécharger notre sauvegarde, nous allons commencé par effectuer une
 
 **Vérifier la viabilité de notre sauvegarde**
 
-1. Nous allons cliquer sur le bouton ``Restaurer```
+1. Nous allons cliquer sur le bouton ``Restaurer``
 
 2. Nous allons choisir les éléments à restaurer, par conséquent, ici, vu que nous souhaitons tester l'intégralité de la sauvegarde, nous allons sélectionner tous les éléments, puis cliquez sur ``Suivant``.
 
