@@ -30,6 +30,7 @@
 - [ ] [Effacer la version Yoast SEO](#remove-yoast-version)
 - [ ] [Effacer les versions CSS et JavaScript](#remove-css-js-version)
 - [ ] [Bonnes pratiques - Sauvegardes](#backup)
+- [ ] [Bonnes pratiques - Mises à jour](#update)
 
 
 <hr id="best-practice" />
@@ -1142,7 +1143,41 @@ Ces cas sont des cas pouvant considérablement varier en fonction de votre activ
 
 Comme pour tout système informatisé, il est primordial de faire des mises à jour régulières afin de vous assurer d'avoir la dernière version de vos plugins / thèmes et Wordpress lui-même sur votre site.
 
-Avant toutes mises à jour de plugins, de thèmes et de versions, ou avant tout changement majeur en termes de contenu, il est primordial d'effectuer 
+## Pourquoi ?
+
+Pour la bonne et simple raison que les mises à jours servent à apporter des modifications, des fonctionnalités, des évolutions en terme de performance mais surtout, car elles permettent d'apporter les correctifs de sécurité nécessaires pour protéger votre système contre des vulnérabilités découvertes.
+
+>NOTE : Avant toutes mises à jour de plugins, de thèmes et de versions, ou avant tout changement majeur en termes de contenu, il est primordial d'effectuer une sauvegarde et de s'assuré de la viabilité de celle-ci. Vous pouvez retrouver les démarches dans la partie [Bonnes pratiques - Sauvegarde](#backup)
+
+## Comment se passe une mise à jour sur Wordpress ?
+
+Pour effectuer sur mise à jour sur Wordpress il vous suffit de vous rendre dans la partie ``Tableau de bord > Mises à jour`` de votre espace administrateur. 
+
+Vous y trouverez la liste des mises à jour en attente, aussi bien pour la ``version de Wordpress``, les ``plugins``, les ``thèmes`` ainsi que les ``traductions``.
+
+<p align="center"><img src="./assets/secure-wp/list-update.png" alt="Liste des mises à jour Wordpress" width="600" height="auto" /></p>
+
+Nous voyons dans l'exemple qu'une extension est en attente de mises à jour, il s'agit du plugin ``Photo Gallery`` dont une faille de sécurité à été révélée il y a quelques jours, nous allons donc mettre à jour ce plugin.
+
+Avant d'effectuer la mise à jour, nous allons examiner ce qui nous est proposé :
+  
+  - La version actuellement installée ``1.8.21``
+  - La version proposée pour la mise à jour ``1.8.22``
+  - La compatibilité avec notre version de Wordpress ``6.5.2`` qui est ici indiquée à 100% selon l'auteur
+
+<p align="center"><img src="./assets/secure-wp/plugin-update.png" alt="Plugin disponible pour mise à jour" width="600" height="auto" /></p>
+
+Nous pouvons également voir plus de détails sur ce plugin et sur la version ``1.8.22`
+
+Nous voyons notamment les failles qui ont été patchées au sein de cette mise à jour, la date de dernière mise à jour ...
+
+<p align="center"><img src="./assets/secure-wp/details-plugin-update.png" alt="Détails de la mise à jour du Plugin Photo Gallery suite à vulnérabilité" width="600" height="auto" /></p>
+
+Si cela nous convient, nous pouvons donc faire la mise à jour. (N'oubliez pas de faire la sauvegarde correctement, comme expliqué dans la partie [Bonnes pratiques - Sauvegarde](#backup) )
+
+Félicitation, votre plugin est à jour.
+
+> Note :  Il est fréquent de se retrouver avec plusieurs mises à jour disponible simultanément. Dans une telle situation, vous pouvez par exemple sélectionner toutes les extensions et les mettre à jour en une seule fois, mais soyez prudent à bien avoir vérifier la compatibilité de chaque extension auparavant.
 
 ***WORK IN PROGRESS***
 
