@@ -868,6 +868,8 @@ Une sauvegarde de qualité, autrement dit, une sauvegarde dont on est certain qu
 C'est pourquoi il est primordiale qu'elle soit effectuée en respectant certaines règles et qu'elle contienne la dernière version exploitable de votre site internet (ou les dernières versions dans certains cas, on reviendra dessus), tout en s'assurant de l'intégrité de votre sauvegarde.
 
 
+<a href="when-to-backup"></a>
+
 ## Quand ?
 
 Nous vous conseillons d'effectuer une sauvegarde dès qu'une de ces situations se produit :
@@ -952,6 +954,8 @@ Lors de votre arrivée sur le plugin d'UpdraftPlus, un "pas à pas" vous est pro
 
 Nous reviendrons sur la partie ``sauvegarder/restaurer`` à la fin, nous allons d'abord vous présenter les éléments à mettre en place sur le plugin pour qu'il réponde à vos besoins.
 
+> Note : Nous vous conseillons fortement la lecture de ces différents points afin de configurer votre plugin directement, cependant, voici le lien pour accéder directement à la partie [Sauvegarde / Restauration](#backup-restore)
+
 ***Migrer / Cloner***
 
 <p align="center"><img src="./assets/secure-wp/updraftplus-migrate.png" alt="plugin de sauvegarde UpdraftPlus Migrer/Clôner" width="600" height="auto" /></p>
@@ -1032,6 +1036,105 @@ Il faut également penser à retourner dans la partie exclusion afin d'exclure l
 
 <p align="center"><img src="./assets/secure-wp/updraftplus-new-directory-exclusion.png" alt="plugin de sauvegarde UpdraftPlus Exclusion du nouveau repertoire de sauvegarde" width="600" height="auto" /></p>
 
+<span id="backup-restore"></span>
+
+***Sauvegarder / Restaurer***
+
+Nous arrivons enfin dans la partie, ``Sauvegarde / Restauration``, partie dans laquelle nous pouvons gérer nos sauvegardes, les télécharger, les restaurer ...
+
+Vous retrouverez ici, le bouton pour télécharger votre site, les *journaux* ainsi que les sauvegardes existantes, si vous avez déjà effectuer des sauvegardes via le plugin, ou si vous avez défini une periodicité pour les sauvegardes automatiques, comme vu précédemment.
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-backup-restore.png" alt="plugin de sauvegarde UpdraftPlus Sauvegarder / Restaurer" width="600" height="auto" /></p>
+
+> Note : Vous voyez ici, sur la capture d'écran, que nous avons programmé des sauvegardes automatiques mensuelle, et que la prochaine sauvegarde automatique des fichiers ET de la base de donnée, aura lieu ``mardi 14 mai à 08:04``.
+
+Nous vous invitons, si ce n'est pas déjà fait, à consulter la partie expliquant [Quand faire vos sauvegardes](#when-to-backup), afin d'adopter les bonnes pratiques et vous assurer de revenir à *"l'image'* la plus proche de votre site en cas d'anomalie.
+
+**Effectuer une sauvegarde manuelle**
+
+1. Cliquez sur le bouton ``Sauvegarder`` sur la partie droite de votre site 
+
+2. Sélectionnez ce que vous souhaitez inclure dans votre sauvegarde. Nous allons choisir d'inclure la ``base de donnée`` ainsi que ``les fichiers``, puis cliquer sur ``Sauvegarder``.
+
+> Note : Vous verrez ici l'information comme quoi *la sauvegarde ne sera envoyée vers aucun stockage distant* car nous l'avons paramétré ainsi. Nous n'autoriserons pas non plus la conservation de la sauvegarde au delà des limites de rétention prévues. 
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-manual-backup.png" alt="plugin de sauvegarde UpdraftPlus Sauvegarde manuelle" width="600" height="auto" /></p>
+
+Une fois la sauvegarde effectuée, vous la retrouverez en bas de la page, dans la partie ``Sauvegarde existantes``, avec la date et l'heure de la sauvegarde, les types d'éléments sauvegardés et les actions ``Restaurer``, ``Supprimer`` et ``Voir le journal``.
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-existing-backups.png" alt="plugin de sauvegarde UpdraftPlus Liste des sauvegardes existantes" width="600" height="auto" /></p>
+
+Nous n'avons pas encore fini avec la sauvegarde. 
+
+Il est important de ne jamais supposer qu'une sauvegarde s'est bien passée ni qu'elle est exploitable. En effet, dans certains cas, même si nous pensons que la sauvegarde s'est bien passée, elle présente des anomalies et risque d'être inexploitable au moment où l'on en aura besoin. 
+
+C'est pourquoi il est important de s'assurer de la fiabilité de notre sauvegarde avant de la considérée comme sûre.
+
+Avant de télécharger notre sauvegarde, nous allons commencé par effectuer une restauration. 
+
+> Note : Vu que nous venons de faire la sauvegarde, la restauration de celle-ci ne changera rien à notre site, elle peut donc être faite sans risquer d'avoir eu des modifications entre temps.
+
+**Vérifier la viabilité de notre sauvegarde**
+
+1. Nous allons cliquer sur le bouton ``Restaurer```
+
+2. Nous allons choisir les éléments à restaurer, par conséquent, ici, vu que nous souhaitons tester l'intégralité de la sauvegarde, nous allons sélectionner tous les éléments, puis cliquez sur ``Suivant``.
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-checking-backup-reliability-step1.png" alt="plugin de sauvegarde UpdraftPlus Vérification de la fiabilité de la sauvegarde" width="600" height="auto" /></p>
+
+3. Le système nous informe que les fichiers d'archives ont été traîtés avec succès, nous propose d'exclure des tables de la base de donnée en cas de besoin puis de lancer la restauration. Nous souhaitons tout vérifier, nous allons donc cliquer sur ``Restaurer``.
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-checking-backup-reliability-step2.png" alt="plugin de sauvegarde UpdraftPlus Vérification de la fiabilité de la sauvegarde" width="600" height="auto" /></p>
+
+4. Une fois effectuée, le système nous indique que la restauration est un succès, la sauvegarde est donc viable, nous allons pouvoir la télécharger.
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-checking-backup-restore-successful.png" alt="plugin de sauvegarde UpdraftPlus Restauration effectuée avc succès" width="600" height="auto" /></p>
+
+> Note : Le système vous demande maintenant, de retourner à la configuration (autrement dit la page sur ``Sauvegarder / Restaurer``) et/ou de télécharger le fichier de journal lié à cette restauration. Nous passerons sur ce point ici, s'agissant d'un simple téléchargement, mais il est toujours bon d'avoir des journaux de ce type d'opération en cas de besoins.
+
+**Télécharger notre sauvegarde**
+
+Pourquoi télécharger une sauvegarde alors qu'elle est déjà stockée sur votre site?
+
+C'est précisément car elle est stockée sur votre site qu'il va falloir la télécharger.
+
+Une sauvegarde stockée sur l'hébergement de votre site, est pratique en cas de restauration mais en cas de défaillance de votre serveur, de piratage ou tout autre anomalie sur votre site, elle a de forte chance d'impacter votre sauvegarde et par conséquent, toute vos sauvegardes risques d'être inutilisable et vous ne pourrez pas remettre votre site en ligne.
+
+C'est donc une bonne pratique de stocker ses sauvegarde à d'autres endroits que sur le serveur hébergeant votre site. 
+
+> Note : Nous vous conseillons 2 lieu de stockage en plus, 2 disques durs différents, 1 serveur et un disque dur ... Ce qu'il est important de comprendre c'est que les réplicas vous offrent une garantie dans le cas ou l'un des lieu de stockage présente une défaillance.
+
+Sur UpdraftPlus, une sauvegarde regroupe plus précisément plusieurs dossiers de sauvegardes qui sépare (pour notre configuration) la ``Base de données``, les ``Extensions``, les ``Thèmes``, les ``Téléversements`` et une catégorie ``Autres``.
+
+1. Nous allons cliqué sur les boutons des parties précédemments citées, ce qui va nous ouvrir un encart pour télécharger la sauvegarde de la partie concernée
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-checking-download-backups.png" alt="plugin de sauvegarde UpdraftPlus Téléchargements des sauvegardes" width="600" height="auto" /></p>
+
+2. Nous allons créer un dossier, à l'endroit où nous souhaitons stocker nos sauvegardes (hors de l'hébergement de notre site), en le nommant selon la convention suivante ``DATE-nomdusite-backup``, en prenant soin d'indiquer la date de notre sauvegarde, ce qui nous donne ici ``20240415-webibecyber-backup``.
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-create-backup-folder.png" alt="plugin de sauvegarde UpdraftPlus Création d'un dossier pour stocker les sauvegardes" width="600" height="auto" /></p>
+
+3. Nous allons cliquer sur ``Télécharger sur votre ordinateur`` ***pour toutes les parties de la sauvegarde***, sélectionner notre dossier ``20240415-webibecyber-backup`` et cliquer sur ``Enregistrer```
+
+Vos fichiers sont maintenant sauvegarder dans le dossier créé précédemment.
+
+> Note : Comme indiqué les solutions FTP et emails enverraient en clair les données de vos sauvegardes et n'importe quelle personne entre le lieu distant et votre flux de données pourrait intercépter les données, les lire et les exfiltrer. En procédant de la sorte, vous allez profiter du certificat SSL/TLS de votre site afin de télécharger vos sauvegardes en ``HTTPS``, sur la capture ci-dessous ``https://webibecyber:8890`` (où 8890 est le port utilisé par notre machine locale mais vous auriez ``https://votresite.com`` pour votre site)
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-https-download-backup.png" alt="plugin de sauvegarde UpdraftPlus Téléchargement de la sauvegarde via HTTPS" width="600" height="auto" /></p>
+
+Il ne vous reste plus qu'à dupliquer ces opérations vers votre 2e support de stockage et votre sauvegarde est terminée.
+
+**Durée de conservation de votre sauvegarde**
+
+Une sauvegarde peut vitre être gourmand en terme de poids (comprendre taille de la sauvegarde), par conséquent, il peut être intéressant de supprimer les sauvegardes les plus vieilles afin de libérer de l'espace et surtout de ne pas vous retrouver avec 15 ans de sauvegardes qui n'auraient aucune utilité.
+
+Cependant, réfléchissez soigneusement, sur le nombre de sauvegardes que vous souhaitez conserver (soit en nombre de sauvegarde, soit en période écoulée) car si vous effacer trop régulièrement vos sauvegardes, ou à contrario que vous les gardez trop longtemps, vous risquez d'être soumis à des problématiques.
+
+1. **De fiabilité** : En effet, il peut arriver que l'on ne découvre un piratage ou des fichiers compromis qu'au bout d'une certaine durée. Car certains systèmes, pour se faire discrets, attendent un laps de temps avant de se déclencher ou d'être effectifs. Par conséquent si vous ne gardez qu'une semaine de sauvegarde, alors que le fichier malveillant s'est déclenché au bout de 2 mois, vous risquez de ne plus avoir de sauvegarde saine et chaque restauration réinstallera le fichier malveillant.
+
+2. **Réglementaires ou legislatives** : Car le RGPD (***Réglement Général sur la Protection des Données***) vous interdit de garder des données personnelles au delà de la période nécessaire et justifiée. D'autre part la loi peut exiger que vous gardiez une trace des données ou transaction sur une durée minimum (ou au maximum) et en fonction du cadre contractuel, de la garantie ...
+
+Ces cas sont des cas pouvant considérablement varier en fonction de votre activité, votre situation, vos obligations légales ... Nous ne pourrons donc pas vous conseiller sur la durée de conservation et vous recommandons de vous rapprocher d'un avocat spécialisé, d'un cabinet juriste ou d'un DPO - ***Data Protection Officer*** (DPD - ***Délégué à la Protection des Données*** en Français).
 
 <hr id="update" />
 
