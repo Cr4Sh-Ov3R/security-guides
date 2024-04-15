@@ -19,18 +19,18 @@
 
 -----
 
-***Date de mise à jour 2024-03-29***
+***Date de mise à jour 2024-04-15***
 
 - [ ] [Installation et bonnes pratiques](#best-practice)
-- [ ] [Installation de plugins](#install-plugins)
+- [ ] [Comment installer un plugin](#install-plugins)
 - [ ] [Cachez votre page de connexion](#hide-login-page) 
 - [ ] [Limiter les attaque par Brute Force pour la connexion](#bf-login)
 - [ ] [Firewall, scanning & 2FA](#waf-scan) 
 - [ ] [Effacer la version Wordpress](#remove-wp-version)
 - [ ] [Effacer la version Yoast SEO](#remove-yoast-version)
 - [ ] [Effacer les versions CSS et JavaScript](#remove-css-js-version)
+- [ ] [Bonnes pratiques - Sauvegardes](#backup)
 
-# 
 
 <hr id="best-practice" />
 
@@ -341,24 +341,21 @@ unzip latest.zip
 rm latest.zip
 ```
 
-<hr id="hide-login-page" />
+<hr id="install-plugins">
 
-# Cachez votre page de connexion
+# Comment installer un plugin
 
-Les premières tentatives de brute force login via Wordpress se font généralement aux adresses ``votresite.fr/wp-admin.php`` ou ``votresite.fr/login`` ou ``votresite.fr/wp-login.php`` qui sont les 3 moyens d'accéder nativement à votre interface de connexion.
+Installer un plugin sur votre site Wordpress est relativement simple, mais ce n'est pas pour autant une chose anodine.
 
-Il est donc primordial de "cacher" l'accès à cette interface du grand public en la personnalisant grâce à un plugin de type ``WPS Hide Login`` qui vous permettra de personnaliser le lien d'accès.
-
-<a id="install-plugin-step"></a>
+Par conséquent il est primordiale de respecter certaines étapes afin de vous assurer de choisir un plugin adapté et régulièrement maintenu, ce qui vous assure dans une grande partie des cas, une fiabilité.
 
 ## Les étapes d'installation d'un plugin
 
 1. Sur votre interface d'administration Wordpress, rendez-vous sur ``Extensions > Ajouter une extension``
 
-2. Dans le champs de recherche tapez le nom du plugin que vous souhaitez, par exemple ``WPS Hide Login``
+2. Dans le champs de recherche tapez le nom du plugin que vous souhaitez, par exemple ``WPS Hide Login`` qui nous servira juste après.
 
 3. Sélectionnez le plugin ``WPS Hide Login`` et cliquez sur "plus de détails"
-
 
 > NB : Pensez à vérifier les informations d'un plugin ou d'un thème avant installation, notamment : 
 > - ``Auteur/autrice`` ici WPServeur, NicolasKulka,wpformation
@@ -369,6 +366,16 @@ Il est donc primordial de "cacher" l'accès à cette interface du grand public e
 <p align="center"><img src="./assets/secure-wp/wps-hide-login-details.png" alt="Plugin WPS Hide Login details" width="350" height="auto" /></p>
 
 4. Si le plugin vous convient, cliquez sur le bouton ``Installer maintenant``
+
+<hr id="hide-login-page" />
+
+# Cachez votre page de connexion
+
+Les premières tentatives de brute force login via Wordpress se font généralement aux adresses ``votresite.fr/wp-admin.php`` ou ``votresite.fr/login`` ou ``votresite.fr/wp-login.php`` qui sont les 3 moyens d'accéder nativement à votre interface de connexion.
+
+Il est donc primordial de "cacher" l'accès à cette interface du grand public en la personnalisant grâce à un plugin de type ``WPS Hide Login`` qui vous permettra de personnaliser le lien d'accès.
+
+> NB : Si vous avez besoin d'un rappel, vous trouverez la procédure ici => [Comment installer un plugin](#install-plugins)
 
 ## L'activation & les réglages
 
@@ -409,7 +416,7 @@ Il existe plusieurs manières de faire et plusieurs outils, nous allons donc ici
 
 De la même manière que lors de l'installation du plugin ``WPS Limit Login``, il faut le rechercher, l'installer et l'activer.
 
-> NB : Si vous avez besoin d'un rappel, je ne vais pas rentrer dans le détail, mais vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
+> NB : Si vous avez besoin d'un rappel, je ne vais pas rentrer dans le détail, mais vous trouverez la procédure ici => [Comment installer un plugin](#install-plugins)
 
 <p align="center"><img src="./assets/secure-wp/wps-limit-login-details.png" alt="Plugin WPS Limit Login details" width="350" height="auto" /></p>
 
@@ -482,23 +489,13 @@ Enfin, vous retrouverez ici les statistiques de tentatives de connexion par brut
 ***2FA***
 > Two Factor Authentication (2FA) vous permet de rajouter une couche de sécurité sur votre site Wordpress lors de la connexion
 
-Pour ce faire nous pouvons vous conseiller 2 outils, ``CrowdSec`` et ``Wordfence``
-
-
-## CrowdSec 
-
-De la même manière que précédemment, il faut rechercher le plugin ``CrowdSec``, l'installer et l'activer.
-
-> NB : Si vous avez besoin d'un rappel, vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
-
-> NOTE : A venir pour les hébergements mutualisés et serveurs VPS/dédiés
-
+Pour ce faire nous pouvons vous conseiller ``Wordfence``
 
 ## Wordfence
 
 De la même manière que précédemment, il faut rechercher le plugin ``Wordfence Security – Pare-feu, scanner de logiciels malveillants, et sécurité de connexion``, l'installer et l'activer.
 
-> NB : Si vous avez besoin d'un rappel, vous trouverez la procédure ici => [étapes d'installation d'un plugin](#install-plugin-step)
+> NB : Si vous avez besoin d'un rappel, vous trouverez la procédure ici => [Comment installer un plugin](#install-plugins)
 
 <p align="center"><img src="./assets/secure-wp/wordfence-details.png" alt="Plugin Wordfence details" width="350" height="auto" /></p>
 
@@ -855,6 +852,196 @@ function remove_css_js_version( $src ) {
 add_filter( 'style_loader_src', 'remove_css_js_version', 9999 );
 add_filter( 'script_loader_src', 'remove_css_js_version', 9999 ); 
 ```
+
+<hr id="backup" />
+
+# Bonnes pratiques - Sauvegardes
+
+Il est important de pratiquer des sauvegardes (backup) régulières de vos sites internet.
+
+On vous le répète souvent, mais pourquoi, quand, quoi et comment faire pour avoir des sauvegardes viables et de qualité?
+
+## Pourquoi ?
+
+Une sauvegarde de qualité, autrement dit, une sauvegarde dont on est certain qu'elle contient l'intégralité du site et dont l'intégrité est respectée, vous permettra de remettre votre site en ligne en cas d'anomalie (suppression malencontreuse, bug, piratage ...) dans les délais les plus courts possibles. 
+
+C'est pourquoi il est primordiale qu'elle soit effectuée en respectant certaines règles et qu'elle contienne la dernière version exploitable de votre site internet (ou les dernières versions dans certains cas, on reviendra dessus), tout en s'assurant de l'intégrité de votre sauvegarde.
+
+
+## Quand ?
+
+Nous vous conseillons d'effectuer une sauvegarde dès qu'une de ces situations se produit :
+
+- Vous modifiez votre site internet, que ce soit dans le contenu textuel, la mise en page ou toute modification technique. En gros dès que vous faites un changement sur votre site.
+
+- Avant de mettre à jour un plugin, un thème ou votre version de Wordpress 
+
+> Note : Si plusieurs mises à jour sont à faire en même temps, une seule sauvegarde suffit.
+
+- Après avoir fait votre mise à jour et que tout s'est bien passé.
+
+
+*Mise à jour automatique, en plus des point ci-dessus :*
+
+Pour le cas des blogs, site avec espace utilisateurs, boutique en ligne ..., en gros si plusieurs acteurs interviennent sur votre blog (une communauté par exemple), nous vous conseillons de faire des sauvegardes régulières, avec une périodicité qui dépendra du flux de données et d'intéraction que votre site / blog.
+
+Par exemple : 
+
+- Peu de nouveaux utilisateurs ou de données changeantes : 1 sauvegarde par quinzaine ou par mois à minima.
+
+- Des modification fréquentes : 1 sauvegarde par semaine ou par quinzaine à minima.
+
+- Des modifications très fréquentes (par exemple, e-commerce) : Des sauvegardes les plus fréquentes possible, pouvant aller de chaque heure à, au max tous les 2/3 jours.
+
+> Note : ***Ces recommandations sont estimées et ne sont en aucun cas des périodicités absolues***. Si vous avez un énorme flux de données une sauvegarde par heure peut-être intéressante pour avoir le moins de perte possible en cas d'anomalie, cependant, ça demande aussi plus d'espace de stockage nécessaire (hors serveur du site) et une régularité importante demande une organisation. 
+
+L'idée est de pouvoir revenir, en un cours laps de temps, à une situation la plus proche qu'elle était avant l'anomalie.
+
+## Quoi ?
+
+Sur Wordpress il y a différents éléments à sauvegarder.
+
+- Tout ce qui est "contenu textuel" et configurations de plugin / thèmes / Wordpress (hors fichiers de configurations pur lié au code source) est sauvegardé dans votre base de données.
+
+- Tout ce qui est fichiers (documents, images ...) et codes sources sont stockés sur l'espace de stockage de votre serveur.
+
+Par conséquent, lors d'une sauvegarde, il est primordial de **sauvegarder à la fois les fichiers stockés sur le serveur ET votre base de donnée**, sans quoi votre sauvegarde ne sera pas complète et deviendra inutile.
+
+
+## Comment ? 
+
+Il y a plusieurs solutions pour sauvegarder votre site Wordpress en intégralité.
+
+- [Avec un plugin de sauvegarde](#backup-plugin)
+
+- "A la main" (nous ne rentrerons pas ici dans le détail pour Wordpress, ça fera l'objet d'une prochaine publication)
+
+Nous allons donc ici vous détailler la manière avec plugin afin de vous guider pas à pas.
+
+<hr id="backup-plugin" />
+
+### Avec un plugin de sauvegarde
+
+Il faut tout d'abord, comme pour tout plugin, faire attention à ce qu'on utilise et choisir un plugin avec soin. 
+
+> NB : Si vous avez besoin d'un rappel, vous trouverez la procédure ici => [Comment installer un plugin](#install-plugins)
+
+Concernant les plugins de sauvegardes, nous vous conseillons également de vérifier les points suivants : 
+
+- Propose t'il une sauvegarde complète du site?
+
+- Permet-il d'automatiser les sauvegardes et de gérer leurs fréquences?
+
+- Permet-il de télécharger notre sauvegarde sur notre ordinateur (en lien direct, en envoi par mail ou en sauvegarde sur un espace distant.)
+
+> NB : Nous attirons votre attention sur *la possibilité de sauvegarde sur un espace de stockage distant*. En effet, si le plugin transfert lui même la sauvegarde sur votre cloud par exemple, cela veut dire que vous autorisez à votre plugin d'accéder et à écrire directement sur votre cloud, ce qui, en cas de compromission du plugin ou de votre site Wordpress, peut permettre d'accéder à vos données distantes, voir de les exfiltrer. 
+
+Nous allons ici nous concentrer sur un des plus réputés en la matière, il s'agit du plugin ``UpdraftPlus``, il vous suffit donc de sauvegarder votre site, puis à rechercher le plugin, à l'installer et enfin à l'activer.
+
+> NB : Si vous avez besoin d'un rappel, vous trouverez la procédure ici => [Comment installer un plugin](#install-plugins)
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-details.png" alt="plugin de sauvegarde UpdraftPlus details" width="600" height="auto" /></p>
+
+> NB : Attention, au moment de l'écriture de ces lignes, la version de Wordpress 6.5.2 vient de sortir et le plugin n'a pas encore été testé pour cette version, nous vous conseillons donc la plus grande prudence si ça vous arrive lors du choix d'un plugin et de son installation. Nous allons ici l'utiliser et nous veillerons à l'évolution du plugin afin de nous assurer que le tutoriel soit viable.
+
+Une fois installé, vous pouvez retrouver votre plugin dans la liste de vos extensions. Il vous suffit de cliquer sur réglages.
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-extension.png" alt="plugin de sauvegarde UpdraftPlus extension" width="600" height="auto" /></p>
+
+Lors de votre arrivée sur le plugin d'UpdraftPlus, un "pas à pas" vous est proposé afin de pouvoir apprendre son fonctionnement, il vous propose également de sauvegarder votre site. Nous vous invitons à le lire par curiosité ou pour un complément d'information de notre ``security guide``.
+
+Nous reviendrons sur la partie ``sauvegarder/restaurer`` à la fin, nous allons d'abord vous présenter les éléments à mettre en place sur le plugin pour qu'il réponde à vos besoins.
+
+***Migrer / Cloner***
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-migate.png" alt="plugin de sauvegarde UpdraftPlus Migrer/Clôner" width="600" height="auto" /></p>
+
+Cette partie vous permet de créer un clône temporaire sur les serveurs d'UpdraftPlus, afin de tester les mises à jour, nouveaux thèmes ... sans risque de planter votre site. Une fois terminé, il vous suffit de supprimer le clône.
+
+> Note : Nous attirons que cette partie est payante et charge l'intégralité de votre site sur leurs serveurs (code source et base de données incluses). Nous ne vous disons pas de ne pas l'utiliser, cependant, nous souhaitions vous alerter sur ces points que vous puissiez prendre votre décision en toute connaissance de cause.
+
+Cependant, si vous effectuez bien les sauvegardes avant de faire une mise à jour, vous aurez toujours la possibilité de remettre votre site en ligne en cas de problème lors d'une mise à jour.
+
+Cette partie vous propose également un module ``Migrator`` pour vous permettre de cloner / dupliquer ou migrer votre site sur un autre serveur.
+
+***Réglages***
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-reglages.png" alt="plugin de sauvegarde UpdraftPlus Réglages" width="600" height="auto" /></p>
+
+Cette partie va vous permettre de planifier les sauvegardes de vos fichiers et de votre base de données à la périodicité souhaitée, ainsi que le nombre de sauvegardes que vous souhaitez garder.
+
+Pour l'exemple, nous allons partir sur la mise en place de mises à jour automatique pour un site avec des modifications peu fréquentes.
+
+> Note : Dans sa version gratuite, ce plugin offre des solutions limitées, notamment d'un point de vue sécurité. Nous allons donc vous guider au mieux dans le cadre d'une offre gratuite.
+
+1. Comme indiqué dans la partie ``Quand?``, nous allons partir sur une sauvegarde automatique à périodicité mensuelle pour les fichiers et la base de données, ainsi qu'un stockage des 2 dernières sauvegardes.
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-frequence.png" alt="plugin de sauvegarde UpdraftPlus Fréquence de sauvegarde" width="600" height="auto" /></p>
+
+2. Il est maintenant temps de choisir le type de stockage distant souhaité en cliquant sur l'icône correspondante. 
+
+Nous n'allons choisir aucun service pour le stockage car en version gratuite.
+
+- Nous ne pourrons pas envoyer nos données de manières sécurisé par SFTP/SCP vers un serveur externe
+- Nous ne pourrons pas chiffrer nos bases de données pour un envoi par email, ce qui reviendrait à envoyer nos données en clair et qu'elles soient interceptable par un acteur malveillant
+- Nous préférons éviter de connecter notre Wordpress à notre Cloud pour éviter des fuites en cas de failles de sécurité.
+
+Si vous souhaitez tout de même utiliser un service distant, vous devrez choisir le service souhaité et rentrer vos identifiants de connexion. 
+
+**ATTENTION, nous déconseillons fortement la solution ``FTP`` car elle transfèrerait vos données sans chiffrement vers vos serveurs, autrement dit, toutes vos données seront envoyées en clair, et toute personne qui se placerait entre le flux de données et vos serveurs pourra lire les données transférées, ce qui n'est pas du tout recommandé**
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-stockage.png" alt="plugin de sauvegarde UpdraftPlus Mode de stockage" width="600" height="auto" /></p>
+
+3. Il est maintenant temps de passer à la partie des éléments à inclure dans la sauvegarde.
+
+- Nous allons laisser ce qui est coché initialement à savoir ``Extensions``, ``Thèmes`` et ``Téléversement`` pour que nous ayons l'intégralité de notre site sauvegardé.
+
+- Cependant, nous allons exclure des Téléversements, les éléments ``backup*``, ``*backups``, ``backwpup*``, ``wp-clone``, ``snapshot``
+
+> Note : le signe ``*`` correspond à ce qu'on appelle un ``catch-all``, ce qui veut dire qu'il prends en compte tous les caractères précédent ou suivant le terme auquel il est attaché. Par exemple, ci-dessus, en utilisant le terme ``backup*``nous allons exclure tous les éléments qui commencent par backup, peu importe le caractère qui suit. De fait, un fichier s'appellant ``backup-20240412-mon-site`` seront concernés par l'exclusion.
+
+- Nous allons laisser les éléménts ``Extensions indispensables``et ``Tout autre répertoire trouvé dans wp-content``
+
+> Note : Le dossier ``wp-content``, est le dossier de Wordpress dans lequel vient s'enregistrer les thèmes, les plugins, les téléchargements, les fichiers cache, les sauvegardes ...
+
+- Nous allons ensuite exclure les éléments portants le nom ``upgrade``, ``cache``, ``updraft``, ``backup*``, ``*backups``, ``mysql.sql``, ``debug.log``
+
+Vous pourrez également ajouter des règles d'exclusion en fonction de vos situations personnelles.
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-select-files.png" alt="plugin de sauvegarde UpdraftPlus Sélection des fichiers à inclure ou exclure" width="600" height="auto" /></p>
+
+4. Dans cette dernière partie, nous allons surtout vous expliquer à quoi ça correspond.
+
+- La ``phrase de chiffrement de la base de données`` vous permet, dans le cas où vous soyez utilisateur premium, de chiffrer la base de données avant transfert ou stockage. Ce qui est un point plutôt positif.
+
+- Nous allons coché ``Courriel`` afin de recevoir un rapport simple à l'adresse email de l'administrateur du site.
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-email-report.png" alt="plugin de sauvegarde UpdraftPlus Rapport simple par email" width="600" height="auto" /></p>
+
+- Dans la partie ``Réglages avancés``, nous allons nous concentrer sur la partie ``Répertoire de sauvegarde``.
+
+Nous allons modifier le nom du dossier par défaut, car qui dit défaut, dit que c'est le premier mot qui va être recherché si quelqu'un cible les utilisateurs de ce plugin.
+
+Pour exemple, nous allons changer le nom ``updraft`` par ``monfichier``, puis nous allons sauvegarder.
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-backup-directory.png" alt="plugin de sauvegarde UpdraftPlus Modification du répertoire de sauvegarde" width="600" height="auto" /></p>
+
+> Note : Vous mettrez un nom de dossier qui vous convient et qui n'est pas trop évident, mais pensez à ne mettre que des lettres, sans caractères spéciaux ni tirets.
+
+Il faut également penser à retourner dans la partie exclusion afin d'exclure le nouveau nom ``mondossier``
+
+<p align="center"><img src="./assets/secure-wp/updraftplus-new-directory-exclusion.png" alt="plugin de sauvegarde UpdraftPlus Exclusion du nouveau repertoire de sauvegarde" width="600" height="auto" /></p>
+
+
+<hr id="update" />
+
+# Bonnes pratiques - Mises à jour
+
+Comme pour tout système informatisé, il est primordial de faire des mises à jour régulières afin de vous assurer d'avoir la dernière version de vos plugins / thèmes et Wordpress lui-même sur votre site.
+
+Avant toutes mises à jour de plugins, de thèmes et de versions, ou avant tout changement majeur en termes de contenu, il est primordial d'effectuer 
+
+***WORK IN PROGRESS***
 
 <hr />
 
