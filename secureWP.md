@@ -868,7 +868,7 @@ Une sauvegarde de qualité, autrement dit, une sauvegarde dont on est certain qu
 C'est pourquoi il est primordiale qu'elle soit effectuée en respectant certaines règles et qu'elle contienne la dernière version exploitable de votre site internet (ou les dernières versions dans certains cas, on reviendra dessus), tout en s'assurant de l'intégrité de votre sauvegarde.
 
 
-<a href="when-to-backup"></a>
+<span id="when-to-backup"></span>
 
 ## Quand ?
 
