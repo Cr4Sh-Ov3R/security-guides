@@ -894,7 +894,9 @@ Une sauvegarde stockée sur l'hébergement de votre site, est pratique en cas de
 
 C'est donc une bonne pratique de stocker ses sauvegarde à d'autres endroits que sur le serveur hébergeant votre site. 
 
-> Note : Nous vous conseillons 2 lieu de stockage en plus, 2 disques durs différents, 1 serveur et un disque dur ... Ce qu'il est important de comprendre c'est que les réplicas vous offrent une garantie dans le cas ou l'un des lieu de stockage présente une défaillance.
+> Note : 2 lieu de stockage en plus, 2 disques durs différents, 1 serveur et un disque dur ... Ce qu'il est important de comprendre c'est que les réplicas vous offrent une garantie dans le cas ou l'un des lieu de stockage présente une défaillance.
+>
+> De manière générale, nous vous conseillons d'appliquer la règle des ``3-2-1`` (pour plus de détails, rendez-vous dans la partie [Les sauvegardes, un point incontournable](https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/bonnes-pratiques-generalites/sauvegardes.md)). 
 
 Sur UpdraftPlus, une sauvegarde regroupe plus précisément plusieurs dossiers de sauvegardes qui sépare (pour notre configuration) la ``Base de données``, les ``Extensions``, les ``Thèmes``, les ``Téléversements`` et une catégorie ``Autres``.
 
