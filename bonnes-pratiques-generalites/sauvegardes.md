@@ -114,6 +114,7 @@ Un des points à prendre en compte pour la copie hors site, est qu'il est préf�
 - soit par une solution de transfert sécurisé tel qu'un tunnel ``SSH`` ou un protocole ``SFTP`` si vous choisissez un serveur distant
 
 <hr />
+
 ***Remerciements :***
 
 Ce référentiel à été réalisé afin de permettre à toute personne, même peu à l'aise avec le code, de pouvoir améliorer la sécurisation de ses serveurs et de ses sites Wordpress de manière la plus simple possible, en ce contexte cyber assez particulier.
