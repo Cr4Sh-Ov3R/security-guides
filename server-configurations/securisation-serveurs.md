@@ -1,5 +1,5 @@
 <h1 align="center">Comment bien configurer ses serveurs</h1>                   
-<p align="center"><srong>by Be Cyber Community</strong><br/><i>-- Tyc-Tac & Cr4Sh --</i></p>
+<p align="center"><strong><i>-- Tyc-Tac & Cr4Sh --</strong></i><br/>members of Be Cyber Community</p>
 
 
 ***Pour qui ?***
@@ -27,6 +27,7 @@
 - [ ] [Installer et sécuriser Apache](#apache)
 - [ ] [Installer et sécuriser Nginx](#nginx)
 - [ ] [Installer et sécuriser PHP](#php)
+- [ ] [Installer MariaDb pour Wordpress](#mariadb-wordpress)
 
 <hr id="apache" />
 
@@ -286,6 +287,54 @@ allow_url_fopen = Off
 ```
 
 > Félicitations PHP est maintenant sécurisé 
+
+<hr id="mariadb-wordpress" />
+
+# Installer MariaDb pour Wordpress
+
+## Installation de Mariadb
+
+```bash
+# Installation de Mariadb
+apt install mariadb-server -y
+
+# Activation 
+systemctl enable mariadb
+
+# Démarrage
+systemctl start mariadb
+
+# Vérification
+systemctl status mariadb
+
+# Sécurisation de votre installation avec des mots de passe fort 
+mariadb-secure-installation
+
+# Connexion à Mariadb
+mysql -u root -p
+```
+
+```sql
+--Création de nos tables pour Wordpress
+CREATE USER 'anyone'@'localhost' IDENTIFIED BY 'YourStrongPasswordHere';
+ CREATE DATABASE  tstSecure;
+ GRANT ALL PRIVILEGES ON tstSecur.* TO 'anyone'@'localhost';
+ FLUSH PRIVILEGES;
+ EXIT;
+```
+
+## Nous devons ensuite Télécharger Wordpress
+
+```bash
+cd /var/www/html
+
+wget https://wordpress.org/latest.zip
+
+unzip latest.zip
+
+rm latest.zip
+```
+
 
 <hr />
 
