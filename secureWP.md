@@ -26,6 +26,7 @@
 
 ***Date de mise à jour 2024-04-16***
 
+- [ ] [Quel Wordpress choisir ?](#what-differences)
 - [ ] [Installation et bonnes pratiques](#best-practice)
 - [ ] [Comment installer un plugin](#install-plugins)
 - [ ] [Cachez votre page de connexion](#hide-login-page) 
@@ -38,29 +39,9 @@
 - [ ] [Bonnes pratiques - Mises à jour](#update)
 
 
-<hr id="best-practice" />
+<hr id="what-differences" />
 
-# Installation et bonnes pratiques 
-
-Avant d'installer et de configurer son site Wordpress, il est important de s'assurer que le serveur sur lequel on l'installe est correctement configuré et sécurisé.
-
-Même si c'est un peu plus complexe, nous vous conseillons fortement d'utiliser un serveur sur lequel vous avez la main pour bien le configurer et le sécuriser, mais ça vous demandera effectivement de vous pencher sur le côté technique afin de bien faire les choses.
-
-Cependant, dans bon nombre de cas, les sites Wordpress sont installé sur des hébergements mutualisés voir directement sur la plateforme Wordpress.com, la configuration du serveur n'est donc que peu, voir pas réalisable car c'est votre hébergeur qui appliquera ses propres règles.
-
-> Note : Si vous souhaitez installer Wordpress sur un serveur VPS, un serveur dédié ou en local, nous vous invitons à lire la partie liée à la [sécurisation serveurs](https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/server-configurations/securisation-serveurs.md)
-
-## Hébergement mutualisé
-
-Dans le cas où vous choisiriez un hébergement mutualisé par commodité, nous vous conseillons de faire attention dans le choix de l'hébergeur et du niveau d'hébergement choisi. 
-
-D'un point de vue général, évitez de souscrire à un hébergement qui utilise uniquement le protocole ``FTP`` (*File Transfer Protocol*) pour le transfert du code source de votre site internet car le protocole ``FTP``.
-
-S'il n'est pas accompagné d'une couche de chiffrement SSL/TLS (ce qui devient alors ``FTPS``), l'envoi par ``FTP`` transmettra l'intégralité de vos données en clair, permettant à n'importe qui d'intercepté les données envoyées, ce qui est fortement déconseillé.
-
-Privilégiez donc tant que possible une offre mettant à disposition le protocole ``SFTP``(*Secure File Transfer Protocol*) qui utilise un tunnel sécurisé ``SSH`` pour transférer vos données chiffrées, donc de manière sécurisé ou le protocole ``SSH`` (*Secure Shell*) en lui même.
-
-## Wordpress.org VS Wordpress.com
+# Quel Wordpress choisir ?
 
 Contrairement à ce que beaucoup de personnes pensent, Wordpress.org et Wordpress.com ne sont pas tout à fait pareil.
 
@@ -120,12 +101,36 @@ Comme dans toute solution il y a des inconvénients :
 - Il faudra payer pour mettre à jour les extensions de manière automatique
 - Il faudra payer pour accéder à des solutions de commerce, de référencement SEO ou d'analyse
 
-
 Il n'y a pas de solution miracle et nous vous présentons ici les 2 solutions afin que vous puissiez choisir en connaissance de cause. 
 
-Cependant, les 2 n'ayant pas les mêmes possibilités de configuration, nous allons ici nous concentrer sur la solution open-source Wordpress.org afin de vous guider. 
+Les 2 solutions n'ayant pas les mêmes possibilités de configurations, nous allons ici nous concentrer sur la solution open-source Wordpress.org basé sur un hébergement mutualisé afin de vous guider. 
 
-> Note : Cela ne veux pas dire que ça ne fonctionnera pas si vous avez un site via Wordpress.com, mais nous ne pouvons pas vous le garantir.
+> Note : Les configurations que nous allons mettre en place dans cette partie du référentiel, fonctionneront aussi bien sur un hébergement mutualisé souscrit auprès d'un hébergeur, que pour une installation sur un serveur VPS, dédié voir auto-hébergé.
+>
+> Cela ne veux pas dire que ça ne fonctionnera pas si vous avez un site via Wordpress.com, mais nous ne pouvons pas vous le garantir.
+
+<hr id="best-practice" />
+
+# Installation et bonnes pratiques 
+
+Avant d'installer et de configurer son site Wordpress, il est important de s'assurer que le serveur sur lequel on l'installe est correctement configuré et sécurisé.
+
+Même si c'est un peu plus complexe, nous vous conseillons fortement d'utiliser un serveur sur lequel vous avez la main pour bien le configurer et le sécuriser, mais ça vous demandera effectivement de vous pencher sur le côté technique afin de bien faire les choses.
+
+Cependant, dans bon nombre de cas, les sites Wordpress sont installé sur des hébergements mutualisés voir directement sur la plateforme Wordpress.com, la configuration du serveur n'est donc que peu, voir pas réalisable car c'est votre hébergeur qui appliquera ses propres règles.
+
+> Note : Si vous souhaitez installer Wordpress sur un serveur VPS, un serveur dédié ou en local, nous vous invitons à lire la partie liée à la [sécurisation serveurs](https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/server-configurations/securisation-serveurs.md)
+
+## Hébergement mutualisé
+
+Dans le cas où vous choisiriez un hébergement mutualisé par commodité, nous vous conseillons de faire attention dans le choix de l'hébergeur et du niveau d'hébergement choisi. 
+
+D'un point de vue général, évitez de souscrire à un hébergement qui utilise uniquement le protocole ``FTP`` (*File Transfer Protocol*) pour le transfert du code source de votre site internet car le protocole ``FTP``.
+
+S'il n'est pas accompagné d'une couche de chiffrement SSL/TLS (ce qui devient alors ``FTPS``), l'envoi par ``FTP`` transmettra l'intégralité de vos données en clair, permettant à n'importe qui d'intercepté les données envoyées, ce qui est fortement déconseillé.
+
+Privilégiez donc tant que possible une offre mettant à disposition le protocole ``SFTP``(*Secure File Transfer Protocol*) qui utilise un tunnel sécurisé ``SSH`` pour transférer vos données chiffrées, donc de manière sécurisé ou le protocole ``SSH`` (*Secure Shell*) en lui même.
+
 
 
 <hr id="install-plugins">
