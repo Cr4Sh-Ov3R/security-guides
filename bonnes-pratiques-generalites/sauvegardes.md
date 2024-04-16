@@ -28,6 +28,7 @@
 
 - [ ] [Généralités](#generalities)
 - [ ] [3-2-1 : Sauvegardes](#321-backup)
+- [ ] [Durée de conservation de vos sauvegardes](#how-long)
 
 
 <hr id="generalities">
@@ -112,6 +113,21 @@ Un des points à prendre en compte pour la copie hors site, est qu'il est préf�
 
 - soit par un chiffrement pour l'exemple d'un disque dur sur un autre site ou à la banque
 - soit par une solution de transfert sécurisé tel qu'un tunnel ``SSH`` ou un protocole ``SFTP`` si vous choisissez un serveur distant
+
+<hr id="how-long" />
+
+# Durée de conservation de vos sauvegardes
+
+Une sauvegarde peut vite être gourmande en terme de poids (comprendre taille de la sauvegarde), par conséquent, il peut être intéressant de supprimer les sauvegardes les plus vieilles afin de libérer de l'espace et surtout de ne pas vous retrouver avec 15 ans de sauvegardes qui n'auraient aucune utilité.
+
+Cependant, réfléchissez soigneusement, sur le nombre de sauvegardes que vous souhaitez conserver (soit en nombre de sauvegarde, soit en période écoulée) car si vous effacer trop régulièrement vos sauvegardes, ou à contrario que vous les gardez trop longtemps, vous risquez d'être soumis à des problématiques.
+
+1. **De fiabilité** : En effet, il peut arriver que l'on ne découvre un piratage ou des fichiers compromis qu'au bout d'une certaine durée car certains systèmes, pour se faire discrets, attendent un laps de temps avant de se déclencher ou d'être effectifs. Par conséquent si vous ne gardez qu'une semaine de sauvegarde, alors que le fichier malveillant s'est déclenché au bout de 2 mois, vous risquez de ne plus avoir de sauvegardes saines et chaque restauration réinstallera le fichier malveillant.
+
+2. **Réglementaires ou legislatives** : Car le RGPD (***Réglement Général sur la Protection des Données***) vous interdit de garder des données personnelles au delà de la période nécessaire et justifiée. D'autre part la loi peut exiger que vous gardiez une trace des données ou transaction sur une durée minimale (ou au maximale) résultant du cadre contractuel, de la garantie ...
+
+Ces cas sont des cas pouvant considérablement varier en fonction de votre activité, votre situation, vos obligations légales ... Nous ne pourrons donc pas vous conseiller sur la durée de conservation et vous recommandons de vous rapprocher d'un avocat spécialisé, d'un cabinet juriste ou d'un DPO - ***Data Protection Officer*** (DPD - ***Délégué à la Protection des Données*** en Français).
+
 
 <hr />
 
