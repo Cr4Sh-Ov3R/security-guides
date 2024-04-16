@@ -1,14 +1,15 @@
 <h1 align="center">Comment sécuriser son site Wordpress</h1>                   
-<p align="center"><srong>by Be Cyber Community</strong><br/><i>-- Tyc-Tac & Cr4Sh --</i></p>
+<p align="center"><strong><i>-- Tyc-Tac & Cr4Sh --</strong></i><br/>members of Be Cyber Community</p>
 
 
 ***Pour qui ?***
 >
->  Ce support est destiné à toute personne souhaitant sécuriser son site / blog basé sur un **CMS Wordpress**, même sans connaissances poussées en développement ni en réseau.
+>  Le Security Guide est un référentiel destiné à toute personne souhaitant sécuriser son site / blog basé sur un **CMS Wordpress**, même sans connaissances poussées en développement ni en réseau.
 >
 > Les propos seront donc ***le plus vulgarisés possibles*** afin de vous accompagner, étape par étape, pour la mise en place des bonnes pratiques et l'installation de plugins reconnus en la matière.
 >
 > Nous vous proposons ici une liste non exhaustives de plugins et outils reconnus dans le domaine de la cybersécurité et qui ont fait leurs preuves. 
+
 
 
 ***Disclaimer***
@@ -16,10 +17,14 @@
 > *Par définition un système d'information ne peut être inviolable et la cybersécurité évolue à une vitesse importante. Ce support ne peut garantir une sécurité sans faille face aux risques de piratage.*
 >
 > *Nous déclinons donc toute responsabilité quant à la mise en pratique des éléments de ce support, des outils et plugins utilisés, nous ferons cependant de notre mieux pour maintenir ce support à jour au fur et à mesure des évolutions dans le domaine.*
+>
+> Le Security Guide est rédigé et mis à disposition gratuitement pour toute personne souhaitant renforcer la sécurité de ses infrastructure. 
+>
+> Notre objectif est d'aider la communauté à réduire sa surface d'attaque pour contribuer à un Web plus sûr. Par conséquent, ce guide est partageable gratuitement et sans condition à des fins informatives et communautaire. Cependant, toute utilisation commerciale de ce référentiel autre que par ses auteurs est ***FORMELLEMENT INTERDITE***.
 
 -----
 
-***Date de mise à jour 2024-04-15***
+***Date de mise à jour 2024-04-16***
 
 - [ ] [Installation et bonnes pratiques](#best-practice)
 - [ ] [Comment installer un plugin](#install-plugins)
@@ -37,310 +42,91 @@
 
 # Installation et bonnes pratiques 
 
-Nous serons un peu plus techniques sur cette partie afin de permettre aux personnes souhaitant installer Wordpress sur leur propre serveur de le préparer afin d'accueillir votre site dans les meilleures conditions possibles.
+Avant d'installer et de configurer son site Wordpress, il est important de s'assurer que le serveur sur lequel on l'installe est correctement configuré et sécurisé.
 
-<details>
-<summary>Installer et sécuriser Apache</summary>
+Même si c'est un peu plus complexe, nous vous conseillons fortement d'utiliser un serveur sur lequel vous avez la main pour bien le configurer et le sécuriser, mais ça vous demandera effectivement de vous pencher sur le côté technique afin de bien faire les choses.
 
-## Installation Apache
-```bash
-# Installation des dépendences
-apt install ca-certificates apt-transport-https software-properties-common lsb-release curl -y
+Cependant, dans bon nombre de cas, les sites Wordpress sont installé sur des hébergements mutualisés voir directement sur la plateforme Wordpress.com, la configuration du serveur n'est donc que peu, voir pas réalisable car c'est votre hébergeur qui appliquera ses propres règles.
 
-# Installation d'Apache
-apt install apache2-utils libapache2-mod-security2 apache2 -y
-apt info apache2
-```
+> Note : Si vous souhaitez installer Wordpress sur un serveur VPS, un serveur dédié ou en local, nous vous invitons à lire la partie liée à la [sécurisation serveurs](https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/server-configurations/securisation-serveurs.md)
 
-## Créez un groupe pour Apache :
-```bash
-addgroup --system "votre-groupe" 
+## Hébergement mutualisé
 
-# Créez un utilisateur pour Apache :
-adduser --system --no-create-home --disabled-login --ingroup "votre-groupe" --disabled-password "votre-utilisateur"
-# Cette commande créée un utilisateur système nommé "votre-utilisateur" sans répertoire personnel (--no-create-home), sans possibilité de se connecter (--disabled-login), et le place dans le groupe "votre-groupe".
+Dans le cas où vous choisiriez un hébergement mutualisé par commodité, nous vous conseillons de faire attention dans le choix de l'hébergeur et du niveau d'hébergement choisi. 
 
+D'un point de vue général, évitez de souscrire à un hébergement qui utilise uniquement le protocole ``FTP`` (*File Transfer Protocol*) pour le transfert du code source de votre site internet car le protocole ``FTP``.
 
-# Supprimez l'utilisateur www-data :
-deluser www-data
-# Assurez-vous qu'il n'y a pas de services ou de processus critiques qui dépendent de cet utilisateur avant de le supprimer.
+S'il n'est pas accompagné d'une couche de chiffrement SSL/TLS (ce qui devient alors ``FTPS``), l'envoi par ``FTP`` transmettra l'intégralité de vos données en clair, permettant à n'importe qui d'intercepté les données envoyées, ce qui est fortement déconseillé.
 
-# Supprimez le groupe www-data :
-delgroup www-data
-```
+Privilégiez donc tant que possible une offre mettant à disposition le protocole ``SFTP``(*Secure File Transfer Protocol*) qui utilise un tunnel sécurisé ``SSH`` pour transférer vos données chiffrées, donc de manière sécurisé ou le protocole ``SSH`` (*Secure Shell*) en lui même.
 
-```bash
-# Une fois cela fait, on modifie le fichier envvars
-nano /etc/apache2/envvars
-```
+## Wordpress.org VS Wordpress.com
 
-```
-# Dans le fichier /etc/apache2/envvars
+Contrairement à ce que beaucoup de personnes pensent, Wordpress.org et Wordpress.com ne sont pas tout à fait pareil.
 
-export APACHE_RUN_USER="votre-utilisateur"
-export APACHE_RUN_GROUP="votre-groupe"
-```
+Bien qu'ils aient le même nom, l'un est open-source, l'autre est commercial.
 
-```bash
-# On redémarre le serveur Apache
-systemctl restart apache2
-```
+## Wordpress.org
 
-## Configuration apache
+Wordpress.org est le site officiel à but non lucratif du projet open-source Wordpress sur lequel vous pourrez trouver le logiciel pour le télécharger.
 
-### Tout se passe dans le fichier */etc/apache2/conf-available/security.conf* :
+Une fois téléchargé, devrez acquérir une solution d'hébergement (serveur dédié, VPS ou encore d'hébergement mutualisé) afin de l'installer et le mettre en ligne. Vous pourrez également le lancer en local afin de vous entraîner, faire des essais ...
 
-```bash
-# Nous allons modifier le fichier avec les règles pour le renforcer
-nano /etc/apache2/conf-available/security.conf
-```
+***Avantages :***
 
-```
-# Dans le fichier etc/apache2/conf-available/security.conf
+Cette solution vous offre une plus grande latitude en terme :
 
-# Cachez la version du serveur apache
-ServerTokens Prod
-ServerSignature Off
+- D'optimisation
+- De gestion de plugins
+- De gestion de thèmes
+- De modifications du code source
+- De personnalisation du code ou création de plugins (avec des connaissances en programmation)
 
-# Désactivez la méthode TRACE
-TraceEnable Off
+Pour faire court, vous avez la main sur l'entièreté du code source, des modifications et de l'environnement dans lequel vous évolués.
 
-# Configurez X-Frame-Options
-Header always append X-Frame-Options SAMEORIGIN
+***Inconvénients :***
 
-# Activez X-XSS-Protection
-Header always set X-XSS-Protection: "1; mode=block"
+Du fait que le logiciel soit téléchargé vous devrez :
 
-# Réduisez les risques de sécurité de type MIME
-Header always set X-Content-Type-Options: "nosniff"
+- L'installer sur votre solution d'hébergement
+- Acquérir un peu plus de connaissances technique et sécuritaire (installation et sécurisation de serveur)
+- Transférer votre code source et votre base de donnée sur la solution d'hébergement
+- Gérer la mise en ligne et la maintenance
+- Gérer l'aspect des sauvegardes
 
-# HSTS - HTTP Strict Transport Sercurity
-Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+En somme, vous devrez acquérir quelques compétences en plus pour choisir la solution d'hébergement, faire vos configuration en respectant les bonnes pratiques (surtout dans le cas d'un serveur VPS, dédié ou auto-hébergé) et configurer / maintenir votre site.
 
-# Sécurisation des cookies
-Header always edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
-```
+## Wordpress.com
 
-```bash
-# Désactivez les protocoles SSL/TLS obsolètes
-nano /etc/apache2/mods-enabled/ssl.conf 
-```
+De son côté lui, Wordpress.com, est une solution commerciale portée par l'entreprise *Automattic* qui vous permet de mettre en place un site Wordpress de manière auto-hébergé, sans connaissances spécifiques, en souscrivant à des abonnements offrant différents niveaux de service.
 
-```
-# Dans le fichier /etc/apache2/mods-enabled/ssl.conf
-SSLProtocol -all +TLSv1.2
-SSLCipherSuite HIGH:!aNULL:!MD5
-```
+***Avantages :***
 
-### Nous devons ensuite activer certains modules:
+Le gros avantage, c'est son côté "clef en main" qui est intéressant pour les personnes n'ayant aucune connaissances techniques.
 
-```bash
-# Modifcation des entêtes
-a2enmod headers 
+- Vous payez l'abonnement qui vous convient en fonction du type de site que vous souhaitez mettre en place
+- L'inscription et la mise en route est assez rapide
+- Vous choisissez parmis les thèmes proposés 
+- Vous commencez directement à rédiger le contenu de votre site.
+- Vous lancez plus rapidement votre site par rapport à la solution open-source
 
-# Réécriture des urls
-a2enmod rewrite
+***Inconvénients :***
 
-# Activation de ssl pour https
-a2enmod ssl
+Comme dans toute solution il y a des inconvénients :
 
-# Activation de php
-a2enmod php8.*
+- Vous n'avez pas accès au code source
+- L'accès aux fonctionnalités est plus restreinte
+- Il faudra payer pour pouvoir installer des plugins ou des thèmes
+- Il faudra payer pour mettre à jour les extensions de manière automatique
+- Il faudra payer pour accéder à des solutions de commerce, de référencement SEO ou d'analyse
 
-# Autres options disponible
-# a2enmod cache Pour activer le mode cache 
-# a2enmod cache_disk Pour activer le mode cache
 
-systemctl reload apache2
-```
+Il n'y a pas de solution miracle et nous vous présentons ici les 2 solutions afin que vous puissiez choisir en connaissance de cause. 
 
-### Pour tester en local nous utilisons curl
+Cependant, les 2 n'ayant pas les mêmes possibilités de configuration, nous allons ici nous concentrer sur la solution open-source Wordpress.org afin de vous guider. 
 
-```bash
-curl -v http://localhost:80/ | head
-```
+> Note : Cela ne veux pas dire que ça ne fonctionnera pas si vous avez un site via Wordpress.com, mais nous ne pouvons pas vous le garantir.
 
-> Nous avons correctement configuré notre serveur Apache enjoy !!
-
-</details>
-
-<details>
-<summary>Installer et sécuriser Nginx</summary>
-
-## Installation de Nginx
-
-```bash
-apt-get install nginx && apt-get install nginx-extras
-systemctl enable nginx
-systemctl start nginx
-systemctl status nginx
-
-curl -I http://127.0.0.1/
-# On voit la version de notre serveur nginx
-```
-
-```bash
-# Désactivez la signature
-nano /etc/nginx/nginx.conf
-```
-
-```
-#Dans le fichier /etc/nginx/nginx.conf
-
-server_tokens off;
-
-# Modifiez la ligne ssl comme suit TLS 1 et TLS 1.1 obsolète
-ssl_protocols TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
-```
-
-```bash
-systemctl reload nginx
-
-curl -I http://127.0.0.1/
-# La signature est bien désactivée, mais cela affiche Nginx corrigeons cela
-
-nano /etc/nginx/nginx.conf
-```
-
-```
-#Dans le fichier /etc/nginx/nginx.conf
-
-# Ajoutez cela en dessous du commentaire basic
-more_set_headers 'Server: ';
-```
-
-```bash
-systemctl reload nginx
-
-curl -I http://127.0.0.1/
-# Voilà, parfait cela n'affiche plus Nginx
-
-nano /etc/nginx/nginx.conf
-```
-
-```
-# Dans le fichier /etc/nginx/nginx.conf
-
-# Ajout des protections pour les headers
-more_set_headers "X-Content-Type-Options : nosniff";
-more_set_headers "X-XSS-Protection : 1; mode=block";
-more_set_headers "X-Download-Options : noopen";
-more_set_headers "X-Permitted-Cross-Domain-Policies : none";
-more_set_headers "X-Frame-Options : SAMEORIGIN";
-
-# Vous pouvez ajouter CSP
-```
-
-```bash
-systemctl reload nginx
-
-curl -I http://127.0.0.1/
-# Pour la sécurité, c'est tout, mais vous pouvez envisager bien plus au niveau de vos optimisations
-```
-</details>
-
-<details>
-<summary>Installer et sécuriser PHP</summary>
-
-## PHP
-
-> Nous allons installer PHP8.3 qui est la dernière version de php
-
-```bash
-# Récuperation de la clé
-curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
-
-# Ajout aux sources
-sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
-
-# Mise à jour
-apt update
-
-# Installation des paquets PHP utilisés par Wordpress
-apt-get install php8.3 php8.3-cli php8.3-common php8.3-imap php8.3-redis php8.3-snmp php8.3-xml php8.3-mysqli php8.3-zip php8.3-mbstring php8.3-curl libapache2-mod-php8.3 -y
-
-# Voir la version de PHP
-php -v
-
-# Ajout du fichier phpinfo pour voir notre configuration
-echo "<?php phpinfo(); ?>" | tee /var/www/html/phpinfo.php
-```
-
-```
-#Ouvrir la page
-http://url/phinfo.php
-```
-
-> Comme vous pouvez le voir un certain nombre de choses ne sont pas bonnes d'un point de vu sécurité
-
-### Sécurisation de php
-
-```bash
-# Tout se passe ici
-nano /etc/php/8.3/apache2/php.ini
-```
-
-```
-# Désactivation d'un certain nombre de fonctions inutiles dans notre cas
-
-disable_functions = exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source,eval,assert,stream_socket_server,stream_socket_accept,stream_socket_client,stream_set_blocking,fsockopen,fputs,fwrite,create_function,pcntl_exec,pcntl_fork,pcntl_signal,pcntl_waitpid,pcntl_wexitstatus,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wstopsig,pcntl_wtermsig,pcntl_strerror,pcntl_get_last_error,pcntl_signal_dispatch,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_async_signals,pcntl_unshare,pcntl_setpriority,pcntl_getpriority
-
-# Désactivation de la version de php
-expose_php = Off
-
-# Révocation l'inclusion de fichier
-allow_url_include = Off
-
-# Seuls les fichiers dans votre site Web peuvent être inclus
-allow_url_fopen = Off
-```
-
-> PHP est maintenant sécurisé 
-
-</details>
-
-## Installation de Mariadb
-
-```bash
-# Installation de Mariadb
-apt install mariadb-server -y
-
-# Activation 
-systemctl enable mariadb
-
-# Démarrage
-systemctl start mariadb
-
-# Vérification
-systemctl status mariadb
-
-# Sécurisation de votre installation avec des mots de passe fort 
-mariadb-secure-installation
-
-# Connexion à Mariadb
-mysql -u root -p
-```
-
-```sql
---Création de nos tables pour Wordpress
-CREATE USER 'anyone'@'localhost' IDENTIFIED BY 'YourStrongPasswordHere';
- CREATE DATABASE  tstSecure;
- GRANT ALL PRIVILEGES ON tstSecur.* TO 'anyone'@'localhost';
- FLUSH PRIVILEGES;
- EXIT;
-```
-
-## Nous devons ensuite Télécharger Wordpress
-
-```bash
-cd /var/www/html
-
-wget https://wordpress.org/latest.zip
-
-unzip latest.zip
-
-rm latest.zip
-```
 
 <hr id="install-plugins">
 
@@ -1147,7 +933,7 @@ Comme pour tout système informatisé, il est primordial de faire des mises à j
 
 Pour la bonne et simple raison que les mises à jours servent à apporter des modifications, des fonctionnalités, des évolutions en terme de performance mais surtout, car elles permettent d'apporter les correctifs de sécurité nécessaires pour protéger votre système contre des vulnérabilités découvertes.
 
->NOTE : Avant toutes mises à jour de plugins, de thèmes et de versions, ou avant tout changement majeur en termes de contenu, il est primordial d'effectuer une sauvegarde et de s'assuré de la viabilité de celle-ci. Vous pouvez retrouver les démarches dans la partie [Bonnes pratiques - Sauvegarde](#backup)
+>NOTE : Avant toutes mises à jour de plugins, de thèmes et de versions, ou avant tout changement majeur en termes de contenu, il est primordial d'effectuer une sauvegarde et de s'assuré de la viabilité de celle-ci. Vous pouvez retrouver les démarches dans la partie [Bonnes pratiques - Sauvegardes](#backup)
 
 ## Comment se passe une mise à jour sur Wordpress ?
 
@@ -1167,19 +953,17 @@ Avant d'effectuer la mise à jour, nous allons examiner ce qui nous est proposé
 
 <p align="center"><img src="./assets/secure-wp/plugin-update.png" alt="Plugin disponible pour mise à jour" width="600" height="auto" /></p>
 
-Nous pouvons également voir plus de détails sur ce plugin et sur la version ``1.8.22`
+Nous pouvons également voir plus de détails sur ce plugin et sur la version ``1.8.22``
 
-Nous voyons notamment les failles qui ont été patchées au sein de cette mise à jour, la date de dernière mise à jour ...
+Nous voyons notamment les raisons de la mises à jour et parfois les failles qui ont été patchées, la date de dernière mise à jour ...
 
 <p align="center"><img src="./assets/secure-wp/details-plugin-update.png" alt="Détails de la mise à jour du Plugin Photo Gallery suite à vulnérabilité" width="600" height="auto" /></p>
 
-Si cela nous convient, nous pouvons donc faire la mise à jour. (N'oubliez pas de faire la sauvegarde correctement, comme expliqué dans la partie [Bonnes pratiques - Sauvegarde](#backup) )
+Si cela nous convient, nous pouvons donc faire la mise à jour. (N'oubliez pas de faire la sauvegarde correctement, comme expliqué dans la partie [Bonnes pratiques - Sauvegardes](#backup) )
 
 Félicitation, votre plugin est à jour.
 
 > Note :  Il est fréquent de se retrouver avec plusieurs mises à jour disponible simultanément. Dans une telle situation, vous pouvez par exemple sélectionner toutes les extensions et les mettre à jour en une seule fois, mais soyez prudent à bien avoir vérifier la compatibilité de chaque extension auparavant.
-
-***WORK IN PROGRESS***
 
 <hr />
 
