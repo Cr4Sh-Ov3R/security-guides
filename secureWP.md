@@ -50,6 +50,8 @@ Cependant, dans bon nombre de cas, les sites Wordpress sont installé sur des h�
 
 > Note : Si vous souhaitez installer Wordpress sur un serveur VPS, un serveur dédié ou en local, nous vous invitons à lire la partie liée à la [sécurisation serveurs](https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/server-configurations/securisation-serveurs.md)
 
+<a href="https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/server-configurations/securisation-serveurs.md" target="_blank"> sécurisation serveur</a>
+
 ## Hébergement mutualisé
 
 Dans le cas où vous choisiriez un hébergement mutualisé par commodité, nous vous conseillons de faire attention dans le choix de l'hébergeur et du niveau d'hébergement choisi. 
