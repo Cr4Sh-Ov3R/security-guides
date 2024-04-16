@@ -818,7 +818,7 @@ Vous pourrez également ajouter des règles d'exclusion en fonction de vos situa
 
 Nous allons modifier le nom du dossier par défaut, car qui dit défaut, dit que c'est le premier mot qui va être recherché si quelqu'un cible les utilisateurs de ce plugin.
 
-Pour exemple, nous allons changer le nom ``updraft`` par ``monfichier``, puis nous allons sauvegarder.
+Pour exemple, nous allons changer le nom ``updraft`` par ``mondossier`` (choisissez un nom pas trop évident à deviner), puis nous allons sauvegarder.
 
 <p align="center"><img src="./assets/secure-wp/updraftplus-backup-directory.png" alt="plugin de sauvegarde UpdraftPlus Modification du répertoire de sauvegarde" width="600" height="auto" /></p>
 
