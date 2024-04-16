@@ -916,17 +916,7 @@ Vos fichiers sont maintenant sauvegarder dans le dossier créé précédemment.
 
 Il ne vous reste plus qu'à dupliquer ces opérations vers votre 2e support de stockage et votre sauvegarde est terminée.
 
-**Durée de conservation de votre sauvegarde**
-
-Une sauvegarde peut vitre être gourmand en terme de poids (comprendre taille de la sauvegarde), par conséquent, il peut être intéressant de supprimer les sauvegardes les plus vieilles afin de libérer de l'espace et surtout de ne pas vous retrouver avec 15 ans de sauvegardes qui n'auraient aucune utilité.
-
-Cependant, réfléchissez soigneusement, sur le nombre de sauvegardes que vous souhaitez conserver (soit en nombre de sauvegarde, soit en période écoulée) car si vous effacer trop régulièrement vos sauvegardes, ou à contrario que vous les gardez trop longtemps, vous risquez d'être soumis à des problématiques.
-
-1. **De fiabilité** : En effet, il peut arriver que l'on ne découvre un piratage ou des fichiers compromis qu'au bout d'une certaine durée. Car certains systèmes, pour se faire discrets, attendent un laps de temps avant de se déclencher ou d'être effectifs. Par conséquent si vous ne gardez qu'une semaine de sauvegarde, alors que le fichier malveillant s'est déclenché au bout de 2 mois, vous risquez de ne plus avoir de sauvegarde saine et chaque restauration réinstallera le fichier malveillant.
-
-2. **Réglementaires ou legislatives** : Car le RGPD (***Réglement Général sur la Protection des Données***) vous interdit de garder des données personnelles au delà de la période nécessaire et justifiée. D'autre part la loi peut exiger que vous gardiez une trace des données ou transaction sur une durée minimum (ou au maximum) et en fonction du cadre contractuel, de la garantie ...
-
-Ces cas sont des cas pouvant considérablement varier en fonction de votre activité, votre situation, vos obligations légales ... Nous ne pourrons donc pas vous conseiller sur la durée de conservation et vous recommandons de vous rapprocher d'un avocat spécialisé, d'un cabinet juriste ou d'un DPO - ***Data Protection Officer*** (DPD - ***Délégué à la Protection des Données*** en Français).
+Vous souhaitez en savoir plus sur les sauvegardes, rendez-vous sur notre partie [Les sauvegardes, un point incontournable](https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/bonnes-pratiques-generalites/sauvegardes.md)
 
 <hr id="update" />
 
