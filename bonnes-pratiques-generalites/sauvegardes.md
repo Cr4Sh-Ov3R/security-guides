@@ -4,7 +4,7 @@
 
 ***Pour qui ?***
 >
->  Le Security Guide est un référentiel destiné à toute personne souhaitant sécuriser son site / blog basé sur un **CMS Wordpress**, même sans connaissances poussées en développement ni en réseau.
+>  Le Security Guide est un référentiel destiné à toute personne souhaitant sécuriser ses infrastuctures, que ce soit au niveau de ses serveurs et/ou son site basé sur un **CMS Wordpress**, même sans connaissances poussées en développement ni en réseau.
 >
 > Les propos seront donc ***le plus vulgarisés possibles*** afin de vous accompagner, étape par étape, pour la mise en place des bonnes pratiques et l'installation de plugins reconnus en la matière.
 >
