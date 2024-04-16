@@ -9,10 +9,7 @@
 > Les propos seront donc ***le plus vulgarisés possibles*** afin de vous accompagner, étape par étape, pour la mise en place des bonnes pratiques et l'installation de plugins reconnus en la matière.
 >
 > Nous vous proposons ici les étapes à suivre pour bien configurer ses serveurs afin de réduire la surface d'attaque. 
->
-> Le Security Guide est rédigé et mis à disposition gratuitement pour toute personne souhaitant renforcer la sécurité de ses infrastructure. 
->
-> Notre objectif est d'aider la communauté à réduire sa surface d'attaque pour contribuer à un Web plus sûr. Par conséquent, ce guide est partageable gratuitement et sans condition à des fins informatives et communautaire. Cependant, toute utilisation commerciale de ce référentiel autre que par ses auteurs est ***FORMELLEMENT INTERDITE***.
+
 
 
 ***Disclaimer***
@@ -20,6 +17,10 @@
 > *Par définition un système d'information ne peut être inviolable et la cybersécurité évolue à une vitesse importante. Ce support ne peut garantir une sécurité sans faille face aux risques de piratage.*
 >
 > *Nous déclinons donc toute responsabilité quant à la mise en pratique des éléments de ce support, des outils et plugins utilisés, nous ferons cependant de notre mieux pour maintenir ce support à jour au fur et à mesure des évolutions dans le domaine.*
+>
+> Le Security Guide est rédigé et mis à disposition gratuitement pour toute personne souhaitant renforcer la sécurité de ses infrastructure. 
+>
+> Notre objectif est d'aider la communauté à réduire sa surface d'attaque pour contribuer à un Web plus sûr. Par conséquent, ce guide est partageable gratuitement et sans condition à des fins informatives et communautaire. Cependant, toute utilisation commerciale de ce référentiel autre que par ses auteurs est ***FORMELLEMENT INTERDITE***.
 
 -----
 
