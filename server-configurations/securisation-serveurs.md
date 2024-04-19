@@ -18,11 +18,11 @@
 >
 > Le Security Guide est rédigé et mis à disposition gratuitement pour toute personne souhaitant renforcer la sécurité de ses infrastructures. 
 >
-> Notre objectif est d'aider la communauté à réduire sa surface d'attaque pour contribuer à un Web plus sûr. Par conséquent, ce guide est partageable gratuitement et sans condition à des fins informatives et communautaire. Cependant, toute utilisation commerciale de ce référentiel autre que par ses auteurs est ***FORMELLEMENT INTERDITE***.
+> Notre objectif est d'aider la communauté à réduire sa surface d'attaque pour contribuer à un Web plus sûr. Par conséquent, ce guide est partageable dans les conditions de la **licence CC BY-NC-ND 4.0 DEED** à des fins informatives et communautaire. Cependant, toute utilisation commerciale de ce référentiel autre que par ses auteurs est ***FORMELLEMENT INTERDITE***.
 
 -----
 
-***Date de mise à jour 2024-04-16***
+***Date de mise à jour : 2024-04-19***
 
 - [ ] [Installer et sécuriser Apache](#apache)
 - [ ] [Installer et sécuriser Nginx](#nginx)
@@ -34,6 +34,20 @@
 # Installer et sécuriser Apache
 
 ## Installation d'Apache
+
+La première chose à faire avant de faire des installations ... est de mettre à jour votre système.
+
+> Note : Toutes les commandes sont ici considérées comme étant logué sur l'utilisateur ``root``, si ce n'est pas le cas, switchez en ``root`` ou rajoutez la commande ``sudo`` devant toutes les commandes. 
+
+> Testé en environnement ``DEBIAN 12`` sur VPS
+
+```bash
+# Mise à jour du système et mise à jour des dépendances existantes
+apt update && apt upgrade -y
+```
+
+Ensuite, vous pouvez installer les dépendances dont vous avez besoin.
+
 ```bash
 # Installation des dépendences
 apt install ca-certificates apt-transport-https software-properties-common lsb-release curl -y
@@ -44,10 +58,21 @@ apt info apache2
 ```
 
 ## Créez un groupe pour Apache :
+
+Nous allons créer un groupe et un utilisateur pour Apache 
+
+Avant toute choses, pensez à stoper Apache 
+
 ```bash
+systemctl stop apache2
+```
+Vous pouvez maintenant créer un nouveau groupe, un nouvel utilisateur, supprimer l'utilisateur www-data et le groupe www-data.
+
+```bash
+# Créons un nouveau groupe
 addgroup --system "votre-groupe" 
 
-# Créez un utilisateur pour Apache :
+# Créons un utilisateur pour Apache qui sera rattaché au groupe que vous avez créé :
 adduser --system --no-create-home --disabled-login --ingroup "votre-groupe" --disabled-password "votre-utilisateur"
 # Cette commande créée un utilisateur système nommé "votre-utilisateur" sans répertoire personnel (--no-create-home), sans possibilité de se connecter (--disabled-login), et le place dans le groupe "votre-groupe".
 
@@ -60,10 +85,20 @@ deluser www-data
 delgroup www-data
 ```
 
+> Note : Si vous avez une erreur pour la suppression de l'utilisateur ``www-data``, regardez le processus utilisé et retourné dans le message d'erreur afin de vous assurer qu'il n'est pas critique. S'il n'est pas critique, terminez le processus avec la commande ``kill numéroProcessus``
+
+Vu que nous avons créé un utilisateur et un groupe pour notre Apache, il va falloir apporter quelques modifications au fichier envvars:
+
+> Note : Si vous avez peur de faire une erreur lorsque vous modifiez un fichier, il vous suffit de commenter la ligne en ajoutant un ``#`` devant, et de recopier la ligne juste en dessous avec les nouvelles valeurs. 
+>
+> Dans l'exemple ci-dessous, vous commentez ``#export APACHE_RUN_USER=www-data`` et écrivez juste en dessous ``export APACHE_RUN_USER="votre-utilisateur"``
+
 ```bash
 # Une fois cela fait, on modifie le fichier envvars
 nano /etc/apache2/envvars
 ```
+
+Dans ce fichier, nous effectuons les modifications suivantes en remplaçant ``www-data`` par les informations de groupe et d'utilisateur que vous avez créé :
 
 ```
 # Dans le fichier /etc/apache2/envvars
@@ -81,10 +116,16 @@ systemctl restart apache2
 
 ### Tout se passe dans le fichier */etc/apache2/conf-available/security.conf* :
 
+Nous allons ensuite renforcer la sécurité de notre Apache en modifiant et ajoutant quelques règles dans notre fichier */etc/apache2/conf-available/security.conf*
+
 ```bash
 # Nous allons modifier le fichier avec les règles pour le renforcer
 nano /etc/apache2/conf-available/security.conf
 ```
+
+Une fois dans notre fichier, cherchez les lignes correspondantes pour modifier les règles suivantes.
+
+> Note : Si les lignes n'existent pas déjà et que vous avez bien vérifié, rajoutez les lignes manquantes à votre fichier de configuration :
 
 ```
 # Dans le fichier etc/apache2/conf-available/security.conf
@@ -112,18 +153,10 @@ Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains
 Header always edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
 ```
 
-```bash
-# Désactivez les protocoles SSL/TLS obsolètes
-nano /etc/apache2/mods-enabled/ssl.conf 
-```
-
-```
-# Dans le fichier /etc/apache2/mods-enabled/ssl.conf
-SSLProtocol -all +TLSv1.2
-SSLCipherSuite HIGH:!aNULL:!MD5
-```
 
 ### Nous devons ensuite activer certains modules:
+
+Avant d'activer le module ``a2enmod php8.*``, pensez à [installer PHP](#php)
 
 ```bash
 # Modifcation des entêtes
@@ -136,7 +169,7 @@ a2enmod rewrite
 a2enmod ssl
 
 # Activation de php
-a2enmod php8.*
+a2enmod php8.* 
 
 # Autres options disponible
 # a2enmod cache Pour activer le mode cache 
@@ -145,7 +178,34 @@ a2enmod php8.*
 systemctl reload apache2
 ```
 
+### Nous devons ensuite retirer les protocoles obsolètes
+
+L'activation du module ``a2enmod ssl`` va créer un fichier de configuration */etc/apache2/mods-enabled/ssl.conf *
+
+Il va nous falloir le modifier pour désactiver certains protocoles obsolètes.
+
+```bash
+# Désactivez les protocoles SSL/TLS obsolètes
+nano /etc/apache2/mods-enabled/ssl.conf 
+```
+
+Trouvez les lignes correspondant à ces configurations et modifiez les valeurs.
+
+```
+# Dans le fichier /etc/apache2/mods-enabled/ssl.conf
+SSLProtocol all -SSLv2 -SSLv3 -TLSv1
+SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5:!SSLv3:!SSLv2:!TLSv1
+```
+
+Une fois effectué, nous pouvons vérifier que nos configuration ont bien été enregistrées :
+
+```bash
+grep -ir SSLProtocol /etc/apache2/*
+```
+
 ### Pour tester en local nous utilisons curl
+
+Dans certains cas, ``curl`` n'est pas installé, il faudra donc l'installé avec la commande ``apt install curl`` afant de lancer le test.
 
 ```bash
 curl -v http://localhost:80/ | head
@@ -257,12 +317,26 @@ php -v
 echo "<?php phpinfo(); ?>" | tee /var/www/html/phpinfo.php
 ```
 
+> ATTENTION : Votre fichier ``phpinfo.php`` révèle beaucoup trop d'information pour le laisser accessible, surtout sur un serveur en ligne.
+> 
+> Si vous avez ajouter le fichier phpinfo pour voir votre configuration, nous vous conseillons d'aller le supprimer dès que vous n'en aurez plus besoin et si possible, jamais sur un serveur en ligne. 
+
+Dans le cas où vous ayez créé le fichier ``phpinfo.php``, vous pouvez l'utiliser de la sorte :
+
 ```
 #Ouvrir la page
-http://url/phinfo.php
+http://votreurl/phinfo.php
 ```
 
 > Comme vous pouvez le voir un certain nombre de choses ne sont pas bonnes d'un point de vu sécurité
+
+Pour supprimer le ``phpinfo.php`` si vous l'avez créé précédemment :
+
+```bash
+# Supprimer le fichier phpinfo.php
+rm /var/www/html/phpinfo.php
+```
+
 
 ### Sécurisation de php
 
@@ -271,10 +345,12 @@ http://url/phinfo.php
 nano /etc/php/8.3/apache2/php.ini
 ```
 
+> Note : Dans le cas où vous ayez créer un fichier ``phpinfo.php`` précédemment, nous vous conseillons de rajouter ``,phpinfo`` à la fin de la ligne ``disable_function``
+
 ```
 # Désactivation d'un certain nombre de fonctions inutiles dans notre cas
 
-disable_functions = exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source,eval,assert,stream_socket_server,stream_socket_accept,stream_socket_client,stream_set_blocking,fsockopen,fputs,fwrite,create_function,pcntl_exec,pcntl_fork,pcntl_signal,pcntl_waitpid,pcntl_wexitstatus,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wstopsig,pcntl_wtermsig,pcntl_strerror,pcntl_get_last_error,pcntl_signal_dispatch,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_async_signals,pcntl_unshare,pcntl_setpriority,pcntl_getpriority
+disable_functions = exec, shell_exec, system, passthru, popen, proc_open, symlink, eval, assert, pcntl_exec, pcntl_fork, pcntl_signal, pcntl_waitpid, pcntl_wexitstatus, pcntl_wifexited, pcntl_wifstopped, pcntl_wifsignaled, pcntl_wifcontinued, pcntl_wstopsig, pcntl_wtermsig, pcntl_strerror, pcntl_get_last_error, pcntl_signal_dispatch, pcntl_sigprocmask, pcntl_sigwaitinfo, pcntl_sigtimedwait, pcntl_async_signals, pcntl_unshare, pcntl_setpriority, pcntl_getpriority
 
 # Désactivation de la version de php
 expose_php = Off
@@ -309,6 +385,7 @@ systemctl status mariadb
 
 # Sécurisation de votre installation avec des mots de passe fort 
 mariadb-secure-installation
+# Par défaut, votre utilisateur root n'a pas de mot de passe, il vous faut en rentrer un le plus robuste possible pour cet utilisateur.
 
 # Connexion à Mariadb
 mysql -u root -p
@@ -326,14 +403,28 @@ CREATE USER 'anyone'@'localhost' IDENTIFIED BY 'YourStrongPasswordHere';
 ## Nous devons ensuite Télécharger Wordpress
 
 ```bash
+# Déplacez-vous dans le dossier html
 cd /var/www/html
 
+# Télécharger la dernière version de Wordpress
 wget https://wordpress.org/latest.zip
 
+# Dézipper le fichier reçu
 unzip latest.zip
 
+# Supprimer le fichier latest.zip après l'avoir dézippé
 rm latest.zip
+
+# Déplacer tous les fichiers contenus dans le dossier wordpress directement dans le dossier html
+mv wordpress/* .
+
+# Enfin supprimer le dossier Wordpress
+rm -r wordpress/
+
 ```
+
+> Note : Dans le dossier ``/var/www/html`` vous avez un fichier ``index.html`` qui est installé par défaut, il vous faudra le déplacer (ou le supprimer) afin que votre serveur puisse se lancer correctement sur votre site Wordpress.
+
 
 
 <hr />

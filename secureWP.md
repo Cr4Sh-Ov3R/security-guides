@@ -20,11 +20,11 @@
 >
 > Le Security Guide est rédigé et mis à disposition gratuitement pour toute personne souhaitant renforcer la sécurité de ses infrastructures. 
 >
-> Notre objectif est d'aider la communauté à réduire sa surface d'attaque pour contribuer à un Web plus sûr. Par conséquent, ce guide est partageable gratuitement et sans condition à des fins informatives et communautaire. Cependant, toute utilisation commerciale de ce référentiel autre que par ses auteurs est ***FORMELLEMENT INTERDITE***.
+> Notre objectif est d'aider la communauté à réduire sa surface d'attaque pour contribuer à un Web plus sûr. Par conséquent, ce guide est partageable dans les conditions de la **licence CC BY-NC-ND 4.0 DEED** à des fins informatives et communautaire. Cependant, toute utilisation commerciale de ce référentiel autre que par ses auteurs est ***FORMELLEMENT INTERDITE***.
 
 -----
 
-***Date de mise à jour 2024-04-16***
+***Date de mise à jour : 2024-04-16***
 
 - [ ] [Quel Wordpress choisir ?](#what-differences)
 - [ ] [Installation et bonnes pratiques](#best-practice)
