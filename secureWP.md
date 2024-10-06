@@ -1,10 +1,10 @@
-<h1 align="center">Comment sécuriser son site Wordpress</h1>                   
+<h1 align="center">Comment sécuriser son site WordPress</h1>                   
 <p align="center"><strong><i>-- Tyc-Tac & Cr4Sh --</strong></i><br/>members of Be Cyber Community</p>
 
 
 ***Pour qui ?***
 >
->  Le Security Guide est un référentiel destiné à toute personne souhaitant sécuriser son site / blog basé sur un **CMS Wordpress**, même sans connaissances poussées en développement ni en réseau.
+>  Le Security Guide est un référentiel destiné à toute personne souhaitant sécuriser son site / blog basé sur un **CMS WordPress**, même sans connaissances poussées en développement ni en réseau.
 >
 > Les propos seront donc ***le plus vulgarisés possibles*** afin de vous accompagner, étape par étape, pour la mise en place des bonnes pratiques et l'installation de plugins reconnus en la matière.
 >
@@ -26,13 +26,13 @@
 
 ***Date de mise à jour : 2024-04-16***
 
-- [ ] [Quel Wordpress choisir ?](#what-differences)
+- [ ] [Quel WordPress choisir ?](#what-differences)
 - [ ] [Installation et bonnes pratiques](#best-practice)
 - [ ] [Comment installer un plugin](#install-plugins)
 - [ ] [Cachez votre page de connexion](#hide-login-page) 
 - [ ] [Limiter les attaque par Brute Force pour la connexion](#bf-login)
 - [ ] [Firewall, scanning & 2FA](#waf-scan) 
-- [ ] [Effacer la version Wordpress](#remove-wp-version)
+- [ ] [Effacer la version WordPress](#remove-wp-version)
 - [ ] [Effacer la version Yoast SEO](#remove-yoast-version)
 - [ ] [Effacer les versions CSS et JavaScript](#remove-css-js-version)
 - [ ] [Bonnes pratiques - Sauvegardes](#backup)
@@ -41,15 +41,15 @@
 
 <hr id="what-differences" />
 
-# Quel Wordpress choisir ?
+# Quel WordPress choisir ?
 
-Contrairement à ce que beaucoup de personnes pensent, Wordpress.org et Wordpress.com ne sont pas tout à fait pareil.
+Contrairement à ce que beaucoup de personnes pensent, WordPress.org et WordPress.com ne sont pas tout à fait pareil.
 
 Bien qu'ils aient le même nom, l'un est open-source, l'autre est commercial.
 
-## Wordpress.org
+## WordPress.org
 
-Wordpress.org est le site officiel à but non lucratif du projet open-source Wordpress sur lequel vous pourrez trouver le logiciel pour le télécharger.
+WordPress.org est le site officiel à but non lucratif du projet open-source WordPress sur lequel vous pourrez trouver le logiciel pour le télécharger.
 
 Une fois téléchargé, devrez acquérir une solution d'hébergement (serveur dédié, VPS ou encore d'hébergement mutualisé) afin de l'installer et le mettre en ligne. Vous pourrez également le lancer en local afin de vous entraîner, faire des essais ...
 
@@ -77,9 +77,9 @@ Du fait que le logiciel soit téléchargé vous devrez :
 
 En somme, vous devrez acquérir quelques compétences en plus pour choisir la solution d'hébergement, faire vos configuration en respectant les bonnes pratiques (surtout dans le cas d'un serveur VPS, dédié ou auto-hébergé) et configurer / maintenir votre site.
 
-## Wordpress.com
+## WordPress.com
 
-De son côté lui, Wordpress.com, est une solution commerciale portée par l'entreprise *Automattic* qui vous permet de mettre en place un site Wordpress de manière auto-hébergé, sans connaissances spécifiques, en souscrivant à des abonnements offrant différents niveaux de service.
+De son côté lui, WordPress.com, est une solution commerciale portée par l'entreprise *Automattic* qui vous permet de mettre en place un site WordPress de manière auto-hébergé, sans connaissances spécifiques, en souscrivant à des abonnements offrant différents niveaux de service.
 
 ***Avantages :***
 
@@ -103,23 +103,23 @@ Comme dans toute solution il y a des inconvénients :
 
 Il n'y a pas de solution miracle et nous vous présentons ici les 2 solutions afin que vous puissiez choisir en connaissance de cause. 
 
-Les 2 solutions n'ayant pas les mêmes possibilités de configurations, nous allons ici nous concentrer sur la solution open-source Wordpress.org basé sur un hébergement mutualisé afin de vous guider. 
+Les 2 solutions n'ayant pas les mêmes possibilités de configurations, nous allons ici nous concentrer sur la solution open-source WordPress.org basé sur un hébergement mutualisé afin de vous guider. 
 
 > Note : Les configurations que nous allons mettre en place dans cette partie du référentiel, fonctionneront aussi bien sur un hébergement mutualisé souscrit auprès d'un hébergeur, que pour une installation sur un serveur VPS, dédié voir auto-hébergé.
 >
-> Cela ne veux pas dire que ça ne fonctionnera pas si vous avez un site via Wordpress.com, mais nous ne pouvons pas vous le garantir.
+> Cela ne veux pas dire que ça ne fonctionnera pas si vous avez un site via WordPress.com, mais nous ne pouvons pas vous le garantir.
 
 <hr id="best-practice" />
 
 # Installation et bonnes pratiques 
 
-Avant d'installer et de configurer son site Wordpress, il est important de s'assurer que le serveur sur lequel on l'installe est correctement configuré et sécurisé.
+Avant d'installer et de configurer son site WordPress, il est important de s'assurer que le serveur sur lequel on l'installe est correctement configuré et sécurisé.
 
 Même si c'est un peu plus complexe, nous vous conseillons fortement d'utiliser un serveur sur lequel vous avez la main pour bien le configurer et le sécuriser, mais ça vous demandera effectivement de vous pencher sur le côté technique afin de bien faire les choses.
 
-Cependant, dans bon nombre de cas, les sites Wordpress sont installé sur des hébergements mutualisés voir directement sur la plateforme Wordpress.com, la configuration du serveur n'est donc que peu, voir pas réalisable car c'est votre hébergeur qui appliquera ses propres règles.
+Cependant, dans bon nombre de cas, les sites WordPress sont installé sur des hébergements mutualisés voir directement sur la plateforme WordPress.com, la configuration du serveur n'est donc que peu, voir pas réalisable car c'est votre hébergeur qui appliquera ses propres règles.
 
-> Note : Si vous souhaitez installer Wordpress sur un serveur VPS, un serveur dédié ou en local, nous vous invitons à lire la partie liée à la [sécurisation serveurs](https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/server-configurations/securisation-serveurs.md)
+> Note : Si vous souhaitez installer WordPress sur un serveur VPS, un serveur dédié ou en local, nous vous invitons à lire la partie liée à la [sécurisation serveurs](https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/server-configurations/securisation-serveurs.md)
 
 ## Hébergement mutualisé
 
@@ -137,13 +137,13 @@ Privilégiez donc tant que possible une offre mettant à disposition le protocol
 
 # Comment installer un plugin
 
-Installer un plugin sur votre site Wordpress est relativement simple, mais ce n'est pas pour autant une chose anodine.
+Installer un plugin sur votre site WordPress est relativement simple, mais ce n'est pas pour autant une chose anodine.
 
 Par conséquent il est primordiale de respecter certaines étapes afin de vous assurer de choisir un plugin adapté et régulièrement maintenu, ce qui vous assure dans une grande partie des cas, une fiabilité.
 
 ## Les étapes d'installation d'un plugin
 
-1. Sur votre interface d'administration Wordpress, rendez-vous sur ``Extensions > Ajouter une extension``
+1. Sur votre interface d'administration WordPress, rendez-vous sur ``Extensions > Ajouter une extension``
 
 2. Dans le champs de recherche tapez le nom du plugin que vous souhaitez, par exemple ``WPS Hide Login`` qui nous servira juste après.
 
@@ -152,7 +152,7 @@ Par conséquent il est primordiale de respecter certaines étapes afin de vous a
 > NB : Pensez à vérifier les informations d'un plugin ou d'un thème avant installation, notamment : 
 > - ``Auteur/autrice`` ici WPServeur, NicolasKulka,wpformation
 > - ``Dernière mise à jour`` (une mise à jour trop éloignée n'est généralement pas signe de fiabilité)
-> - ``Nécessite Wordpress en version`` ET ``Compatible jusqu'à la version``, vous trouverez la version de votre Wordpress sur le coin inférieur droit de votre espace d'administration
+> - ``Nécessite WordPress en version`` ET ``Compatible jusqu'à la version``, vous trouverez la version de votre WordPress sur le coin inférieur droit de votre espace d'administration
 - ``Installations actives``, un nombre élevé, avec de bonnes notes est généralement signe d'un plugin de qualité, surtout si la dernière mise à jour est assez récente.
 
 <p align="center"><img src="./assets/secure-wp/wps-hide-login-details.png" alt="Plugin WPS Hide Login details" width="350" height="auto" /></p>
@@ -163,7 +163,7 @@ Par conséquent il est primordiale de respecter certaines étapes afin de vous a
 
 # Cachez votre page de connexion
 
-Les premières tentatives de brute force login via Wordpress se font généralement aux adresses ``votresite.fr/wp-admin.php`` ou ``votresite.fr/login`` ou ``votresite.fr/wp-login.php`` qui sont les 3 moyens d'accéder nativement à votre interface de connexion.
+Les premières tentatives de brute force login via WordPress se font généralement aux adresses ``votresite.fr/wp-admin.php`` ou ``votresite.fr/login`` ou ``votresite.fr/wp-login.php`` qui sont les 3 moyens d'accéder nativement à votre interface de connexion.
 
 Il est donc primordial de "cacher" l'accès à cette interface du grand public en la personnalisant grâce à un plugin de type ``WPS Hide Login`` qui vous permettra de personnaliser le lien d'accès.
 
@@ -273,13 +273,13 @@ Enfin, vous retrouverez ici les statistiques de tentatives de connexion par brut
 
 ***Firewall***
 
-> Un pare-feu (firewall) sur votre Wordpress vous aidera à protéger votre site Wordpress des attaques en identifiant et bloquant le trafic malveillant.
+> Un pare-feu (firewall) sur votre WordPress vous aidera à protéger votre site WordPress des attaques en identifiant et bloquant le trafic malveillant.
 
 ***Scanning***
 > Un scanner vous permet de bloquer du code ou contenu malveillant, de vérifier si vos fichiers ont été modifiés ...
 
 ***2FA***
-> Two Factor Authentication (2FA) vous permet de rajouter une couche de sécurité sur votre site Wordpress lors de la connexion
+> Two Factor Authentication (2FA) vous permet de rajouter une couche de sécurité sur votre site WordPress lors de la connexion
 
 Pour ce faire nous pouvons vous conseiller ``Wordfence``
 
@@ -325,7 +325,7 @@ Sur votre Dashboard, vous trouverez les parties liées au ``Firewall``, au ``Sca
 
 1. Nous vous conseillons de les mettre en application ou de faire vos mises à jour très régulièrement. 
 
-> NB : Il est une bonne pratique de mettre très régulièrement à jour vos plugins et thèmes ou versions de Wordpress. Pensez cependant à faire des sauvegardes régulières de votre Wordpress AINSI QUE de votre base de données.
+> NB : Il est une bonne pratique de mettre très régulièrement à jour vos plugins et thèmes ou versions de WordPress. Pensez cependant à faire des sauvegardes régulières de votre WordPress AINSI QUE de votre base de données.
 
 2. Cliquez sur ``Manage Firewall`` pour commencer à configurer ``Wordfence``.
 
@@ -343,11 +343,11 @@ Au bout d'une semaine, il enclenchera automatiquement le pare-feu.
 
 2. Protection level
 
-Lors de l'installation, le "Basic Wordpress Protection" est d'office activé. 
+Lors de l'installation, le "Basic WordPress Protection" est d'office activé. 
 
-Cependant, il pourra certes bloquer de nombreuses requête malveillante une fois le plugin chargé, mais certains plugins vulnérables ou Wordpress lui-même pourront parfois réussir à exécuter du code malveillant sans passer par le pare-feu.
+Cependant, il pourra certes bloquer de nombreuses requête malveillante une fois le plugin chargé, mais certains plugins vulnérables ou WordPress lui-même pourront parfois réussir à exécuter du code malveillant sans passer par le pare-feu.
 
-Il est donc primordial d'optimiser le processus en modifiant la configuration PHP afin de lancer le pare-feu avant Wordpress ou tout autre fichier PHP. 
+Il est donc primordial d'optimiser le processus en modifiant la configuration PHP afin de lancer le pare-feu avant WordPress ou tout autre fichier PHP. 
 
 Pour se faire, il est nécessaire de modifier certains fichiers (en fonction de votre serveur) comme le ``.htaccess``, le ``php.ini``...
 
@@ -363,7 +363,7 @@ Pour se faire, il est nécessaire de modifier certains fichiers (en fonction de 
 
 - Une fois téléchargé et sauvegardé quelque part en lieu sûr (pour pouvoir le remettre en cas de dysfonctionnement), cliquez sur continuer.
 
-> NB : Dans certains cas, il se peut que la mise en cache de votre serveur ou qu'un plugin qui gère le cache sur votre Wordpress, retarde de quelques instants les nouveaux paramétrages. N'hésitez pas à recharger la page du Firewall pour vérifier que les modifications soient bien prise en compte.
+> NB : Dans certains cas, il se peut que la mise en cache de votre serveur ou qu'un plugin qui gère le cache sur votre WordPress, retarde de quelques instants les nouveaux paramétrages. N'hésitez pas à recharger la page du Firewall pour vérifier que les modifications soient bien prise en compte.
 
 <p align="center"><img src="./assets/secure-wp/wordfence-extented-protection.png" alt="Plugin Wordfence extented protection" width="350" height="auto" /></p> 
 
@@ -398,13 +398,13 @@ Dans la partie ``Additional Options``
 
 - Forcer l'utilisation d'un mot de passe fort pour tous les utilisateurs.
 
-- Ne laissez pas Wordpress révéler les utilisateurs valides dans les erreurs de connexion.
+- Ne laissez pas WordPress révéler les utilisateurs valides dans les erreurs de connexion.
 
 - Empêchez les utilisateurs d'enregistrer un nom d'utilisateur ``admin`` même s'il n'existe pas déjà.
 
-- Empêchez la découverte des noms d'utilisateurs par les scans, oEmbed, API Rest Wordpress ou encore les sitemap XML de Wordpress.
+- Empêchez la découverte des noms d'utilisateurs par les scans, oEmbed, API Rest WordPress ou encore les sitemap XML de WordPress.
 
-- Désactivez les mots de passe d'applications de Wordpress.
+- Désactivez les mots de passe d'applications de WordPress.
 
 - Bloquer toutes les adresses IP qui envoient des requêtes POST avec un ``user-agent`` et ``referer`` vides.
 
@@ -454,7 +454,7 @@ Dans cette partie, Wordfence va vous permettre de scanner votre site :
 
 - De manière régulière pour étudier les vulnérabilités liées à des fichiers qui auraient été modifiés ou des plugins/thèmes qui auraient besoin de mises à jour.
 
-- De manière manuelle, pour lancer un scan total de votre site Wordpress en cliquant sur ``Start New Scan``
+- De manière manuelle, pour lancer un scan total de votre site WordPress en cliquant sur ``Start New Scan``
 
 > NB : Une fois le scan fini, vous aurez le détail du scan disponible en cliquant sur ``Show Log``, ainsi que les parties validées ou présentant une erreur. 
 
@@ -494,7 +494,7 @@ Vous pouvez également affiner votre Live Trafic en choisissant :
 
 C'est ici que vous pourrez activer l'authentification à deux facteurs (2FA ou Two-Factor Authentication). 
 
-Il s'agit d'une méthode pour rajouter une couche de sécurité lors de la connexion à votre site Wordpress, car une fois avoir rentré vos identifiants et mots de passe, Wordfence vous demande un code pour valider la connexion.
+Il s'agit d'une méthode pour rajouter une couche de sécurité lors de la connexion à votre site WordPress, car une fois avoir rentré vos identifiants et mots de passe, Wordfence vous demande un code pour valider la connexion.
 
 > NB : Nous vous conseillons fortement de mettre en place l'authentification multi-facteur (MFA / 2FA) partout où vous le pouvez, que ce soit sur logiciels de messagerie e-mails, vos réseaux sociaux, vos banques, sites administratifs (partout où cela est possible).
 
@@ -520,7 +520,7 @@ Dans cette partie, nous allons régler tout ce qui est lié à l'authentificatio
 
 <p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings.png" alt="Plugin Wordfence Login Security settings" width="600" height="auto" /></p>
 
-Dans la première partie, ``User Summary``, vous trouverez la liste des utilisateurs existant sur votre site Wordpress, avec le détail de leurs rôles, ceux pour qui l'authentification à deux facteurs est active ou ne l'est pas.
+Dans la première partie, ``User Summary``, vous trouverez la liste des utilisateurs existant sur votre site WordPress, avec le détail de leurs rôles, ceux pour qui l'authentification à deux facteurs est active ou ne l'est pas.
 
 1. ``2FA Rôles`` : Nous vous conseillons de régler les différents rôles ***Administrator***, ***Editor***, ***Author***, ***Contributor*** et ***Subscriber*** sur ``Required`` afin de forcer le 2FA pour tous les utilisateurs. 
 
@@ -538,11 +538,11 @@ Dans la première partie, ``User Summary``, vous trouverez la liste des utilisat
 
 > NB : La encore si vous utilisez des plugins comme Jetpack ou tout autre plugin ayant besoin d'XML-RPC pour fonctionner, attention à ne pas le désactiver. 
 
-La partie suivante est intéressante dans le cas où vous utiliseriez le plugin de e-commerce pour Wordpress - Woocommerce, sinon vous pouvez le laisser tel quel.
+La partie suivante est intéressante dans le cas où vous utiliseriez le plugin de e-commerce pour WordPress - Woocommerce, sinon vous pouvez le laisser tel quel.
 
 <p align="center"><img src="./assets/secure-wp/wordfence-login-security-settings-woocommerce.png" alt="Plugin Wordfence Login Security settings woocommerce" width="600" height="auto" /></p>
 
-1. Woocommerce integration : Si vous activez cette partie, recaptcha ET 2FA seront ajoutés aux formulaires de connexion et d'enregistrement de Woocommerce, en plus des formulaires Wordpress par défaut.
+1. Woocommerce integration : Si vous activez cette partie, recaptcha ET 2FA seront ajoutés aux formulaires de connexion et d'enregistrement de Woocommerce, en plus des formulaires WordPress par défaut.
 
 > NB : Pensez à tester vos formulaire après avoir activé cette options pour vous assurer qu'il n'y ait pas de problème avec certains plugins.
 
@@ -580,11 +580,11 @@ Félicitations, la grosse partie Firewall, Scanning & 2FA est terminée.
 
 <hr id="remove-wp-version" />
 
-# Effacer la version Wordpress
+# Effacer la version WordPress
 
 Encore une fois, il est primordial de limiter les informations que l'on diffuse afin de complexifier le processus d'énumération. 
 
-Plus nous cachons les outils et services que nous utilisons, plus nous nous mettons "à l'abri" des menaces. Nous allons donc faire en sorte de cacher la version de Wordpress que nous utilisons.
+Plus nous cachons les outils et services que nous utilisons, plus nous nous mettons "à l'abri" des menaces. Nous allons donc faire en sorte de cacher la version de WordPress que nous utilisons.
 
 > ATTENTION : faites une sauvegarde avant toute modification dans le code source, surtout dans le cas où vous n'êtes pas à l'aise avec le code.
 
@@ -599,25 +599,25 @@ Pour éditer un fichier vous avez 2 possibilités:
 Trouvez le fichier ``function.php`` de votre thème, puis à la fin du fichier, ajoutez le code suivant : 
 
 ```php
-// Nous ajoutons cette partie pour retirer la version wordpress de notre site
+// Nous ajoutons cette partie pour retirer la version WordPress de notre site
 add_filter('the_generator', 'my_delete_version'); 
 
 function my_delete_version() { 
 return ''; }
 ```
 
-Bravo, votre version de Wordpress n'apparait maintenant plus dans votre code.
+Bravo, votre version de WordPress n'apparait maintenant plus dans votre code.
 
 <hr id="remove-yoast-version" />
 
 # Effacer la version YOAST SEO
 
-YOAST est un plugin performant pour le référencement SEO de votre site Wordpress, mais bien qu'il soit performant, il diffuse, lui aussi, son numéro de version dans le code de votre site, ce qui est une aubaine pour les personnes qui souhaiteraient trouver une vulnérabilité liée à votre version de plugin.
+YOAST est un plugin performant pour le référencement SEO de votre site WordPress, mais bien qu'il soit performant, il diffuse, lui aussi, son numéro de version dans le code de votre site, ce qui est une aubaine pour les personnes qui souhaiteraient trouver une vulnérabilité liée à votre version de plugin.
 
 <p align="center"><img src="./assets/secure-wp/yoast-version.png" alt="Plugin YOAST version" width="600" height="auto" /></p>
 
 
-De la même manière que pour la version Wordpress, ouvrez le fichier ``function.php``de votre thème et insérez-y le code suivant à la fin (tout en ayant pris soin de faire une sauvegarde avant).
+De la même manière que pour la version WordPress, ouvrez le fichier ``function.php``de votre thème et insérez-y le code suivant à la fin (tout en ayant pris soin de faire une sauvegarde avant).
 
 ```php
 // Delete yoast version
@@ -668,7 +668,7 @@ Nous vous conseillons d'effectuer une sauvegarde dès qu'une de ces situations s
 
 - Vous modifiez votre site internet, que ce soit dans le contenu textuel, la mise en page ou toute modification technique. En gros dès que vous faites un changement sur votre site.
 
-- Avant de mettre à jour un plugin, un thème ou votre version de Wordpress 
+- Avant de mettre à jour un plugin, un thème ou votre version de WordPress 
 
 > Note : Si plusieurs mises à jour sont à faire en même temps, une seule sauvegarde suffit.
 
@@ -693,9 +693,9 @@ L'idée est de pouvoir revenir, en un cours laps de temps, à une situation la p
 
 ## Quoi ?
 
-Sur Wordpress il y a différents éléments à sauvegarder.
+Sur WordPress il y a différents éléments à sauvegarder.
 
-- Tout ce qui est "contenu textuel" et configurations de plugin / thèmes / Wordpress (hors fichiers de configurations pur lié au code source) est sauvegardé dans votre base de données.
+- Tout ce qui est "contenu textuel" et configurations de plugin / thèmes / WordPress (hors fichiers de configurations pur lié au code source) est sauvegardé dans votre base de données.
 
 - Tout ce qui est fichiers (documents, images ...) et codes sources sont stockés sur l'espace de stockage de votre serveur.
 
@@ -704,11 +704,11 @@ Par conséquent, lors d'une sauvegarde, il est primordial de **sauvegarder à la
 
 ## Comment ? 
 
-Il y a plusieurs solutions pour sauvegarder votre site Wordpress en intégralité.
+Il y a plusieurs solutions pour sauvegarder votre site WordPress en intégralité.
 
 - [Avec un plugin de sauvegarde](#backup-plugin)
 
-- "A la main" (nous ne rentrerons pas ici dans le détail pour Wordpress, ça fera l'objet d'une prochaine publication)
+- "A la main" (nous ne rentrerons pas ici dans le détail pour WordPress, ça fera l'objet d'une prochaine publication)
 
 Nous allons donc ici vous détailler la manière avec plugin afin de vous guider pas à pas.
 
@@ -728,7 +728,7 @@ Concernant les plugins de sauvegardes, nous vous conseillons également de véri
 
 - Permet-il de télécharger notre sauvegarde sur notre ordinateur (en lien direct, en envoi par mail ou en sauvegarde sur un espace distant.)
 
-> NB : Nous attirons votre attention sur *la possibilité de sauvegarde sur un espace de stockage distant*. En effet, si le plugin transfert lui même la sauvegarde sur votre cloud par exemple, cela veut dire que vous autorisez à votre plugin d'accéder et à écrire directement sur votre cloud, ce qui, en cas de compromission du plugin ou de votre site Wordpress, peut permettre d'accéder à vos données distantes, voir de les exfiltrer. 
+> NB : Nous attirons votre attention sur *la possibilité de sauvegarde sur un espace de stockage distant*. En effet, si le plugin transfert lui même la sauvegarde sur votre cloud par exemple, cela veut dire que vous autorisez à votre plugin d'accéder et à écrire directement sur votre cloud, ce qui, en cas de compromission du plugin ou de votre site WordPress, peut permettre d'accéder à vos données distantes, voir de les exfiltrer. 
 
 Nous allons ici nous concentrer sur un des plus réputés en la matière, il s'agit du plugin ``UpdraftPlus``, il vous suffit donc de sauvegarder votre site, puis à rechercher le plugin, à l'installer et enfin à l'activer.
 
@@ -736,7 +736,7 @@ Nous allons ici nous concentrer sur un des plus réputés en la matière, il s'a
 
 <p align="center"><img src="./assets/secure-wp/updraftplus-details.png" alt="plugin de sauvegarde UpdraftPlus details" width="600" height="auto" /></p>
 
-> NB : Attention, au moment de l'écriture de ces lignes, la version de Wordpress 6.5.2 vient de sortir et le plugin n'a pas encore été testé pour cette version, nous vous conseillons donc la plus grande prudence si ça vous arrive lors du choix d'un plugin et de son installation. Nous allons ici l'utiliser et nous veillerons à l'évolution du plugin afin de nous assurer que le tutoriel soit viable.
+> NB : Attention, au moment de l'écriture de ces lignes, la version de WordPress 6.5.2 vient de sortir et le plugin n'a pas encore été testé pour cette version, nous vous conseillons donc la plus grande prudence si ça vous arrive lors du choix d'un plugin et de son installation. Nous allons ici l'utiliser et nous veillerons à l'évolution du plugin afin de nous assurer que le tutoriel soit viable.
 
 Une fois installé, vous pouvez retrouver votre plugin dans la liste de vos extensions. Il vous suffit de cliquer sur réglages.
 
@@ -780,7 +780,7 @@ Nous n'allons choisir aucun service pour le stockage car en version gratuite.
 
 - Nous ne pourrons pas envoyer nos données de manières sécurisé par SFTP/SCP vers un serveur externe
 - Nous ne pourrons pas chiffrer nos bases de données pour un envoi par email, ce qui reviendrait à envoyer nos données en clair et qu'elles soient interceptable par un acteur malveillant
-- Nous préférons éviter de connecter notre Wordpress à notre Cloud pour éviter des fuites en cas de failles de sécurité.
+- Nous préférons éviter de connecter notre WordPress à notre Cloud pour éviter des fuites en cas de failles de sécurité.
 
 Si vous souhaitez tout de même utiliser un service distant, vous devrez choisir le service souhaité et rentrer vos identifiants de connexion. 
 
@@ -798,7 +798,7 @@ Si vous souhaitez tout de même utiliser un service distant, vous devrez choisir
 
 - Nous allons laisser les éléménts ``Extensions indispensables``et ``Tout autre répertoire trouvé dans wp-content``
 
-> Note : Le dossier ``wp-content``, est le dossier de Wordpress dans lequel vient s'enregistrer les thèmes, les plugins, les téléchargements, les fichiers cache, les sauvegardes ...
+> Note : Le dossier ``wp-content``, est le dossier de WordPress dans lequel vient s'enregistrer les thèmes, les plugins, les téléchargements, les fichiers cache, les sauvegardes ...
 
 - Nous allons ensuite exclure les éléments portants le nom ``upgrade``, ``cache``, ``updraft``, ``backup*``, ``*backups``, ``mysql.sql``, ``debug.log``
 
@@ -924,7 +924,7 @@ Vous souhaitez en savoir plus sur les sauvegardes, rendez-vous sur notre partie 
 
 # Bonnes pratiques - Mises à jour
 
-Comme pour tout système informatisé, il est primordial de faire des mises à jour régulières afin de vous assurer d'avoir la dernière version de vos plugins / thèmes et Wordpress lui-même sur votre site.
+Comme pour tout système informatisé, il est primordial de faire des mises à jour régulières afin de vous assurer d'avoir la dernière version de vos plugins / thèmes et WordPress lui-même sur votre site.
 
 ## Pourquoi ?
 
@@ -932,13 +932,13 @@ Pour la bonne et simple raison que les mises à jours servent à apporter des mo
 
 >NOTE : Avant toutes mises à jour de plugins, de thèmes et de versions, ou avant tout changement majeur en termes de contenu, il est primordial d'effectuer une sauvegarde et de s'assuré de la viabilité de celle-ci. Vous pouvez retrouver les démarches dans la partie [Bonnes pratiques - Sauvegardes](#backup)
 
-## Comment se passe une mise à jour sur Wordpress ?
+## Comment se passe une mise à jour sur WordPress ?
 
-Pour effectuer sur mise à jour sur Wordpress il vous suffit de vous rendre dans la partie ``Tableau de bord > Mises à jour`` de votre espace administrateur. 
+Pour effectuer sur mise à jour sur WordPress il vous suffit de vous rendre dans la partie ``Tableau de bord > Mises à jour`` de votre espace administrateur. 
 
-Vous y trouverez la liste des mises à jour en attente, aussi bien pour la ``version de Wordpress``, les ``plugins``, les ``thèmes`` ainsi que les ``traductions``.
+Vous y trouverez la liste des mises à jour en attente, aussi bien pour la ``version de WordPress``, les ``plugins``, les ``thèmes`` ainsi que les ``traductions``.
 
-<p align="center"><img src="./assets/secure-wp/list-update.png" alt="Liste des mises à jour Wordpress" width="600" height="auto" /></p>
+<p align="center"><img src="./assets/secure-wp/list-update.png" alt="Liste des mises à jour WordPress" width="600" height="auto" /></p>
 
 Nous voyons dans l'exemple qu'une extension est en attente de mises à jour, il s'agit du plugin ``Photo Gallery`` dont une faille de sécurité à été révélée il y a quelques jours, nous allons donc mettre à jour ce plugin.
 
@@ -946,7 +946,7 @@ Avant d'effectuer la mise à jour, nous allons examiner ce qui nous est proposé
   
   - La version actuellement installée ``1.8.21``
   - La version proposée pour la mise à jour ``1.8.22``
-  - La compatibilité avec notre version de Wordpress ``6.5.2`` qui est ici indiquée à 100% selon l'auteur
+  - La compatibilité avec notre version de WordPress ``6.5.2`` qui est ici indiquée à 100% selon l'auteur
 
 <p align="center"><img src="./assets/secure-wp/plugin-update.png" alt="Plugin disponible pour mise à jour" width="600" height="auto" /></p>
 
@@ -966,7 +966,7 @@ Félicitation, votre plugin est à jour.
 
 ***Remerciements :***
 
-Ce référentiel à été réalisé afin de permettre à toute personne, même peu à l'aise avec le code, de pouvoir améliorer la sécurisation de ses serveurs et de ses sites Wordpress de manière la plus simple possible, en ce contexte cyber assez particulier.
+Ce référentiel à été réalisé afin de permettre à toute personne, même peu à l'aise avec le code, de pouvoir améliorer la sécurisation de ses serveurs et de ses sites WordPress de manière la plus simple possible, en ce contexte cyber assez particulier.
 
 Nous espérons que ce référentiel vous a plu, qu'il aidera le plus de monde possible, alors n'hésitez pas à le partager à toute personne qui en aurait besoin.
 
