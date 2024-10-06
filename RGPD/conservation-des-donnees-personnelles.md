@@ -1,10 +1,10 @@
 <h1 align="center">Conservation des données à caractère personnel</h1>                   
-<p align="center"><strong><i>-- Hacktorney - Tyc-Tac - Cr4Sh --</strong></i><br/>members of Be Cyber Community</p>
+<p align="center"><strong><i>-- Hacktorney - Tyc-Tac - Cr4Sh --</strong></i><br/>members of Guardians of Cyber</p>
 
 
 ***Pour qui ?***
 >
->  Le Security Guide est un référentiel destiné à toute personne souhaitant renforcer la sécurité de ses systèmes d'informations (Ordinateurs, serveurs, programmation, sites internet, Wordpress ...), de connaître et comprendre la gouvernance (PCA/PRA ...), mais également de se tenir au courant des éléments réglementaires et législatifs (RGPD, DORA, NIS) en ce contexte cyber assez particulier, même sans connaissances poussées en développement ni en réseau.
+>  Le Security Guide est un référentiel destiné à toute personne souhaitant renforcer la sécurité de ses systèmes d'informations (Ordinateurs, serveurs, programmation, sites internet, WordPress ...), de connaître et comprendre la gouvernance (PCA/PRA ...), mais également de se tenir au courant des éléments réglementaires et législatifs (RGPD, DORA, NIS) en ce contexte cyber assez particulier, même sans connaissances poussées en développement ni en réseau.
 >
 > Les propos seront donc ***le plus vulgarisés possibles*** afin de vous accompagner, étape par étape, avec un contenu le plus détaillé possible afin de ***contribuer à un Web plus sûr***.
 
@@ -22,7 +22,7 @@
 
 -----
 
-***Date de mise à jour : 2024-04-20***
+***Date de mise à jour : 2024-10-04***
 
 - [ ] [Principes de base](#basic-principles)
 - [ ] [Définition de la durée de conservation](#data-retention-period)
@@ -104,9 +104,9 @@ Merci pour votre intérêt et nous vous disons à très bientôt pour plus de co
 
 ###### Crédits :
 
-- **Tyc-Tac** : Be.Cyber Community
+- **Tyc-Tac** : Guardians of Cyber
 
-- **Cr4Sh** : Be.Cyber Community - Edu.Cyber
+- **Cr4Sh** : Guardians of Cyber - Edu.Cyber
 
-- **Hacktorney** : Be.Cyber Community - lawgitech.eu
+- **Hacktorney** : Guardians of Cyber - lawgitech.eu
 
