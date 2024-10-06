@@ -22,7 +22,7 @@
 
 ## Pourquoi ce référentiel ?
 
-Nous avons pensé ce référentiel comme une base de connaissances, permettant à toute personne qui le souhaite, qu'elle soit techos ou peu à l'aise avec le milieu informatique, de pouvoir renforcer la sécurité de ses systèmes d'informations (Ordinateurs, serveurs, programmation, sites internet, Wordpress ...), de connaître et comprendre la gouvernance (PCA/PRA ...), mais également de se tenir au courant des éléments réglementaires et législatifs (RGPD, DORA, NIS) en ce contexte cyber assez particulier.
+Nous avons pensé ce référentiel comme une base de connaissances, permettant à toute personne qui le souhaite, qu'elle soit techos ou peu à l'aise avec le milieu informatique, de pouvoir renforcer la sécurité de ses systèmes d'informations (Ordinateurs, serveurs, programmation, sites internet, WordPress ...), de connaître et comprendre la gouvernance (PCA/PRA ...), mais également de se tenir au courant des éléments réglementaires et législatifs (RGPD, DORA, NIS) en ce contexte cyber assez particulier.
 
 Notre objectif est de fournir des contenus de qualité et vérifiés, rédigés par des professionnels passionnés, le plus détaillé et le plus "vulgarisé" possible afin de contribuer à un Web plus sûr.
 
@@ -35,7 +35,7 @@ Ce référentiel est destiné à évoluer pour implémenter le plus de situation
 
 Actuellement en ``version 1.0``, le référentiel contient :
 
-- [Comment sécuriser son site Wordpress](https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/secureWP.md)
+- [Comment sécuriser son site WordPress](https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/secureWP.md)
 
 **Configuration Serveurs**
 - [Comment bien configurer ses serveurs](https://github.com/Cr4Sh-Ov3R/security-guides/blob/main/server-configurations/securisation-serveurs.md)
@@ -67,8 +67,8 @@ Merci pour votre intérêt et nous vous disons à très bientôt pour plus de co
 
 ###### Crédits :
 
-- **Tyc-Tac** : Be.Cyber Community
+- **Tyc-Tac** : Guardians of Cyber
 
-- **Cr4Sh** : Be.Cyber Community - Edu.Cyber
+- **Cr4Sh** : Guardians of Cyber - Edu.Cyber
 
-- **Hacktorney** : Be.Cyber Community
+- **Hacktorney** : Guardians of Cyber - lawgitech.eu
