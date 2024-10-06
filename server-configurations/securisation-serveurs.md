@@ -1,10 +1,10 @@
 <h1 align="center">Comment bien configurer ses serveurs</h1>                   
-<p align="center"><strong><i>-- Tyc-Tac & Cr4Sh --</strong></i><br/>members of Be Cyber Community</p>
+<p align="center"><strong><i>-- Tyc-Tac & Cr4Sh --</strong></i><br/>members of Guardians of Cyber</p>
 
 
 ***Pour qui ?***
 >
->  Le Security Guide est un référentiel destiné à toute personne souhaitant sécuriser ses infrastuctures, que ce soit au niveau de ses serveurs et/ou son site basé sur un **CMS Wordpress**, même sans connaissances poussées en développement ni en réseau.
+>  Le Security Guide est un référentiel destiné à toute personne souhaitant sécuriser ses infrastuctures, que ce soit au niveau de ses serveurs et/ou son site basé sur un **CMS WordPress**, même sans connaissances poussées en développement ni en réseau.
 >
 > Les propos seront donc ***le plus vulgarisés possibles*** afin de vous accompagner, étape par étape, pour la mise en place des bonnes pratiques et l'installation de plugins reconnus en la matière.
 
@@ -22,12 +22,12 @@
 
 -----
 
-***Date de mise à jour : 2024-04-19***
+***Date de mise à jour : 2024-10-04***
 
 - [ ] [Installer et sécuriser Apache](#apache)
 - [ ] [Installer et sécuriser Nginx](#nginx)
 - [ ] [Installer et sécuriser PHP](#php)
-- [ ] [Installer MariaDb pour Wordpress](#mariadb-wordpress)
+- [ ] [Installer MariaDb pour WordPress](#mariadb-wordpress)
 
 <hr id="apache" />
 
@@ -307,7 +307,7 @@ sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://pa
 # Mise à jour
 apt update
 
-# Installation des paquets PHP utilisés par Wordpress
+# Installation des paquets PHP utilisés par WordPress
 apt-get install php8.3 php8.3-cli php8.3-common php8.3-imap php8.3-redis php8.3-snmp php8.3-xml php8.3-mysqli php8.3-zip php8.3-mbstring php8.3-curl libapache2-mod-php8.3 -y
 
 # Voir la version de PHP
@@ -366,7 +366,7 @@ allow_url_fopen = Off
 
 <hr id="mariadb-wordpress" />
 
-# Installer MariaDb pour Wordpress
+# Installer MariaDb pour WordPress
 
 ## Installation de Mariadb
 
@@ -392,7 +392,7 @@ mysql -u root -p
 ```
 
 ```sql
---Création de nos tables pour Wordpress
+--Création de nos tables pour WordPress
 CREATE USER 'anyone'@'localhost' IDENTIFIED BY 'YourStrongPasswordHere';
  CREATE DATABASE  tstSecure;
  GRANT ALL PRIVILEGES ON tstSecur.* TO 'anyone'@'localhost';
@@ -400,13 +400,13 @@ CREATE USER 'anyone'@'localhost' IDENTIFIED BY 'YourStrongPasswordHere';
  EXIT;
 ```
 
-## Nous devons ensuite Télécharger Wordpress
+## Nous devons ensuite Télécharger WordPress
 
 ```bash
 # Déplacez-vous dans le dossier html
 cd /var/www/html
 
-# Télécharger la dernière version de Wordpress
+# Télécharger la dernière version de WordPress
 wget https://wordpress.org/latest.zip
 
 # Dézipper le fichier reçu
@@ -415,7 +415,7 @@ unzip latest.zip
 # Supprimer le fichier latest.zip après l'avoir dézippé
 rm latest.zip
 
-# Déplacer tous les fichiers contenus dans le dossier wordpress directement dans le dossier html
+# Déplacer tous les fichiers contenus dans le dossier WordPress directement dans le dossier html
 mv wordpress/* .
 
 # Enfin supprimer le dossier Wordpress
@@ -423,7 +423,7 @@ rm -r wordpress/
 
 ```
 
-> Note : Dans le dossier ``/var/www/html`` vous avez un fichier ``index.html`` qui est installé par défaut, il vous faudra le déplacer (ou le supprimer) afin que votre serveur puisse se lancer correctement sur votre site Wordpress.
+> Note : Dans le dossier ``/var/www/html`` vous avez un fichier ``index.html`` qui est installé par défaut, il vous faudra le déplacer (ou le supprimer) afin que votre serveur puisse se lancer correctement sur votre site WordPress.
 
 
 
@@ -443,6 +443,6 @@ Merci pour votre intérêt et nous vous disons à très bientôt pour plus de co
 
 ***Crédits :***
 
-- **Tyc-Tac** : Be.Cyber Community
+- **Tyc-Tac** : Guardians of Cyber
 
-- **Cr4Sh** : Be.Cyber Community - Edu.Cyber
+- **Cr4Sh** : Guardians of Cyber - Edu.Cyber
