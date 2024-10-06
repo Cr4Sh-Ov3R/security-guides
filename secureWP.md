@@ -1,5 +1,5 @@
 <h1 align="center">Comment sécuriser son site WordPress</h1>                   
-<p align="center"><strong><i>-- Tyc-Tac & Cr4Sh --</strong></i><br/>members of Be Cyber Community</p>
+<p align="center"><strong><i>-- Tyc-Tac & Cr4Sh --</strong></i><br/>members of Guardians of Cyber</p>
 
 
 ***Pour qui ?***
@@ -24,7 +24,7 @@
 
 -----
 
-***Date de mise à jour : 2024-04-16***
+***Date de mise à jour : 2024-10-04***
 
 - [ ] [Quel WordPress choisir ?](#what-differences)
 - [ ] [Installation et bonnes pratiques](#best-practice)
@@ -257,7 +257,7 @@ Sauf cas particulier (et auquel cas, vous avez suffisamment de compétence pour 
 
 Cet onglet vous permet de définir les adresses IP que vous connaissez comme malveillantes via les outils de Cyber Threat Intelligence ou car elles apparaîssent souvent dans vos logs ou dans les tentatives de connexion par brute force. 
 
-Par exemple, avec Be.Cyber Community, nous avons référencé un grand nombre d'adresses IP malveillantes que vous trouverez ici [Malicious Ip Adresses - Be Cyber Community](https://github.com/duggytuxy/malicious_ip_addresses) et que vous pouvez utiliser pour enrichir votre liste noire.
+Par exemple, avec Guardians of Cyber, nous avons référencé un grand nombre d'adresses IP malveillantes que vous trouverez ici [Malicious Ip Adresses - Guardians of Cyber](https://github.com/duggytuxy/malicious_ip_addresses) et que vous pouvez utiliser pour enrichir votre liste noire.
 
 <p align="center"><img src="./assets/secure-wp/wps-limit-login-black-list.png" alt="Plugin WPS Limit Login black list" width="600" height="auto" /></p>
 
@@ -964,9 +964,7 @@ Félicitation, votre plugin est à jour.
 
 <hr />
 
-***Remerciements :***
-
-Ce référentiel à été réalisé afin de permettre à toute personne, même peu à l'aise avec le code, de pouvoir améliorer la sécurisation de ses serveurs et de ses sites WordPress de manière la plus simple possible, en ce contexte cyber assez particulier.
+###### Remerciements :
 
 Nous espérons que ce référentiel vous a plu, qu'il aidera le plus de monde possible, alors n'hésitez pas à le partager à toute personne qui en aurait besoin.
 
@@ -976,8 +974,8 @@ Merci pour votre intérêt et nous vous disons à très bientôt pour plus de co
 
 <hr>
 
-***Crédits :***
+###### Crédits :
 
-- **Tyc-Tac** : Be.Cyber Community
+- **Tyc-Tac** : Guardians of Cyber
 
-- **Cr4Sh** : Be.Cyber Community - Edu.Cyber
+- **Cr4Sh** : Guardians of Cyber - Edu.Cyber
