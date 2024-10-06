@@ -1,10 +1,10 @@
 <h1 align="center">Les sauvegardes, un point incontournable</h1>                   
-<p align="center"><strong><i>-- Tyc-Tac & Cr4Sh --</strong></i><br/>members of Be Cyber Community</p>
+<p align="center"><strong><i>-- Tyc-Tac & Cr4Sh --</strong></i><br/>members of Guardians of Cyber</p>
 
 
 ***Pour qui ?***
 >
->  Le Security Guide est un référentiel destiné à toute personne souhaitant sécuriser ses infrastuctures, que ce soit au niveau de ses serveurs et/ou son site basé sur un **CMS Wordpress**, même sans connaissances poussées en développement ni en réseau.
+>  Le Security Guide est un référentiel destiné à toute personne souhaitant sécuriser ses infrastuctures, que ce soit au niveau de ses serveurs et/ou son site basé sur un **CMS WordPress**, même sans connaissances poussées en développement ni en réseau.
 >
 > Les propos seront donc ***le plus vulgarisés possibles*** afin de vous accompagner, étape par étape, pour la mise en place des bonnes pratiques et l'installation de plugins reconnus en la matière.
 >
@@ -20,11 +20,11 @@
 >
 > Le Security Guide est rédigé et mis à disposition gratuitement pour toute personne souhaitant renforcer la sécurité de ses infrastructures. 
 >
-> Notre objectif est d'aider la communauté à réduire sa surface d'attaque pour contribuer à un Web plus sûr. Par conséquent, ce guide est partageable gratuitement et sans condition à des fins informatives et communautaire. Cependant, toute utilisation commerciale de ce référentiel autre que par ses auteurs est ***FORMELLEMENT INTERDITE***.
+> Notre objectif est d'aider la communauté à réduire sa surface d'attaque pour contribuer à un Web plus sûr. Par conséquent, ce guide est partageable dans les conditions de la **licence CC BY-NC-ND 4.0 DEED** à des fins informatives et communautaire Cependant, toute utilisation commerciale de ce référentiel autre que par ses auteurs est ***FORMELLEMENT INTERDITE***.
 
 -----
 
-***Date de mise à jour 2024-04-16***
+***Date de mise à jour : 2024-10-04***
 
 - [ ] [Généralités](#generalities)
 - [ ] [3-2-1 : Sauvegardes](#321-backup)
@@ -133,7 +133,7 @@ Ces cas sont des cas pouvant considérablement varier en fonction de votre activ
 
 ***Remerciements :***
 
-Ce référentiel à été réalisé afin de permettre à toute personne, même peu à l'aise avec le code, de pouvoir améliorer la sécurisation de ses serveurs et de ses sites Wordpress de manière la plus simple possible, en ce contexte cyber assez particulier.
+Ce référentiel à été réalisé afin de permettre à toute personne, même peu à l'aise avec le code, de pouvoir améliorer la sécurisation de ses serveurs et de ses sites WordPress de manière la plus simple possible, en ce contexte cyber assez particulier.
 
 Nous espérons que ce référentiel vous a plu, qu'il aidera le plus de monde possible, alors n'hésitez pas à le partager à toute personne qui en aurait besoin.
 
@@ -145,6 +145,6 @@ Merci pour votre intérêt et nous vous disons à très bientôt pour plus de co
 
 ***Crédits :***
 
-- **Tyc-Tac** : Be.Cyber Community
+- **Tyc-Tac** : Guardians of Cyber
 
-- **Cr4Sh** : Be.Cyber Community - Edu.Cyber
+- **Cr4Sh** : Guardians of Cyber - Edu.Cyber
